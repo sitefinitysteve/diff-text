@@ -1,0 +1,33 @@
+{
+    "name": "sitefinitysteve/php-diff-text",
+    "version": "1.5.4",
+    "description": "PHP library to generate HTML diff output with multiple diff strategies. PHP variant of vue-diff-text.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Steve McNiven-Scott"
+        }
+    ],
+    "keywords": ["diff", "text-diff", "html-diff", "php-diff", "comparison"],
+    "require": {
+        "php": ">=8.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpDiffText\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpDiffText\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "minimum-stability": "stable"
+}
