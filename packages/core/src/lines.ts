@@ -105,17 +105,6 @@ function partition(types: string[], context: number): Range[] {
   return ranges;
 }
 
-function countBefore(rows: LineRow[], end: number): { oldBefore: number; newBefore: number } {
-  let oldBefore = 0;
-  let newBefore = 0;
-  for (let i = 0; i < end; i++) {
-    const r = rows[i]!;
-    if (r.oldNo !== undefined) oldBefore++;
-    if (r.newNo !== undefined) newBefore++;
-  }
-  return { oldBefore, newBefore };
-}
-
 /**
  * Unified hunks: visible hunks (changes plus `contextLines` of context) interleaved,
  * in document order, with collapsed ranges of unchanged lines.
