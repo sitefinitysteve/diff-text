@@ -41,3 +41,6 @@ src/**/*.js.map
 # IDE files
 *.tsbuildinfo
 Thumbs.db
+
+# GitHub Pages build output
+_site

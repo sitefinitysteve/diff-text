@@ -4,6 +4,8 @@ import { resolve } from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Relative asset URLs: the build is deployed under /diff-text/<platform>/ on GitHub Pages.
+  base: './',
   plugins: [react()],
   server: {
     port: 5175,

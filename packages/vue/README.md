@@ -27,6 +27,8 @@ npm install vue-diff-text
 
 ## Demo
 
+**Live demo:** https://sitefinitysteve.github.io/diff-text/vue/
+
 ![vue-diff-text demo page](https://raw.githubusercontent.com/sitefinitysteve/diff-text/main/packages/vue/DemoPreview.png)
 
 *The demo page: every text mode, the HTML diff, side-by-side and unified document views, and the stats badge.*

@@ -30,6 +30,8 @@ npm install react-diff-text
 
 ## Demo
 
+**Live demo:** https://sitefinitysteve.github.io/diff-text/react/
+
 ![react-diff-text demo page](https://raw.githubusercontent.com/sitefinitysteve/diff-text/main/packages/react/DemoPreview.png)
 
 *The demo page: every text mode, the HTML diff, side-by-side and unified document views, and the stats badge.*

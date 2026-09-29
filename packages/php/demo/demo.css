@@ -110,12 +110,15 @@ body {
   gap: 4px;
   font: 500 13px/1 var(--f-body);
 }
-.demo-platforms span {
+.demo-platforms a {
   padding: 7px 11px;
   border-radius: 999px;
   color: var(--graphite);
+  text-decoration: none;
 }
-.demo-platforms span[aria-current='true'] {
+.demo-platforms a:hover { color: var(--ink); }
+.demo-platforms a:focus-visible { outline: 2px solid var(--marker); outline-offset: 2px; }
+.demo-platforms a[aria-current='page'] {
   background: var(--ink);
   color: var(--paper);
 }

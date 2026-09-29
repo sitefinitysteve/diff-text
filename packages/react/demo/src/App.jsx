@@ -44,7 +44,7 @@ export default function App() {
     <div className="demo">
       <header className="demo-bar">
         <div className="demo-mark"><span className="del">diff</span><span className="add">text</span></div>
-        <nav className="demo-platforms" aria-label="Platforms"><span>Vue</span><span aria-current="true">React</span><span>PHP</span></nav>
+        <nav className="demo-platforms" aria-label="Platforms"><a href="../vue/">Vue</a><a href="../react/" aria-current="page">React</a><a href="../php/">PHP</a></nav>
       </header>
 
       <section className="demo-hero">

@@ -70,7 +70,7 @@ $grains = array_values(array_filter($content['modes'], static fn (array $m): boo
 <div class="demo">
   <header class="demo-bar">
     <div class="demo-mark"><span class="del">diff</span><span class="add">text</span></div>
-    <nav class="demo-platforms" aria-label="Platforms"><span>Vue</span><span>React</span><span aria-current="true">PHP</span></nav>
+    <nav class="demo-platforms" aria-label="Platforms"><a href="../vue/">Vue</a><a href="../react/">React</a><a href="../php/" aria-current="page">PHP</a></nav>
   </header>
 
   <section class="demo-hero">

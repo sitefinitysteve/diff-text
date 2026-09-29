@@ -8,7 +8,7 @@
         class="demo-platforms"
         aria-label="Platforms"
       >
-        <span aria-current="true">Vue</span><span>React</span><span>PHP</span>
+        <a href="../vue/" aria-current="page">Vue</a><a href="../react/">React</a><a href="../php/">PHP</a>
       </nav>
     </header>
 

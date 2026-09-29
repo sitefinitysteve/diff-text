@@ -20,6 +20,8 @@ That's it — Composer's autoloader handles the rest. No service providers, no c
 
 ## Demo
 
+**Live demo:** https://sitefinitysteve.github.io/diff-text/php/
+
 ![php-diff-text demo page, rendered server-side](https://raw.githubusercontent.com/sitefinitysteve/php-diff-text/main/DemoPreview.png)
 
 *The demo page, rendered server-side: every text mode, the HTML diff, side-by-side and unified document views, and the stats badge.*
