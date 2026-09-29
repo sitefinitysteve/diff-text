@@ -1,0 +1,34 @@
+# Push vue-vX.Y.Z or react-vX.Y.Z to publish that package to npm.
+# Requires secret NPM_TOKEN (automation token).
+name: Release npm package
+on:
+  push:
+    tags: ['vue-v*', 'react-v*']
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+      - id: pkg
+        run: |
+          case "$GITHUB_REF_NAME" in
+            vue-v*) echo "ws=vue-diff-text" >> "$GITHUB_OUTPUT" ;;
+            react-v*) echo "ws=react-diff-text" >> "$GITHUB_OUTPUT" ;;
+          esac
+      - run: npm install
+      - run: npm test -w ${{ steps.pkg.outputs.ws }}
+      - run: npm run build -w ${{ steps.pkg.outputs.ws }}
+      - run: npm publish -w ${{ steps.pkg.outputs.ws }} --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: gh release create "$GITHUB_REF_NAME" --generate-notes --title "$GITHUB_REF_NAME"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

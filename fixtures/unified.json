@@ -1,0 +1,3102 @@
+[
+  {
+    "name": "both empty (context 3)",
+    "old": "",
+    "new": "",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-empty\">No changes</div></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "old empty (context 3)",
+    "old": "",
+    "new": "a\nb\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 0,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "b"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">b</span></div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 0,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "new empty (context 3)",
+    "old": "a\nb\n",
+    "new": "",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 0,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "b"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">b</span></div></div>",
+      "stats": {
+        "added": 0,
+        "removed": 2,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "identical (context 3)",
+    "old": "a\nb\nc\n",
+    "new": "a\nb\nc\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "collapsed",
+          "count": 3,
+          "oldStart": 1,
+          "newStart": 1,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "b"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 3,
+              "text": "c"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-empty\">No changes</div></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 3,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "one line changed in the middle (context 3)",
+    "old": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\n",
+    "new": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline ten\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "collapsed",
+          "count": 6,
+          "oldStart": 1,
+          "newStart": 1,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "line 1"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "line 2"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 3,
+              "text": "line 3"
+            },
+            {
+              "type": "equal",
+              "oldNo": 4,
+              "newNo": 4,
+              "text": "line 4"
+            },
+            {
+              "type": "equal",
+              "oldNo": 5,
+              "newNo": 5,
+              "text": "line 5"
+            },
+            {
+              "type": "equal",
+              "oldNo": 6,
+              "newNo": 6,
+              "text": "line 6"
+            }
+          ]
+        },
+        {
+          "type": "hunk",
+          "oldStart": 7,
+          "oldLines": 7,
+          "newStart": 7,
+          "newLines": 7,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 7,
+              "newNo": 7,
+              "text": "line 7"
+            },
+            {
+              "type": "equal",
+              "oldNo": 8,
+              "newNo": 8,
+              "text": "line 8"
+            },
+            {
+              "type": "equal",
+              "oldNo": 9,
+              "newNo": 9,
+              "text": "line 9"
+            },
+            {
+              "type": "removed",
+              "oldNo": 10,
+              "text": "line 10"
+            },
+            {
+              "type": "added",
+              "newNo": 10,
+              "text": "line ten"
+            },
+            {
+              "type": "equal",
+              "oldNo": 11,
+              "newNo": 11,
+              "text": "line 11"
+            },
+            {
+              "type": "equal",
+              "oldNo": 12,
+              "newNo": 12,
+              "text": "line 12"
+            },
+            {
+              "type": "equal",
+              "oldNo": 13,
+              "newNo": 13,
+              "text": "line 13"
+            }
+          ]
+        },
+        {
+          "type": "collapsed",
+          "count": 7,
+          "oldStart": 14,
+          "newStart": 14,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 14,
+              "newNo": 14,
+              "text": "line 14"
+            },
+            {
+              "type": "equal",
+              "oldNo": 15,
+              "newNo": 15,
+              "text": "line 15"
+            },
+            {
+              "type": "equal",
+              "oldNo": 16,
+              "newNo": 16,
+              "text": "line 16"
+            },
+            {
+              "type": "equal",
+              "oldNo": 17,
+              "newNo": 17,
+              "text": "line 17"
+            },
+            {
+              "type": "equal",
+              "oldNo": 18,
+              "newNo": 18,
+              "text": "line 18"
+            },
+            {
+              "type": "equal",
+              "oldNo": 19,
+              "newNo": 19,
+              "text": "line 19"
+            },
+            {
+              "type": "equal",
+              "oldNo": 20,
+              "newNo": 20,
+              "text": "line 20"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-collapsed\">6 unchanged lines</div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">7</span><span class=\"diff-gutter diff-gutter-new\">7</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 7</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">8</span><span class=\"diff-gutter diff-gutter-new\">8</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 8</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">9</span><span class=\"diff-gutter diff-gutter-new\">9</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 9</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 10\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">10</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 10</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 10\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">10</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">line ten</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">11</span><span class=\"diff-gutter diff-gutter-new\">11</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 11</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">12</span><span class=\"diff-gutter diff-gutter-new\">12</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 12</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">13</span><span class=\"diff-gutter diff-gutter-new\">13</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 13</span></div><div class=\"diff-row diff-row-collapsed\">7 unchanged lines</div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 19,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "two distant changes (context 3)",
+    "old": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+    "new": "line 1\nline 2\nline 3\nfour\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\ntwenty-five\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 7,
+          "newStart": 1,
+          "newLines": 7,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "line 1"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "line 2"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 3,
+              "text": "line 3"
+            },
+            {
+              "type": "removed",
+              "oldNo": 4,
+              "text": "line 4"
+            },
+            {
+              "type": "added",
+              "newNo": 4,
+              "text": "four"
+            },
+            {
+              "type": "equal",
+              "oldNo": 5,
+              "newNo": 5,
+              "text": "line 5"
+            },
+            {
+              "type": "equal",
+              "oldNo": 6,
+              "newNo": 6,
+              "text": "line 6"
+            },
+            {
+              "type": "equal",
+              "oldNo": 7,
+              "newNo": 7,
+              "text": "line 7"
+            }
+          ]
+        },
+        {
+          "type": "collapsed",
+          "count": 14,
+          "oldStart": 8,
+          "newStart": 8,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 8,
+              "newNo": 8,
+              "text": "line 8"
+            },
+            {
+              "type": "equal",
+              "oldNo": 9,
+              "newNo": 9,
+              "text": "line 9"
+            },
+            {
+              "type": "equal",
+              "oldNo": 10,
+              "newNo": 10,
+              "text": "line 10"
+            },
+            {
+              "type": "equal",
+              "oldNo": 11,
+              "newNo": 11,
+              "text": "line 11"
+            },
+            {
+              "type": "equal",
+              "oldNo": 12,
+              "newNo": 12,
+              "text": "line 12"
+            },
+            {
+              "type": "equal",
+              "oldNo": 13,
+              "newNo": 13,
+              "text": "line 13"
+            },
+            {
+              "type": "equal",
+              "oldNo": 14,
+              "newNo": 14,
+              "text": "line 14"
+            },
+            {
+              "type": "equal",
+              "oldNo": 15,
+              "newNo": 15,
+              "text": "line 15"
+            },
+            {
+              "type": "equal",
+              "oldNo": 16,
+              "newNo": 16,
+              "text": "line 16"
+            },
+            {
+              "type": "equal",
+              "oldNo": 17,
+              "newNo": 17,
+              "text": "line 17"
+            },
+            {
+              "type": "equal",
+              "oldNo": 18,
+              "newNo": 18,
+              "text": "line 18"
+            },
+            {
+              "type": "equal",
+              "oldNo": 19,
+              "newNo": 19,
+              "text": "line 19"
+            },
+            {
+              "type": "equal",
+              "oldNo": 20,
+              "newNo": 20,
+              "text": "line 20"
+            },
+            {
+              "type": "equal",
+              "oldNo": 21,
+              "newNo": 21,
+              "text": "line 21"
+            }
+          ]
+        },
+        {
+          "type": "hunk",
+          "oldStart": 22,
+          "oldLines": 7,
+          "newStart": 22,
+          "newLines": 7,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 22,
+              "newNo": 22,
+              "text": "line 22"
+            },
+            {
+              "type": "equal",
+              "oldNo": 23,
+              "newNo": 23,
+              "text": "line 23"
+            },
+            {
+              "type": "equal",
+              "oldNo": 24,
+              "newNo": 24,
+              "text": "line 24"
+            },
+            {
+              "type": "removed",
+              "oldNo": 25,
+              "text": "line 25"
+            },
+            {
+              "type": "added",
+              "newNo": 25,
+              "text": "twenty-five"
+            },
+            {
+              "type": "equal",
+              "oldNo": 26,
+              "newNo": 26,
+              "text": "line 26"
+            },
+            {
+              "type": "equal",
+              "oldNo": 27,
+              "newNo": 27,
+              "text": "line 27"
+            },
+            {
+              "type": "equal",
+              "oldNo": 28,
+              "newNo": 28,
+              "text": "line 28"
+            }
+          ]
+        },
+        {
+          "type": "collapsed",
+          "count": 2,
+          "oldStart": 29,
+          "newStart": 29,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 29,
+              "newNo": 29,
+              "text": "line 29"
+            },
+            {
+              "type": "equal",
+              "oldNo": 30,
+              "newNo": 30,
+              "text": "line 30"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 1</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 2</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 3</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 4\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 4</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 4\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">four</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">5</span><span class=\"diff-gutter diff-gutter-new\">5</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 5</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">6</span><span class=\"diff-gutter diff-gutter-new\">6</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 6</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">7</span><span class=\"diff-gutter diff-gutter-new\">7</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 7</span></div><div class=\"diff-row diff-row-collapsed\">14 unchanged lines</div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">22</span><span class=\"diff-gutter diff-gutter-new\">22</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 22</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">23</span><span class=\"diff-gutter diff-gutter-new\">23</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 23</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">24</span><span class=\"diff-gutter diff-gutter-new\">24</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 24</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 25\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\">25</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 25</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 25\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">25</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">twenty-five</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">26</span><span class=\"diff-gutter diff-gutter-new\">26</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 26</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">27</span><span class=\"diff-gutter diff-gutter-new\">27</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 27</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">28</span><span class=\"diff-gutter diff-gutter-new\">28</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 28</span></div><div class=\"diff-row diff-row-collapsed\">2 unchanged lines</div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 28,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "changes merged by overlapping context (context 3)",
+    "old": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\n",
+    "new": "line 1\nline 2\nline 3\nline 4\nfive\nline 6\nline 7\nline 8\nline 9\nten\nline 11\nline 12\nline 13\nline 14\nline 15\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 13,
+          "newStart": 1,
+          "newLines": 13,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "line 1"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "line 2"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 3,
+              "text": "line 3"
+            },
+            {
+              "type": "equal",
+              "oldNo": 4,
+              "newNo": 4,
+              "text": "line 4"
+            },
+            {
+              "type": "removed",
+              "oldNo": 5,
+              "text": "line 5"
+            },
+            {
+              "type": "added",
+              "newNo": 5,
+              "text": "five"
+            },
+            {
+              "type": "equal",
+              "oldNo": 6,
+              "newNo": 6,
+              "text": "line 6"
+            },
+            {
+              "type": "equal",
+              "oldNo": 7,
+              "newNo": 7,
+              "text": "line 7"
+            },
+            {
+              "type": "equal",
+              "oldNo": 8,
+              "newNo": 8,
+              "text": "line 8"
+            },
+            {
+              "type": "equal",
+              "oldNo": 9,
+              "newNo": 9,
+              "text": "line 9"
+            },
+            {
+              "type": "removed",
+              "oldNo": 10,
+              "text": "line 10"
+            },
+            {
+              "type": "added",
+              "newNo": 10,
+              "text": "ten"
+            },
+            {
+              "type": "equal",
+              "oldNo": 11,
+              "newNo": 11,
+              "text": "line 11"
+            },
+            {
+              "type": "equal",
+              "oldNo": 12,
+              "newNo": 12,
+              "text": "line 12"
+            },
+            {
+              "type": "equal",
+              "oldNo": 13,
+              "newNo": 13,
+              "text": "line 13"
+            }
+          ]
+        },
+        {
+          "type": "collapsed",
+          "count": 2,
+          "oldStart": 14,
+          "newStart": 14,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 14,
+              "newNo": 14,
+              "text": "line 14"
+            },
+            {
+              "type": "equal",
+              "oldNo": 15,
+              "newNo": 15,
+              "text": "line 15"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 1</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 2</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 3</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 4</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 5\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">5</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 5</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 5\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">5</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">five</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">6</span><span class=\"diff-gutter diff-gutter-new\">6</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 6</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">7</span><span class=\"diff-gutter diff-gutter-new\">7</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 7</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">8</span><span class=\"diff-gutter diff-gutter-new\">8</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 8</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">9</span><span class=\"diff-gutter diff-gutter-new\">9</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 9</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 10\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\">10</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 10</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 10\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">10</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">ten</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">11</span><span class=\"diff-gutter diff-gutter-new\">11</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 11</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">12</span><span class=\"diff-gutter diff-gutter-new\">12</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 12</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">13</span><span class=\"diff-gutter diff-gutter-new\">13</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 13</span></div><div class=\"diff-row diff-row-collapsed\">2 unchanged lines</div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 13,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "a single unchanged line between changes is never folded (context 3)",
+    "old": "a\nb\nc\n",
+    "new": "A\nb\nC\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 3,
+          "newStart": 1,
+          "newLines": 3,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "A"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "b"
+            },
+            {
+              "type": "removed",
+              "oldNo": 3,
+              "text": "c"
+            },
+            {
+              "type": "added",
+              "newNo": 3,
+              "text": "C"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">A</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 3\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">c</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">C</span></div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "two unchanged lines between changes fold at context 0 (context 3)",
+    "old": "a\nb\nc\nd\n",
+    "new": "A\nb\nc\nD\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 4,
+          "newStart": 1,
+          "newLines": 4,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "A"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "b"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 3,
+              "text": "c"
+            },
+            {
+              "type": "removed",
+              "oldNo": 4,
+              "text": "d"
+            },
+            {
+              "type": "added",
+              "newNo": 4,
+              "text": "D"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">A</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">c</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 4\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">d</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 4\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">D</span></div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 2,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "more removed than added (context 3)",
+    "old": "keep\nold one\nold two\nold three\nkeep\n",
+    "new": "keep\nnew one\nkeep\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 5,
+          "newStart": 1,
+          "newLines": 3,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "keep"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "old one"
+            },
+            {
+              "type": "removed",
+              "oldNo": 3,
+              "text": "old two"
+            },
+            {
+              "type": "removed",
+              "oldNo": 4,
+              "text": "old three"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "new one"
+            },
+            {
+              "type": "equal",
+              "oldNo": 5,
+              "newNo": 3,
+              "text": "keep"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">keep</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">old one</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 3\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">old two</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 4\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">old three</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">new one</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">5</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">keep</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 3,
+        "unchanged": 2,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "more added than removed (context 3)",
+    "old": "keep\nold\nkeep\n",
+    "new": "keep\nnew one\nnew two\nnew three\nkeep\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 3,
+          "newStart": 1,
+          "newLines": 5,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "keep"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "old"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "new one"
+            },
+            {
+              "type": "added",
+              "newNo": 3,
+              "text": "new two"
+            },
+            {
+              "type": "added",
+              "newNo": 4,
+              "text": "new three"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 5,
+              "text": "keep"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">keep</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">old</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">new one</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">new two</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 4\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">new three</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">5</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">keep</span></div></div>",
+      "stats": {
+        "added": 3,
+        "removed": 1,
+        "unchanged": 2,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "intra-line word diff (context 3)",
+    "old": "The quick brown fox\njumps over\n",
+    "new": "The quick red fox\njumps over\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "The quick brown fox"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "The quick red fox"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "jumps over"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">The quick brown fox</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">The quick red fox</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">jumps over</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "low-similarity pair skips intra-line (context 3)",
+    "old": "alpha beta gamma\n",
+    "new": "one two three\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "alpha beta gamma"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "one two three"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">alpha beta gamma</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">one two three</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "long line skips intra-line (context 3)",
+    "old": "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x end\n",
+    "new": "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x fin\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x end"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x fin"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x end</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x fin</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "CRLF vs LF (context 3)",
+    "old": "one\r\ntwo\r\n",
+    "new": "one\ntwo\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "one"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "two"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "one"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "two"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">one</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">two</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">one</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">two</span></div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "stripTrailingCr (context 3)",
+    "old": "one\r\ntwo\r\n",
+    "new": "one\ntwo\nthree\n",
+    "options": {
+      "stripTrailingCr": true,
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 3,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "one"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "two"
+            },
+            {
+              "type": "added",
+              "newNo": 3,
+              "text": "three"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">one</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">two</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">three</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 0,
+        "unchanged": 2,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "ignoreWhitespace (context 3)",
+    "old": "a\n  b\nc\n",
+    "new": "a\nb  \nd\n",
+    "options": {
+      "ignoreWhitespace": true,
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 3,
+          "newStart": 1,
+          "newLines": 3,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "b  "
+            },
+            {
+              "type": "removed",
+              "oldNo": 3,
+              "text": "c"
+            },
+            {
+              "type": "added",
+              "newNo": 3,
+              "text": "d"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">b  </span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 3\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">c</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">d</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 2,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "ignoreCase (context 3)",
+    "old": "Alpha\nBeta\n",
+    "new": "alpha\nGamma\n",
+    "options": {
+      "ignoreCase": true,
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "alpha"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "Beta"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "Gamma"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">alpha</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">Beta</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">Gamma</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "no final newline (context 3)",
+    "old": "a\nb",
+    "new": "a\nb\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "b"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "b"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">b</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "HTML-special characters are escaped (context 3)",
+    "old": "<p class=\"x\">\n&amp;\n",
+    "new": "<p class='y'>\n&amp;\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "<p class=\"x\">"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "<p class='y'>"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "&amp;"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">&lt;p class=&quot;x&quot;&gt;</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">&lt;p class=&#39;y&#39;&gt;</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">&amp;amp;</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "unicode lines (context 3)",
+    "old": "😀 smile\n東京\n",
+    "new": "😁 grin\n東京\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "😀 smile"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "😁 grin"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "東京"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">😀 smile</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">😁 grin</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">東京</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "indentation change keeps each side (context 3)",
+    "old": "    return x;\n",
+    "new": "  return y;\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "    return x;"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "  return y;"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">    return x;</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">  return y;</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "tab-indented edit (context 3)",
+    "old": "\tif (a) {\n\t\tgo();\n",
+    "new": "\tif (b) {\n\t\tgo();\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "\tif (a) {"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "\tif (b) {"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "\t\tgo();"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">\tif (a) {</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">\tif (b) {</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">\t\tgo();</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "whitespace-only change within a line (context 3)",
+    "old": "a b\n",
+    "new": "a  b\n",
+    "options": {
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "a b"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "a  b"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a b</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">a  b</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "ignoreCase keeps each side spelling (context 3)",
+    "old": "Hello World\n",
+    "new": "hello world!\n",
+    "options": {
+      "ignoreCase": true,
+      "contextLines": 3
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "Hello World"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "hello world!"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">Hello World</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">hello world!</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "both empty (context 0)",
+    "old": "",
+    "new": "",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-empty\">No changes</div></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "old empty (context 0)",
+    "old": "",
+    "new": "a\nb\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 0,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "b"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">b</span></div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 0,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "new empty (context 0)",
+    "old": "a\nb\n",
+    "new": "",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 0,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "b"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">b</span></div></div>",
+      "stats": {
+        "added": 0,
+        "removed": 2,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "identical (context 0)",
+    "old": "a\nb\nc\n",
+    "new": "a\nb\nc\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "collapsed",
+          "count": 3,
+          "oldStart": 1,
+          "newStart": 1,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "b"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 3,
+              "text": "c"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-empty\">No changes</div></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 3,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "one line changed in the middle (context 0)",
+    "old": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\n",
+    "new": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline ten\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "collapsed",
+          "count": 9,
+          "oldStart": 1,
+          "newStart": 1,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "line 1"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "line 2"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 3,
+              "text": "line 3"
+            },
+            {
+              "type": "equal",
+              "oldNo": 4,
+              "newNo": 4,
+              "text": "line 4"
+            },
+            {
+              "type": "equal",
+              "oldNo": 5,
+              "newNo": 5,
+              "text": "line 5"
+            },
+            {
+              "type": "equal",
+              "oldNo": 6,
+              "newNo": 6,
+              "text": "line 6"
+            },
+            {
+              "type": "equal",
+              "oldNo": 7,
+              "newNo": 7,
+              "text": "line 7"
+            },
+            {
+              "type": "equal",
+              "oldNo": 8,
+              "newNo": 8,
+              "text": "line 8"
+            },
+            {
+              "type": "equal",
+              "oldNo": 9,
+              "newNo": 9,
+              "text": "line 9"
+            }
+          ]
+        },
+        {
+          "type": "hunk",
+          "oldStart": 10,
+          "oldLines": 1,
+          "newStart": 10,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 10,
+              "text": "line 10"
+            },
+            {
+              "type": "added",
+              "newNo": 10,
+              "text": "line ten"
+            }
+          ]
+        },
+        {
+          "type": "collapsed",
+          "count": 10,
+          "oldStart": 11,
+          "newStart": 11,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 11,
+              "newNo": 11,
+              "text": "line 11"
+            },
+            {
+              "type": "equal",
+              "oldNo": 12,
+              "newNo": 12,
+              "text": "line 12"
+            },
+            {
+              "type": "equal",
+              "oldNo": 13,
+              "newNo": 13,
+              "text": "line 13"
+            },
+            {
+              "type": "equal",
+              "oldNo": 14,
+              "newNo": 14,
+              "text": "line 14"
+            },
+            {
+              "type": "equal",
+              "oldNo": 15,
+              "newNo": 15,
+              "text": "line 15"
+            },
+            {
+              "type": "equal",
+              "oldNo": 16,
+              "newNo": 16,
+              "text": "line 16"
+            },
+            {
+              "type": "equal",
+              "oldNo": 17,
+              "newNo": 17,
+              "text": "line 17"
+            },
+            {
+              "type": "equal",
+              "oldNo": 18,
+              "newNo": 18,
+              "text": "line 18"
+            },
+            {
+              "type": "equal",
+              "oldNo": 19,
+              "newNo": 19,
+              "text": "line 19"
+            },
+            {
+              "type": "equal",
+              "oldNo": 20,
+              "newNo": 20,
+              "text": "line 20"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-collapsed\">9 unchanged lines</div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 10\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">10</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 10</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 10\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">10</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">line ten</span></div><div class=\"diff-row diff-row-collapsed\">10 unchanged lines</div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 19,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "two distant changes (context 0)",
+    "old": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+    "new": "line 1\nline 2\nline 3\nfour\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\ntwenty-five\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "collapsed",
+          "count": 3,
+          "oldStart": 1,
+          "newStart": 1,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "line 1"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "line 2"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 3,
+              "text": "line 3"
+            }
+          ]
+        },
+        {
+          "type": "hunk",
+          "oldStart": 4,
+          "oldLines": 1,
+          "newStart": 4,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 4,
+              "text": "line 4"
+            },
+            {
+              "type": "added",
+              "newNo": 4,
+              "text": "four"
+            }
+          ]
+        },
+        {
+          "type": "collapsed",
+          "count": 20,
+          "oldStart": 5,
+          "newStart": 5,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 5,
+              "newNo": 5,
+              "text": "line 5"
+            },
+            {
+              "type": "equal",
+              "oldNo": 6,
+              "newNo": 6,
+              "text": "line 6"
+            },
+            {
+              "type": "equal",
+              "oldNo": 7,
+              "newNo": 7,
+              "text": "line 7"
+            },
+            {
+              "type": "equal",
+              "oldNo": 8,
+              "newNo": 8,
+              "text": "line 8"
+            },
+            {
+              "type": "equal",
+              "oldNo": 9,
+              "newNo": 9,
+              "text": "line 9"
+            },
+            {
+              "type": "equal",
+              "oldNo": 10,
+              "newNo": 10,
+              "text": "line 10"
+            },
+            {
+              "type": "equal",
+              "oldNo": 11,
+              "newNo": 11,
+              "text": "line 11"
+            },
+            {
+              "type": "equal",
+              "oldNo": 12,
+              "newNo": 12,
+              "text": "line 12"
+            },
+            {
+              "type": "equal",
+              "oldNo": 13,
+              "newNo": 13,
+              "text": "line 13"
+            },
+            {
+              "type": "equal",
+              "oldNo": 14,
+              "newNo": 14,
+              "text": "line 14"
+            },
+            {
+              "type": "equal",
+              "oldNo": 15,
+              "newNo": 15,
+              "text": "line 15"
+            },
+            {
+              "type": "equal",
+              "oldNo": 16,
+              "newNo": 16,
+              "text": "line 16"
+            },
+            {
+              "type": "equal",
+              "oldNo": 17,
+              "newNo": 17,
+              "text": "line 17"
+            },
+            {
+              "type": "equal",
+              "oldNo": 18,
+              "newNo": 18,
+              "text": "line 18"
+            },
+            {
+              "type": "equal",
+              "oldNo": 19,
+              "newNo": 19,
+              "text": "line 19"
+            },
+            {
+              "type": "equal",
+              "oldNo": 20,
+              "newNo": 20,
+              "text": "line 20"
+            },
+            {
+              "type": "equal",
+              "oldNo": 21,
+              "newNo": 21,
+              "text": "line 21"
+            },
+            {
+              "type": "equal",
+              "oldNo": 22,
+              "newNo": 22,
+              "text": "line 22"
+            },
+            {
+              "type": "equal",
+              "oldNo": 23,
+              "newNo": 23,
+              "text": "line 23"
+            },
+            {
+              "type": "equal",
+              "oldNo": 24,
+              "newNo": 24,
+              "text": "line 24"
+            }
+          ]
+        },
+        {
+          "type": "hunk",
+          "oldStart": 25,
+          "oldLines": 1,
+          "newStart": 25,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 25,
+              "text": "line 25"
+            },
+            {
+              "type": "added",
+              "newNo": 25,
+              "text": "twenty-five"
+            }
+          ]
+        },
+        {
+          "type": "collapsed",
+          "count": 5,
+          "oldStart": 26,
+          "newStart": 26,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 26,
+              "newNo": 26,
+              "text": "line 26"
+            },
+            {
+              "type": "equal",
+              "oldNo": 27,
+              "newNo": 27,
+              "text": "line 27"
+            },
+            {
+              "type": "equal",
+              "oldNo": 28,
+              "newNo": 28,
+              "text": "line 28"
+            },
+            {
+              "type": "equal",
+              "oldNo": 29,
+              "newNo": 29,
+              "text": "line 29"
+            },
+            {
+              "type": "equal",
+              "oldNo": 30,
+              "newNo": 30,
+              "text": "line 30"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-collapsed\">3 unchanged lines</div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 4\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 4</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 4\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">four</span></div><div class=\"diff-row diff-row-collapsed\">20 unchanged lines</div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 25\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\">25</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 25</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 25\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">25</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">twenty-five</span></div><div class=\"diff-row diff-row-collapsed\">5 unchanged lines</div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 28,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "changes merged by overlapping context (context 0)",
+    "old": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\n",
+    "new": "line 1\nline 2\nline 3\nline 4\nfive\nline 6\nline 7\nline 8\nline 9\nten\nline 11\nline 12\nline 13\nline 14\nline 15\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "collapsed",
+          "count": 4,
+          "oldStart": 1,
+          "newStart": 1,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "line 1"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "line 2"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 3,
+              "text": "line 3"
+            },
+            {
+              "type": "equal",
+              "oldNo": 4,
+              "newNo": 4,
+              "text": "line 4"
+            }
+          ]
+        },
+        {
+          "type": "hunk",
+          "oldStart": 5,
+          "oldLines": 1,
+          "newStart": 5,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 5,
+              "text": "line 5"
+            },
+            {
+              "type": "added",
+              "newNo": 5,
+              "text": "five"
+            }
+          ]
+        },
+        {
+          "type": "collapsed",
+          "count": 4,
+          "oldStart": 6,
+          "newStart": 6,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 6,
+              "newNo": 6,
+              "text": "line 6"
+            },
+            {
+              "type": "equal",
+              "oldNo": 7,
+              "newNo": 7,
+              "text": "line 7"
+            },
+            {
+              "type": "equal",
+              "oldNo": 8,
+              "newNo": 8,
+              "text": "line 8"
+            },
+            {
+              "type": "equal",
+              "oldNo": 9,
+              "newNo": 9,
+              "text": "line 9"
+            }
+          ]
+        },
+        {
+          "type": "hunk",
+          "oldStart": 10,
+          "oldLines": 1,
+          "newStart": 10,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 10,
+              "text": "line 10"
+            },
+            {
+              "type": "added",
+              "newNo": 10,
+              "text": "ten"
+            }
+          ]
+        },
+        {
+          "type": "collapsed",
+          "count": 5,
+          "oldStart": 11,
+          "newStart": 11,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 11,
+              "newNo": 11,
+              "text": "line 11"
+            },
+            {
+              "type": "equal",
+              "oldNo": 12,
+              "newNo": 12,
+              "text": "line 12"
+            },
+            {
+              "type": "equal",
+              "oldNo": 13,
+              "newNo": 13,
+              "text": "line 13"
+            },
+            {
+              "type": "equal",
+              "oldNo": 14,
+              "newNo": 14,
+              "text": "line 14"
+            },
+            {
+              "type": "equal",
+              "oldNo": 15,
+              "newNo": 15,
+              "text": "line 15"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-collapsed\">4 unchanged lines</div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 5\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">5</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 5</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 5\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">5</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">five</span></div><div class=\"diff-row diff-row-collapsed\">4 unchanged lines</div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 10\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\">10</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 10</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 10\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">10</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">ten</span></div><div class=\"diff-row diff-row-collapsed\">5 unchanged lines</div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 13,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "a single unchanged line between changes is never folded (context 0)",
+    "old": "a\nb\nc\n",
+    "new": "A\nb\nC\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 3,
+          "newStart": 1,
+          "newLines": 3,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "A"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "b"
+            },
+            {
+              "type": "removed",
+              "oldNo": 3,
+              "text": "c"
+            },
+            {
+              "type": "added",
+              "newNo": 3,
+              "text": "C"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">A</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 3\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">c</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">C</span></div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "two unchanged lines between changes fold at context 0 (context 0)",
+    "old": "a\nb\nc\nd\n",
+    "new": "A\nb\nc\nD\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "A"
+            }
+          ]
+        },
+        {
+          "type": "collapsed",
+          "count": 2,
+          "oldStart": 2,
+          "newStart": 2,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "b"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 3,
+              "text": "c"
+            }
+          ]
+        },
+        {
+          "type": "hunk",
+          "oldStart": 4,
+          "oldLines": 1,
+          "newStart": 4,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 4,
+              "text": "d"
+            },
+            {
+              "type": "added",
+              "newNo": 4,
+              "text": "D"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">A</span></div><div class=\"diff-row diff-row-collapsed\">2 unchanged lines</div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 4\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">d</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 4\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">D</span></div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 2,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "more removed than added (context 0)",
+    "old": "keep\nold one\nold two\nold three\nkeep\n",
+    "new": "keep\nnew one\nkeep\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 5,
+          "newStart": 1,
+          "newLines": 3,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "keep"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "old one"
+            },
+            {
+              "type": "removed",
+              "oldNo": 3,
+              "text": "old two"
+            },
+            {
+              "type": "removed",
+              "oldNo": 4,
+              "text": "old three"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "new one"
+            },
+            {
+              "type": "equal",
+              "oldNo": 5,
+              "newNo": 3,
+              "text": "keep"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">keep</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">old one</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 3\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">old two</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 4\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">old three</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">new one</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">5</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">keep</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 3,
+        "unchanged": 2,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "more added than removed (context 0)",
+    "old": "keep\nold\nkeep\n",
+    "new": "keep\nnew one\nnew two\nnew three\nkeep\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 3,
+          "newStart": 1,
+          "newLines": 5,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "keep"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "old"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "new one"
+            },
+            {
+              "type": "added",
+              "newNo": 3,
+              "text": "new two"
+            },
+            {
+              "type": "added",
+              "newNo": 4,
+              "text": "new three"
+            },
+            {
+              "type": "equal",
+              "oldNo": 3,
+              "newNo": 5,
+              "text": "keep"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">keep</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">old</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">new one</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">new two</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 4\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">new three</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">5</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">keep</span></div></div>",
+      "stats": {
+        "added": 3,
+        "removed": 1,
+        "unchanged": 2,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "intra-line word diff (context 0)",
+    "old": "The quick brown fox\njumps over\n",
+    "new": "The quick red fox\njumps over\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "The quick brown fox"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "The quick red fox"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "jumps over"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">The quick brown fox</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">The quick red fox</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">jumps over</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "low-similarity pair skips intra-line (context 0)",
+    "old": "alpha beta gamma\n",
+    "new": "one two three\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "alpha beta gamma"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "one two three"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">alpha beta gamma</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">one two three</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "long line skips intra-line (context 0)",
+    "old": "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x end\n",
+    "new": "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x fin\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x end"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x fin"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x end</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x fin</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "CRLF vs LF (context 0)",
+    "old": "one\r\ntwo\r\n",
+    "new": "one\ntwo\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "one"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "two"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "one"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "two"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">one</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">two</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">one</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">two</span></div></div>",
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "stripTrailingCr (context 0)",
+    "old": "one\r\ntwo\r\n",
+    "new": "one\ntwo\nthree\n",
+    "options": {
+      "stripTrailingCr": true,
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "collapsed",
+          "count": 2,
+          "oldStart": 1,
+          "newStart": 1,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "one"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "two"
+            }
+          ]
+        },
+        {
+          "type": "hunk",
+          "oldStart": 3,
+          "oldLines": 0,
+          "newStart": 3,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "added",
+              "newNo": 3,
+              "text": "three"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-collapsed\">2 unchanged lines</div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">three</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 0,
+        "unchanged": 2,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "ignoreWhitespace (context 0)",
+    "old": "a\n  b\nc\n",
+    "new": "a\nb  \nd\n",
+    "options": {
+      "ignoreWhitespace": true,
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "collapsed",
+          "count": 2,
+          "oldStart": 1,
+          "newStart": 1,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "b  "
+            }
+          ]
+        },
+        {
+          "type": "hunk",
+          "oldStart": 3,
+          "oldLines": 1,
+          "newStart": 3,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 3,
+              "text": "c"
+            },
+            {
+              "type": "added",
+              "newNo": 3,
+              "text": "d"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-collapsed\">2 unchanged lines</div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 3\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">c</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">d</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 2,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "ignoreCase (context 0)",
+    "old": "Alpha\nBeta\n",
+    "new": "alpha\nGamma\n",
+    "options": {
+      "ignoreCase": true,
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "alpha"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "Beta"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "Gamma"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">alpha</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">Beta</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">Gamma</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "no final newline (context 0)",
+    "old": "a\nb",
+    "new": "a\nb\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "equal",
+              "oldNo": 1,
+              "newNo": 1,
+              "text": "a"
+            },
+            {
+              "type": "removed",
+              "oldNo": 2,
+              "text": "b"
+            },
+            {
+              "type": "added",
+              "newNo": 2,
+              "text": "b"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">b</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "HTML-special characters are escaped (context 0)",
+    "old": "<p class=\"x\">\n&amp;\n",
+    "new": "<p class='y'>\n&amp;\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "<p class=\"x\">"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "<p class='y'>"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "&amp;"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">&lt;p class=&quot;x&quot;&gt;</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">&lt;p class=&#39;y&#39;&gt;</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">&amp;amp;</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "unicode lines (context 0)",
+    "old": "😀 smile\n東京\n",
+    "new": "😁 grin\n東京\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "😀 smile"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "😁 grin"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "東京"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">😀 smile</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">😁 grin</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">東京</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "indentation change keeps each side (context 0)",
+    "old": "    return x;\n",
+    "new": "  return y;\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "    return x;"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "  return y;"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">    return x;</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">  return y;</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "tab-indented edit (context 0)",
+    "old": "\tif (a) {\n\t\tgo();\n",
+    "new": "\tif (b) {\n\t\tgo();\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 2,
+          "newStart": 1,
+          "newLines": 2,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "\tif (a) {"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "\tif (b) {"
+            },
+            {
+              "type": "equal",
+              "oldNo": 2,
+              "newNo": 2,
+              "text": "\t\tgo();"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">\tif (a) {</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">\tif (b) {</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">\t\tgo();</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "whitespace-only change within a line (context 0)",
+    "old": "a b\n",
+    "new": "a  b\n",
+    "options": {
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "a b"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "a  b"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a b</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">a  b</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  },
+  {
+    "name": "ignoreCase keeps each side spelling (context 0)",
+    "old": "Hello World\n",
+    "new": "hello world!\n",
+    "options": {
+      "ignoreCase": true,
+      "contextLines": 0
+    },
+    "expected": {
+      "hunks": [
+        {
+          "type": "hunk",
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "rows": [
+            {
+              "type": "removed",
+              "oldNo": 1,
+              "text": "Hello World"
+            },
+            {
+              "type": "added",
+              "newNo": 1,
+              "text": "hello world!"
+            }
+          ]
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">Hello World</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">hello world!</span></div></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 0,
+        "unit": "lines"
+      }
+    }
+  }
+]

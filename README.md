@@ -1,324 +1,125 @@
-# Vue Diff Text
+# diff-text
 
-I needed a way to show text differences in my Vue 3 apps, so I built this wrapper around the fantastic [jsdiff](https://github.com/kpdecker/jsdiff) library by [@kpdecker](https://github.com/kpdecker). It gives you five different ways to highlight changes between text blocks, from character-level precision to sentence-level overview.
+Text and HTML diff components for Vue, React, and PHP.
 
-**Looking for PHP?** Check out the sister package [php-diff-text](https://github.com/sitefinitysteve/php-diff-text) — a 1:1 PHP port with the same diffing strategies.
+diff-text shows what changed between two versions of a piece of text. It compares by character,
+word, word-plus-whitespace, sentence, or line, and it can diff rich HTML while keeping the markup
+valid. For longer text there are unified and side-by-side line views with line numbers and folded
+unchanged context, plus a stats badge with added / removed / unchanged counts and a similarity
+percentage.
 
-**⚠️ Important:** This library is designed for **text and paragraph comparisons**, not code diffing. If you need to compare code with syntax highlighting, use [v-code-diff](https://github.com/Shimada666/v-code-diff) instead.
+It is built for prose and paragraphs (policies, articles, CMS content), not for code review.
 
-## What you get
+![The diff-text demo page: hero and the six diff modes](https://raw.githubusercontent.com/sitefinitysteve/diff-text/main/packages/vue/DemoPreview-hero.png)
 
-- Works with Vue 3 Composition API
-- Six different diff strategies: characters, words, words with spaces, lines, sentences, and HTML
-- Perfect for text, documents, and prose comparisons
-- Easy to customize with CSS variables
-- Full TypeScript support
-- Lightweight (just a thin wrapper around jsdiff)
-- Pass any options that jsdiff supports
+*The shared demo page, rendered here by the Vue package. The React and PHP demos render the same page.*
 
-## Installation
+## Packages
 
-```bash
-npm install vue-diff-text
-```
+| Package | Install | Docs |
+|---------|---------|------|
+| [vue-diff-text](https://www.npmjs.com/package/vue-diff-text) (Vue 3) | `npm i vue-diff-text` | [packages/vue/README.md](packages/vue/README.md) |
+| [react-diff-text](https://www.npmjs.com/package/react-diff-text) (React 18 and 19) | `npm i react-diff-text` | [packages/react/README.md](packages/react/README.md) |
+| [sitefinitysteve/php-diff-text](https://packagist.org/packages/sitefinitysteve/php-diff-text) (PHP 8.1+) | `composer require sitefinitysteve/php-diff-text` | [packages/php/README.md](packages/php/README.md) |
 
-## Demo
+All three render the same markup and share one stylesheet (`style.css`, themeable through
+`--text-diff-*` custom properties). The npm packages bundle their only dependency (jsdiff);
+the PHP package needs only `ext-mbstring`.
 
-![Vue Diff Text Demo](DemoPreview.png)
+`packages/core` (`@diff-text/core`) is a private workspace package: the TypeScript reference
+implementation that the Vue and React packages bundle at build time. It is not published.
 
-*To run this demo locally: `git clone` this repo, `cd demo`, `npm install`, then `npm run dev`*
+## Feature matrix
 
-## The six components
+| Feature | Vue | React | PHP |
+|---------|-----|-------|-----|
+| Character diff | `<DiffChars>` | `<DiffChars>` | `DiffText::chars()` / `DiffChars` |
+| Word diff | `<DiffWords>` | `<DiffWords>` | `DiffText::words()` / `DiffWords` |
+| Word diff, whitespace significant | `<DiffWordsWithSpace>` (alias `TextDiff`) | `<DiffWordsWithSpace>` (alias `TextDiff`) | `DiffText::wordsWithSpace()` / `DiffWordsWithSpace` |
+| Sentence diff | `<DiffSentences>` | `<DiffSentences>` | `DiffText::sentences()` / `DiffSentences` |
+| Line diff (inline) | `<DiffLines>` | `<DiffLines>` | `DiffText::lines()` / `DiffLines` |
+| HTML diff | `<DiffHtml>` | `<DiffHtml>` | `DiffText::html()` / `DiffHtml` |
+| Unified line view | `<DiffUnified>` | `<DiffUnified>` | `DiffText::unified()` / `DiffUnified` |
+| Side-by-side line view | `<DiffSplit>` | `<DiffSplit>` | `DiffText::split()` / `DiffSplit` |
+| Stats badge | `<DiffStats>` | `<DiffStats>` | `DiffText::stats()` / `DiffStats` |
+| Similarity (0 to 1) | `computeSimilarity()` | `computeSimilarity()` | `DiffText::similarity()` / `Similarity::compute()` |
+| Raw change list | `computeDiff()` | `computeDiff()` | `DiffWords::diff()` etc. |
+| Line hunks | `buildHunks()` | `buildHunks()` | `DiffUnified::hunks()` |
+| Split rows | `buildSplitRows()` | `buildSplitRows()` | `DiffSplit::hunks()` |
+| Stats data | `computeStats()`, `lineStats()` | `computeStats()`, `lineStats()` | `DiffStats::compute()`, `fromChanges()`, `fromHunks()` |
+| HTML diff result object | `diffHtml()` | `diffHtml()` | no (markup only) |
+| HTML helpers | `normalizeQuotes()`, `stripFormattingTags()` | same | `NormalizeHtml::normalizeQuotes()`, `stripFormattingTags()` |
+| Expandable collapsed rows | yes (click to expand) | yes (click to expand) | no (static rows) |
+| `next()` / `prev()` / `goTo()` / `count` | yes, via template ref | yes, via `ref` (`forwardRef`) | no (output carries `data-change-index` for your own script) |
+| Options: `ignoreCase`, `ignoreWhitespace`, `contextLines`, ... | yes | yes | yes |
 
-Each component uses a different diffing strategy depending on what level of detail you need:
+## How parity is enforced
 
-**DiffChars** - Shows every single character change. Great for catching typos or small edits.
-
-**DiffWords** - Highlights word-level changes but ignores whitespace. Perfect for most text editing scenarios.
-
-**DiffWordsWithSpace** - Like DiffWords but also shows whitespace changes. Useful when formatting matters.
-
-**DiffLines** - Shows entire line changes. Good for comparing plain text files or when you want a high-level overview.
-
-**DiffSentences** - Highlights sentence-level changes. Nice for prose and document editing.
-
-**DiffHtml** - Compares HTML content and highlights markup differences. Perfect for rich text editing and HTML content changes. Supports a `similarity-threshold` prop to gracefully handle complete content replacements by showing old text as fully deleted and new text as fully added when texts are too dissimilar.
-
-## How to use it
-
-> **⚠️ Important:** You should import the CSS file for styling to work. It's not mandatory, you CAN implement the classes yourself.
-
-> ```javascript
-> import 'vue-diff-text/dist/style.css'
-> ```
-
-### Basic example
-
-```vue
-<template>
-  <div>
-    <!-- Pick whichever diff type makes sense for your use case -->
-    <DiffChars :old-text="oldText" :new-text="newText" />
-    <DiffWords :old-text="oldText" :new-text="newText" />
-    <DiffWordsWithSpace :old-text="oldText" :new-text="newText" />
-    <DiffLines :old-text="oldText" :new-text="newText" />
-    <DiffSentences :old-text="oldText" :new-text="newText" />
-    <DiffHtml :old-text="oldHtml" :new-text="newHtml" />
-  </div>
-</template>
-
-<script setup>
-import { DiffChars, DiffWords, DiffWordsWithSpace, DiffLines, DiffSentences, DiffHtml } from 'vue-diff-text'
-import 'vue-diff-text/dist/style.css'
-
-const oldText = "Hello world"
-const newText = "Hello Vue world"
-const oldHtml = '<p>Welcome to our <strong>website</strong>!</p>'
-const newHtml = '<p>Welcome to our <strong>amazing website</strong>!</p>'
-</script>
-```
-
-### Passing options
-
-Since this is just a wrapper around jsdiff, you can pass any options that jsdiff supports:
-
-```vue
-<template>
-  <div>
-    <!-- Ignore case differences -->
-    <DiffWords 
-      :old-text="oldText" 
-      :new-text="newText" 
-      :options="{ ignoreCase: true }"
-    />
-    
-    <!-- Ignore whitespace when comparing lines -->
-    <DiffLines 
-      :old-text="oldText" 
-      :new-text="newText" 
-      :options="{ ignoreWhitespace: true }"
-    />
-  </div>
-</template>
-
-<script setup>
-import { DiffWords, DiffLines } from 'vue-diff-text'
-import 'vue-diff-text/dist/style.css'
-
-const oldText = "Hello WORLD"
-const newText = "hello world"
-</script>
-```
-
-## Props
-
-All components take the same props:
-
-- `old-text` (required) - The original text
-- `new-text` (required) - The new text to compare
-- `options` (optional) - Any options to pass to jsdiff
-- `similarity-threshold` (optional, DiffHtml only) - Number between 0 and 1. When set, if the text similarity falls below this threshold, the diff renders as a full replacement (all old text deleted, all new text added) instead of word-level diffing. Recommended value: `0.3`. Default: `null` (disabled).
-
-## Options
-
-The options you can pass depend on which diff type you're using. Here are the most common ones:
-
-**For most components:**
-- `ignoreCase: true` - Ignore case differences
-- `ignoreWhitespace: true` - Ignore whitespace differences
-
-**For DiffLines:**
-- `newlineIsToken: true` - Treat newlines as separate tokens
-
-Check the [jsdiff docs](https://github.com/kpdecker/jsdiff#options) for the complete list of what each diff type supports.
-
-### Handling large replacements (DiffHtml)
-
-When text is completely rewritten, word-level diffs can produce unreadable results by finding
-incidental word matches. The `similarity-threshold` prop fixes this:
-
-```vue
-<DiffHtml
-  :old-text="oldHtml"
-  :new-text="newHtml"
-  :similarity-threshold="0.3"
-/>
-```
-
-When set, DiffHtml computes text similarity. If below the threshold, it shows the old text as
-fully deleted and the new text as fully added — just like Google Docs or GitHub handles
-complete rewrites. The threshold is a number between 0-1 (0.3 = 30% similarity).
-
-## Styling
-
-**You must import the CSS file for styling to work.** Add this import to your component or main.js:
-
-```javascript
-import 'vue-diff-text/dist/style.css'
-```
-
-You can then customize the look in two ways:
-
-### CSS variables (easiest)
-
-Just override the CSS variables to change colors:
-
-```css
-:root {
-  --text-diff-added-bg: #e6ffed;
-  --text-diff-added-color: #1b7332;
-  --text-diff-removed-bg: #ffe6e6;
-  --text-diff-removed-color: #d73a49;
-  --text-diff-removed-decoration: line-through;
-}
-```
-
-### Direct CSS classes
-
-If you need more control, target these classes. Note that all styles are scoped under `.text-diff`:
-
-```css
-.text-diff {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  /* Add your custom container styles here */
-}
-
-.text-diff .diff-added {
-  background-color: #e6ffed;
-  color: #1b7332;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 4px;
-}
-
-.text-diff .diff-removed {
-  background-color: #ffe6e6;
-  color: #d73a49;
-  text-decoration: line-through;
-  border-radius: 3px;
-  padding: 2px 4px;
-}
-```
-
-The available classes are:
-- `.text-diff` - Main container (each component has this)
-- `.text-diff .diff-added` - Added text spans
-- `.text-diff .diff-removed` - Removed text spans
-
-**Note:** The DiffHtml component uses the same CSS classes (`.diff-added` and `.diff-removed`) as the other components for consistent styling.
+- [SPEC.md](SPEC.md) is the behavior contract: tokenizers, the exact Myers variant, whitespace
+  post-processing, similarity, the line and split models, stats, the HTML diff, and the canonical
+  markup for every view. It is written so the PHP port can be done without reading JavaScript.
+- `fixtures/*.json` are the executable form of SPEC.md. They are generated from `packages/core`
+  with `npm run fixtures`. If the text and the fixtures disagree, the fixtures win.
+- All three test suites run the fixtures: the Vue and React suites mount every case and compare the
+  rendered markup, and the PHP suite compares change lists, markup, hunks, and stats byte for byte
+  (the HTML diff included: one engine, SPEC.md section 12).
+- CI runs `npm run fixtures:check`, which fails if the committed fixtures differ from what core
+  produces.
+- The demo page is shared too: `demo/` holds the CSS, the sample text, and the template contract
+  that each package's demo follows ([demo/README.md](demo/README.md)).
 
 ## Development
 
-Want to contribute or just mess around with the code? Here's how to get started.
-
-### Setup
-
-You'll need Node.js 18+ and npm (or yarn, whatever you prefer).
+Requires Node 20+ and, for the PHP package, PHP 8.1+ with Composer.
 
 ```bash
-git clone https://github.com/sitefinitysteve/vue-diff-text.git
-cd vue-diff-text
-npm install
+npm install            # installs the core, vue and react workspaces
+npm test               # core, Vue and React test suites
+npm run lint
+npm run test:php       # PHP suite (run `composer install` in packages/php first)
+npm run fixtures       # regenerate fixtures/*.json from packages/core
+npm run fixtures:check # fail if the committed fixtures are out of date
+npm run build          # build the Vue and React packages
 ```
 
-### Working on it
-
-The easiest way to develop is to use the demo app with hot reload:
+Demos:
 
 ```bash
-cd demo
-npm run dev
+cd packages/vue/demo && npm install && npm run dev     # http://localhost:5174
+cd packages/react/demo && npm install && npm run dev   # http://localhost:5175
+cd packages/php && composer demo                       # http://127.0.0.1:8080
 ```
 
-This spins up a dev server (usually at http://localhost:5173) where you can see all the components in action. The demo is set up with Vite aliases so it points directly to the source files - no build step needed.
-
-Just edit the files in `src/components/` and your changes will show up instantly.
-
-If you want to test the built version instead:
-
-```bash
-npm run build
-cd demo
-npm run dev
-```
-
-### Building
-
-When you're ready to build:
-
-```bash
-npm run build
-```
-
-This creates the dist files (ES module, UMD bundle, TypeScript declarations, and CSS).
-
-### Testing
-
-The demo folder has a complete Vue 3 app for testing. It lets you:
-- Edit text in real-time and see the diffs
-- Compare all five diff types side by side
-- Test different options
-- Try it with longer text blocks
-
-```bash
-cd demo
-npm install  # First time only
-npm run dev
-```
-
-### Project layout
+Layout:
 
 ```
-vue-diff-text/
-├── src/
-│   ├── components/          # The five diff components
-│   └── index.ts            # Main entry point
-├── demo/                   # Test app
-├── dist/                   # Built files
-└── package.json
+demo/            shared demo CSS, sample text, template contract
+fixtures/        canonical test cases, generated from core
+packages/core/   @diff-text/core, the TypeScript reference implementation (private)
+packages/vue/    vue-diff-text
+packages/react/  react-diff-text
+packages/php/    php-diff-text
+scripts/         fixture generation and checks
+SPEC.md          the behavior contract
 ```
 
-Available scripts:
-- `npm run dev` - Start dev server
-- `npm run build` - Build for production
-- `npm run preview` - Preview built version
+## Releases
 
-For the demo (run from `demo/`):
-- `npm run dev` - Start demo server
-- `npm run build` - Build demo
-- `npm run preview` - Preview built demo
+Releases are driven by tags (see `.github/workflows`):
 
-## Dependencies
+- `vue-vX.Y.Z` publishes `vue-diff-text` to npm; `react-vX.Y.Z` publishes `react-diff-text`
+  (`release-npm.yml`). The workflow runs that package's tests, builds it, publishes with
+  provenance, and creates a GitHub release. It needs the `NPM_TOKEN` secret.
+- `php-vX.Y.Z` tags the mirror repository
+  [sitefinitysteve/php-diff-text](https://github.com/sitefinitysteve/php-diff-text) as `vX.Y.Z`,
+  which Packagist reads (`split-php.yml`). Every push to `main` that touches `packages/php` also
+  updates the mirror's `main` branch. It needs the `SPLIT_TOKEN` secret.
 
-- **vue** ^3.4.21 - Vue 3 framework
-- **diff** ^5.2.0 - The core diffing library by [@kpdecker](https://github.com/kpdecker) that does all the heavy lifting
-- **diffblazer** ^1.0.0 - Fast HTML diffing library used by the DiffHtml component
-
-## Contributing
-
-Found a bug or want to add a feature? Pull requests are welcome!
-
-1. Fork it
-2. Create your feature branch
-3. Make your changes
-4. Test it in the demo app
-5. Commit and push
-6. Open a pull request
+Bump the version in the package's `package.json` or `composer.json` (and the npm packages' CHANGELOG)
+before tagging.
+CI (`ci.yml`) runs fixtures:check, lint, tests and builds on Node 20 and 22, and the PHP suite on
+PHP 8.1 to 8.4.
 
 ## License
 
-MIT © Steve McNiven-Scott
-
-## Thanks
-
-Huge thanks to [@kpdecker](https://github.com/kpdecker) for creating and maintaining [jsdiff](https://github.com/kpdecker/jsdiff). This library wouldn't exist without his excellent work on the underlying diffing algorithms.
-
-## Links
-
-- [GitHub repo](https://github.com/sitefinitysteve/vue-diff-text)
-- [Issues](https://github.com/sitefinitysteve/vue-diff-text/issues)
-- [Vue 3 docs](https://vuejs.org/)
-- [jsdiff docs](https://github.com/kpdecker/jsdiff)
-- [php-diff-text](https://github.com/sitefinitysteve/php-diff-text) - PHP sister package (1:1 port)
-- [v-code-diff](https://github.com/Shimada666/v-code-diff) - For code diffing with syntax highlighting
+MIT

@@ -1,0 +1,30 @@
+{
+  "name": "@diff-text/core",
+  "private": true,
+  "version": "1.6.0",
+  "description": "Framework-agnostic diff model and canonical renderer shared by vue-diff-text, react-diff-text, and the PHP port.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./style.css": "./src/style.css"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "diff": "^8.0.2"
+  },
+  "devDependencies": {
+    "fast-check": "^4.10.2",
+    "jsdom": "^28.1.0",
+    "typescript": "^5.2.2",
+    "vitest": "^4.0.18"
+  },
+  "license": "MIT"
+}

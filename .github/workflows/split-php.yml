@@ -1,0 +1,33 @@
+# Mirrors packages/php into sitefinitysteve/php-diff-text, which Packagist reads.
+# Pushing a tag php-vX.Y.Z publishes vX.Y.Z on the mirror.
+# Requires secret SPLIT_TOKEN: a fine-grained PAT with contents:write on php-diff-text.
+name: Split PHP package
+on:
+  push:
+    branches: [main]
+    paths: ['packages/php/**']
+    tags: ['php-v*']
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: tag
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/php-v* ]]; then
+            echo "tag=${GITHUB_REF#refs/tags/php-}" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: danharrin/monorepo-split-github-action@v2.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.SPLIT_TOKEN }}
+        with:
+          package_directory: packages/php
+          repository_organization: sitefinitysteve
+          repository_name: php-diff-text
+          branch: main
+          tag: ${{ steps.tag.outputs.tag }}
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com

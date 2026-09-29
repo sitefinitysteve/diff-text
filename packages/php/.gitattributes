@@ -1,0 +1,8 @@
+# Keep development files out of Composer dist archives.
+/tests            export-ignore
+/benchmarks       export-ignore
+/phpunit.xml      export-ignore
+/.gitattributes   export-ignore
+/demo             export-ignore
+/DemoPreview.png  export-ignore
+/DemoPreview-hero.png export-ignore

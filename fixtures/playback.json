@@ -1,0 +1,707 @@
+[
+  {
+    "name": "both empty",
+    "old": "",
+    "new": "",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "changes": [],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"></div></div>"
+    }
+  },
+  {
+    "name": "identical",
+    "old": "nothing changes",
+    "new": "nothing changes",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "nothing changes",
+          "added": false,
+          "removed": false,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span>nothing changes</span></div></div>"
+    }
+  },
+  {
+    "name": "all new",
+    "old": "",
+    "new": "fresh text",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "fresh text",
+          "added": true,
+          "removed": false,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span class=\"diff-added\" data-change-index=\"0\" style=\"--td-i:0\">fresh text</span></div></div>"
+    }
+  },
+  {
+    "name": "all removed",
+    "old": "old text",
+    "new": "",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "old text",
+          "added": false,
+          "removed": true,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">old text</span></div></div>"
+    }
+  },
+  {
+    "name": "single change",
+    "old": "The quick brown fox",
+    "new": "The quick red fox",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "The quick ",
+          "added": false,
+          "removed": false,
+          "count": 2
+        },
+        {
+          "value": "brown",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "red",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " fox",
+          "added": false,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span>The quick </span><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">brown</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">red</span><span> fox</span></div></div>"
+    }
+  },
+  {
+    "name": "many changes",
+    "old": "one two three four five six",
+    "new": "uno two tres four cinco six seven",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "one",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "uno",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " two ",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "three",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "tres",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " four ",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "five",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "cinco",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " six ",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "seven",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">one</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">uno</span><span> two </span><span class=\"diff-removed\" data-change-index=\"2\" style=\"--td-i:2\">three</span><span class=\"diff-added\" data-change-index=\"3\" style=\"--td-i:3\">tres</span><span> four </span><span class=\"diff-removed\" data-change-index=\"4\" style=\"--td-i:4\">five</span><span class=\"diff-added\" data-change-index=\"5\" style=\"--td-i:5\">cinco</span><span> six </span><span class=\"diff-added\" data-change-index=\"6\" style=\"--td-i:6\">seven</span></div></div>"
+    }
+  },
+  {
+    "name": "chars",
+    "old": "kitten",
+    "new": "sitting",
+    "options": {
+      "mode": "chars"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "k",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "s",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "itt",
+          "added": false,
+          "removed": false,
+          "count": 3
+        },
+        {
+          "value": "e",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "i",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "n",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "g",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-chars text-diff-playback\"><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">k</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">s</span><span>itt</span><span class=\"diff-removed\" data-change-index=\"2\" style=\"--td-i:2\">e</span><span class=\"diff-added\" data-change-index=\"3\" style=\"--td-i:3\">i</span><span>n</span><span class=\"diff-added\" data-change-index=\"4\" style=\"--td-i:4\">g</span></div></div>"
+    }
+  },
+  {
+    "name": "sentences",
+    "old": "Hi. How are you? Bye.",
+    "new": "Hi. How is it going? Bye!",
+    "options": {
+      "mode": "sentences"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "Hi. ",
+          "added": false,
+          "removed": false,
+          "count": 2
+        },
+        {
+          "value": "How are you?",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "How is it going?",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " ",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "Bye.",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "Bye!",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-sentences text-diff-playback\"><span>Hi. </span><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">How are you?</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">How is it going?</span><span> </span><span class=\"diff-removed\" data-change-index=\"2\" style=\"--td-i:2\">Bye.</span><span class=\"diff-added\" data-change-index=\"3\" style=\"--td-i:3\">Bye!</span></div></div>"
+    }
+  },
+  {
+    "name": "lines",
+    "old": "a\nb\nc\n",
+    "new": "a\nB\nc\nd\n",
+    "options": {
+      "mode": "lines"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "a\n",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "b\n",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "B\n",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "c\n",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "d\n",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-lines text-diff-playback\"><span>a\n</span><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">b\n</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">B\n</span><span>c\n</span><span class=\"diff-added\" data-change-index=\"2\" style=\"--td-i:2\">d\n</span></div></div>"
+    }
+  },
+  {
+    "name": "wordsWithSpace",
+    "old": "a  b",
+    "new": "a b c",
+    "options": {
+      "mode": "wordsWithSpace"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "a",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "  ",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": " ",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "b",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " c",
+          "added": true,
+          "removed": false,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words-with-space text-diff-playback\"><span>a</span><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">  </span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\"> </span><span>b</span><span class=\"diff-added\" data-change-index=\"2\" style=\"--td-i:2\"> c</span></div></div>"
+    }
+  },
+  {
+    "name": "speed 200",
+    "old": "slow fox",
+    "new": "quick fox",
+    "options": {
+      "mode": "words",
+      "speed": 200
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "slow",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "quick",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " fox",
+          "added": false,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\" style=\"--text-diff-playback-step:200ms\"><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">slow</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">quick</span><span> fox</span></div></div>"
+    }
+  },
+  {
+    "name": "fractional speed is floored",
+    "old": "slow fox",
+    "new": "quick fox",
+    "options": {
+      "mode": "words",
+      "speed": 250.7
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "slow",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "quick",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " fox",
+          "added": false,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\" style=\"--text-diff-playback-step:250ms\"><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">slow</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">quick</span><span> fox</span></div></div>"
+    }
+  },
+  {
+    "name": "zero speed is ignored",
+    "old": "slow fox",
+    "new": "quick fox",
+    "options": {
+      "mode": "words",
+      "speed": 0
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "slow",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "quick",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " fox",
+          "added": false,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">slow</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">quick</span><span> fox</span></div></div>"
+    }
+  },
+  {
+    "name": "negative speed is ignored",
+    "old": "slow fox",
+    "new": "quick fox",
+    "options": {
+      "mode": "words",
+      "speed": -5
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "slow",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "quick",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " fox",
+          "added": false,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">slow</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">quick</span><span> fox</span></div></div>"
+    }
+  },
+  {
+    "name": "non-numeric speed is ignored",
+    "old": "slow fox",
+    "new": "quick fox",
+    "options": {
+      "mode": "words",
+      "speed": "300"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "slow",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "quick",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " fox",
+          "added": false,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">slow</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">quick</span><span> fox</span></div></div>"
+    }
+  },
+  {
+    "name": "unicode",
+    "old": "東京 😀",
+    "new": "京都 😁",
+    "options": {
+      "mode": "chars"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "東",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "京",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "都",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": " ",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "😀",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "😁",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-chars text-diff-playback\"><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">東</span><span>京</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">都</span><span> </span><span class=\"diff-removed\" data-change-index=\"2\" style=\"--td-i:2\">😀</span><span class=\"diff-added\" data-change-index=\"3\" style=\"--td-i:3\">😁</span></div></div>"
+    }
+  },
+  {
+    "name": "CRLF",
+    "old": "one\r\ntwo\r\n",
+    "new": "one\ntwo\n",
+    "options": {
+      "mode": "lines"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "one\r\ntwo\r\n",
+          "added": false,
+          "removed": true,
+          "count": 2
+        },
+        {
+          "value": "one\ntwo\n",
+          "added": true,
+          "removed": false,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-lines text-diff-playback\"><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">one\ntwo\n</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">one\ntwo\n</span></div></div>"
+    }
+  },
+  {
+    "name": "custom idPrefix",
+    "old": "a b",
+    "new": "a c",
+    "options": {
+      "mode": "words",
+      "idPrefix": "pb"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "a ",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "b",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "c",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"pb-replay\"><label class=\"diff-replay\" for=\"pb-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span>a </span><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">b</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">c</span></div></div>"
+    }
+  },
+  {
+    "name": "anchors",
+    "old": "a b",
+    "new": "a c",
+    "options": {
+      "mode": "words",
+      "idPrefix": "pb",
+      "anchors": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "a ",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "b",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "c",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"pb-replay\"><label class=\"diff-replay\" for=\"pb-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span>a </span><span class=\"diff-removed\" id=\"pb-change-0\" data-change-index=\"0\" style=\"--td-i:0\">b</span><span class=\"diff-added\" id=\"pb-change-1\" data-change-index=\"1\" style=\"--td-i:1\">c</span></div></div>"
+    }
+  },
+  {
+    "name": "HTML-special characters are escaped",
+    "old": "<b>\"x\"</b>",
+    "new": "<b>'y'</b>",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "<b>",
+          "added": false,
+          "removed": false,
+          "count": 3
+        },
+        {
+          "value": "\"x\"",
+          "added": false,
+          "removed": true,
+          "count": 3
+        },
+        {
+          "value": "'y'",
+          "added": true,
+          "removed": false,
+          "count": 3
+        },
+        {
+          "value": "</b>",
+          "added": false,
+          "removed": false,
+          "count": 4
+        }
+      ],
+      "html": "<div class=\"text-diff-playback-wrap\"><input class=\"diff-replay-input\" type=\"checkbox\" id=\"td-replay\"><label class=\"diff-replay\" for=\"td-replay\">Replay</label><div class=\"text-diff text-diff-words text-diff-playback\"><span>&lt;b&gt;</span><span class=\"diff-removed\" data-change-index=\"0\" style=\"--td-i:0\">&quot;x&quot;</span><span class=\"diff-added\" data-change-index=\"1\" style=\"--td-i:1\">&#39;y&#39;</span><span>&lt;/b&gt;</span></div></div>"
+    }
+  }
+]

@@ -1,0 +1,44 @@
+{
+    "name": "sitefinitysteve/php-diff-text",
+    "version": "1.6.0",
+    "description": "PHP library to generate HTML diff output with multiple diff strategies. PHP variant of vue-diff-text.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Steve McNiven-Scott"
+        }
+    ],
+    "keywords": ["diff", "text-diff", "html-diff", "php-diff", "comparison"],
+    "require": {
+        "php": ">=8.1",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0|^11.0",
+        "ext-dom": "*",
+        "ext-libxml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpDiffText\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpDiffText\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "bench": "php benchmarks/bench.php",
+        "sync-style": "php -r \"copy('../core/src/style.css', 'css/style.css');\"",
+        "demo:sync": "php -r \"copy('../../demo/demo.css', 'demo/demo.css'); copy('../../demo/content.json', 'demo/content.json');\"",
+        "demo": [
+            "Composer\\Config::disableProcessTimeout",
+            "@demo:sync",
+            "php -S 127.0.0.1:8080 -t demo"
+        ]
+    },
+    "minimum-stability": "stable"
+}
