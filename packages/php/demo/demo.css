@@ -1,0 +1,331 @@
+/* diff-text demo: page chrome shared by the Vue, React, and PHP demos.
+   Load it AFTER the library's style.css. The diff markup itself (.text-diff*,
+   .diff-row-*, .diff-gutter, .text-diff-stats ...) is styled only by the library;
+   this file themes it through the public --text-diff-* custom properties and
+   sets layout and type on the page chrome around it. See README.md. */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap');
+
+:root {
+  --ink: #16181d;
+  --graphite: #5b6270;
+  --paper: #f6f7f9;
+  --sheet: #ffffff;
+  --rule: #e2e5ea;
+  --marker: #3b4bdb;
+  --add-ink: #17693f;
+  --add-wash: #dcf3e3;
+  --del-ink: #b42318;
+  --del-wash: #fde6e3;
+
+  --add-line: #eff9f2;
+  --del-line: #fef3f1;
+
+  /* Library theme: every --text-diff-* property, mapped onto the page palette. */
+  --text-diff-added-bg: var(--add-wash);
+  --text-diff-added-color: var(--add-ink);
+  --text-diff-removed-bg: var(--del-wash);
+  --text-diff-removed-color: var(--del-ink);
+  --text-diff-line-added-bg: var(--add-line);
+  --text-diff-line-removed-bg: var(--del-line);
+  --text-diff-gutter-bg: transparent;
+  --text-diff-gutter-color: var(--graphite);
+  --text-diff-sign-added-color: var(--add-ink);
+  --text-diff-sign-removed-color: var(--del-ink);
+  --text-diff-rule-color: var(--rule);
+  --text-diff-collapsed-bg: var(--paper);
+  --text-diff-collapsed-color: var(--graphite);
+  --text-diff-empty-color: var(--graphite);
+  --text-diff-font-mono: var(--f-mono);
+
+  --f-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --f-body: 'Hanken Grotesk', system-ui, sans-serif;
+  --f-mono: 'Martian Mono', ui-monospace, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ink: #e8eaef;
+    --graphite: #9aa1ae;
+    --paper: #111318;
+    --sheet: #181b21;
+    --rule: #2a2e37;
+    --marker: #8792ff;
+    --add-ink: #7fdca4;
+    --add-wash: #173524;
+    --del-ink: #ff9d92;
+    --del-wash: #3d1a17;
+    --add-line: #12261a;
+    --del-line: #2a1413;
+  }
+}
+:root[data-theme='dark'] {
+  --ink: #e8eaef;
+  --graphite: #9aa1ae;
+  --paper: #111318;
+  --sheet: #181b21;
+  --rule: #2a2e37;
+  --marker: #8792ff;
+  --add-ink: #7fdca4;
+  --add-wash: #173524;
+  --del-ink: #ff9d92;
+  --del-wash: #3d1a17;
+  --add-line: #12261a;
+  --del-line: #2a1413;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 16px/1.55 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.demo {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+}
+
+/* ---- Top bar ---- */
+.demo-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.demo-mark {
+  font: 700 20px/1 var(--f-display);
+  letter-spacing: -0.02em;
+}
+.demo-mark .del { color: var(--del-ink); text-decoration: line-through; text-decoration-thickness: 2px; }
+.demo-mark .add { color: var(--add-ink); }
+.demo-platforms {
+  display: flex;
+  gap: 4px;
+  font: 500 13px/1 var(--f-body);
+}
+.demo-platforms span {
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: var(--graphite);
+}
+.demo-platforms span[aria-current='true'] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---- Hero: the component is the headline ---- */
+.demo-hero { padding: 72px 0 56px; }
+.demo-hero-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 24px 56px;
+  align-items: end;
+  margin-bottom: 40px;
+}
+@media (max-width: 760px) { .demo-hero-top { grid-template-columns: minmax(0, 1fr); } }
+.demo-hero h1 {
+  margin: 0;
+  font: 700 clamp(34px, 5vw, 56px)/1.02 var(--f-display);
+  letter-spacing: -0.035em;
+  max-width: 16ch;
+}
+.demo-hero .lede {
+  margin: 0 0 14px;
+  max-width: 54ch;
+  color: var(--graphite);
+  font-size: 18px;
+}
+.demo-install {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--sheet);
+  font: 400 12px/1.2 var(--f-mono);
+  color: var(--graphite);
+  max-width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+/* Granularity switch: CSS-only radios so PHP, Vue, and React render identical markup. */
+.grain { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.grain input { position: absolute; opacity: 0; pointer-events: none; }
+.grain label {
+  padding: 8px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--sheet);
+  font: 500 14px/1 var(--f-body);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.grain label:hover { border-color: var(--graphite); }
+.grain input:checked + label { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.grain input:focus-visible + label { outline: 2px solid var(--marker); outline-offset: 2px; }
+
+.grain .stage { flex-basis: 100%; margin-top: 12px; }
+.stage {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: clamp(20px, 4vw, 36px);
+}
+.stage-out { display: none; }
+.stage .text-diff {
+  font: 400 clamp(17px, 2.3vw, 24px)/1.65 var(--f-mono);
+  letter-spacing: -0.01em;
+}
+.stage-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+  font: 400 12.5px/1.4 var(--f-mono);
+  color: var(--graphite);
+}
+.stage-meta code { margin-left: auto; font: inherit; }
+/* Stats badge (library markup): only type is set here. */
+.text-diff-stats { font: 400 12.5px/1.6 var(--f-mono); }
+
+/* The checked radio reveals its matching output. The ids are fixed in content order. */
+#g-chars:checked ~ .stage [data-grain='chars'],
+#g-words:checked ~ .stage [data-grain='words'],
+#g-wordsWithSpace:checked ~ .stage [data-grain='wordsWithSpace'],
+#g-sentences:checked ~ .stage [data-grain='sentences'],
+#g-lines:checked ~ .stage [data-grain='lines'] { display: block; }
+
+/* ---- Section headings ---- */
+.demo-section { padding-top: 64px; }
+.demo-section > h2 {
+  margin: 0 0 6px;
+  font: 700 28px/1.1 var(--f-display);
+  letter-spacing: -0.025em;
+}
+.demo-section > p { margin: 0 0 28px; color: var(--graphite); max-width: 60ch; }
+
+/* ---- Specimen sheet: one tile per mode ---- */
+.specimens {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr));
+  gap: 16px;
+}
+.specimen {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 22px 24px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.specimen header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 12px; }
+.specimen h3 { margin: 0; font: 700 19px/1.2 var(--f-display); letter-spacing: -0.015em; }
+.specimen header code { font: 400 11.5px/1 var(--f-mono); color: var(--graphite); }
+.specimen .use { margin: 4px 0 16px; color: var(--graphite); font-size: 14.5px; }
+
+/* Inputs use the diff's own vocabulary: a − / + gutter, no boxes. */
+.inputs {
+  margin: 0 0 16px;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  row-gap: 6px;
+  font: 400 12.5px/1.6 var(--f-mono);
+  color: var(--graphite);
+}
+.inputs dt { font-weight: 500; }
+.inputs dt.old { color: var(--del-ink); }
+.inputs dt.new { color: var(--add-ink); }
+.inputs dd { margin: 0; white-space: pre-wrap; word-break: break-word; }
+
+.result {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px dashed var(--rule);
+}
+.result .text-diff { font: 400 14.5px/1.7 var(--f-mono); }
+.result .text-diff-html { font: 400 16px/1.6 var(--f-body); }
+.result .text-diff-html p { margin: 0 0 8px; }
+.result .text-diff-html ul { margin: 0; padding-left: 20px; }
+
+/* ---- Document views: a sheet holding the library's own split/unified view ---- */
+.doc {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 16px 20px 20px;
+}
+.doc + .doc { margin-top: 16px; }
+.doc-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 14px;
+}
+.doc-head h3 { margin: 0; font: 700 17px/1.2 var(--f-display); letter-spacing: -0.01em; }
+.doc-head .doc-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.doc-head code { font: 400 11.5px/1 var(--f-mono); color: var(--graphite); }
+/* Previous / next change (Vue and React only): quiet pills, like the granularity switch. */
+.doc-nav { display: flex; gap: 6px; }
+.doc-nav button {
+  padding: 6px 11px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--sheet);
+  color: var(--graphite);
+  font: 500 12.5px/1 var(--f-body);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.doc-nav button:hover { border-color: var(--graphite); color: var(--ink); }
+.doc-nav button:focus-visible { outline: 2px solid var(--marker); outline-offset: 2px; }
+/* Type size and leading for the line views; the library sets the font family. */
+.doc-body { font-size: 13px; line-height: 1.75; }
+@media (max-width: 560px) {
+  .doc { padding: 14px 12px 12px; }
+  .doc-body { font-size: 12px; }
+}
+
+/* ---- Usage ---- */
+.usage {
+  margin: 0;
+  padding: 22px 24px;
+  border-radius: 14px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 400 13px/1.8 var(--f-mono);
+  overflow-x: auto;
+}
+.usage .c { color: #8a93a3; }
+
+.demo-foot {
+  margin-top: 72px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  color: var(--graphite);
+  font-size: 14px;
+}
+.demo-foot a { color: inherit; }
+
+/* ---- Phone width: 16px gutter ---- */
+@media (max-width: 560px) {
+  .demo { padding: 0 16px 64px; }
+  .demo-hero { padding: 48px 0 40px; }
+  .specimen { padding: 18px 16px 20px; }
+  .usage { padding: 18px 16px; font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

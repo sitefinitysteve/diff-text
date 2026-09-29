@@ -1,29 +1,14 @@
-# demo
+# vue-diff-text demo
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+The shared diff-text demo page (see `../../../demo/README.md`), rendered with the real
+vue-diff-text components. Vite aliases `vue-diff-text` to `../src`, so library edits show up
+without a build.
 
 ```sh
-npm install
+npm install          # also run `npm install` once at the monorepo root
+npm run dev          # http://localhost:5174
+npm run build && npm run preview
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+`npm run demo:sync` copies `demo.css` and `content.json` from the monorepo's `demo/` folder into
+`src/`. It runs automatically before `dev` and `build`.

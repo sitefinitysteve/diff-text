@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>diff-text demo prototype</title>
+<!-- Library styles first, then the shared page chrome (see README.md). -->
+<link rel="stylesheet" href="../packages/core/src/style.css">
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<!--
+  Client-side prototype of the shared demo template. It approximates the
+  library's canonical markup (SPEC.md section 13) with jsdiff from a CDN so the
+  page can be designed without a build. The platform demos (e.g.
+  packages/php/demo/index.php) emit the same structure with the real library.
+-->
+<div class="demo">
+  <header class="demo-bar">
+    <div class="demo-mark"><span class="del">diff</span><span class="add">text</span></div>
+    <nav class="demo-platforms" aria-label="Platforms"><span aria-current="true">Vue</span><span>React</span><span>PHP</span></nav>
+  </header>
+
+  <section class="demo-hero">
+    <div class="demo-hero-top">
+      <h1>Show readers exactly what changed.</h1>
+      <div>
+        <p class="lede">Diff components for Vue, React, and PHP. Compare text by character, word, sentence, or line, or compare rich HTML without breaking its markup.</p>
+        <code class="demo-install">npm i vue-diff-text</code>
+      </div>
+    </div>
+    <div class="grain" id="grain"></div>
+  </section>
+
+  <section class="demo-section" id="granularity">
+    <h2>Pick the right granularity</h2>
+    <p>Each mode breaks the text into different pieces before comparing. Smaller pieces catch typos. Larger pieces keep rewrites readable.</p>
+    <div class="specimens" id="specimens"></div>
+  </section>
+
+  <section class="demo-section" id="document">
+    <h2>Review a whole document</h2>
+    <p>For longer text, compare line by line. Unchanged stretches fold away, and edited lines show which words changed.</p>
+    <div id="docs"></div>
+  </section>
+
+  <section class="demo-section" id="usage">
+    <h2>Use it</h2>
+    <pre class="usage"><span class="c">&lt;!-- Vue --&gt;</span>
+&lt;DiffWords :old-text="before" :new-text="after" /&gt;
+&lt;DiffSplit :old-text="before" :new-text="after" :context-lines="3" /&gt;</pre>
+  </section>
+
+  <footer class="demo-foot">MIT licensed. Available as vue-diff-text, react-diff-text, and sitefinitysteve/php-diff-text.</footer>
+</div>
+
+<script src="content.js"></script>
+<script type="module">
+import * as D from 'https://cdn.jsdelivr.net/npm/diff@8/+esm';
+const C = window.DEMO_CONTENT;
+const MINUS = '−';
+const esc = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fn = { chars: D.diffChars, words: D.diffWords, wordsWithSpace: D.diffWordsWithSpace, sentences: D.diffSentences, lines: D.diffLines };
+const cls = { chars: 'chars', words: 'words', wordsWithSpace: 'words-with-space', sentences: 'sentences', lines: 'lines' };
+const cp = s => [...s].length;
+
+// ---- text modes (SPEC 13.1) ----
+function textDiff(mode, a, b) {
+  let i = 0;
+  return `<div class="text-diff text-diff-${cls[mode]}">` + fn[mode](a, b).filter(p => p.value).map(p =>
+    p.added ? `<span class="diff-added" data-change-index="${i++}">${esc(p.value)}</span>`
+    : p.removed ? `<span class="diff-removed" data-change-index="${i++}">${esc(p.value)}</span>`
+    : `<span>${esc(p.value)}</span>`).join('') + '</div>';
+}
+
+// ---- stats badge (SPEC 13.4) ----
+function statsBadge(s, unit, similarity) {
+  const word = n => unit === 'lines' ? (n === 1 ? 'line' : 'lines') : (n === 1 ? 'character' : 'characters');
+  const stat = (k, vis, n) => `<span class="diff-stat diff-stat-${k}"><span aria-hidden="true">${vis}</span><span class="diff-sr">${n} ${word(n)} ${k}</span></span>`;
+  return `<div class="text-diff-stats" data-unit="${unit}">` + stat('added', '+' + s.added, s.added) + stat('removed', MINUS + s.removed, s.removed)
+    + stat('unchanged', '=' + s.unchanged, s.unchanged)
+    + (similarity == null ? '' : `<span class="diff-stat diff-stat-similarity">${Math.floor(similarity * 100 + 0.5)}% similar</span>`) + '</div>';
+}
+const charStats = ch => ch.reduce((s, c) => (s[c.added ? 'added' : c.removed ? 'removed' : 'unchanged'] += cp(c.value), s), { added: 0, removed: 0, unchanged: 0 });
+const similarity = (a, b) => { const s = charStats(D.diffChars(a, b)); const t = Math.max(cp(a), cp(b)); return t ? s.unchanged / t : 1; };
+
+// ---- hero: CSS-only radio switch ----
+const grains = C.modes.filter(m => m.key !== 'html');
+let radios = '', outs = '';
+for (const m of grains) {
+  radios += `<input type="radio" name="grain" id="g-${m.key}"${m.key === 'words' ? ' checked' : ''}><label for="g-${m.key}">${m.title}</label>`;
+  outs += `<div class="stage-out" data-grain="${m.key}">${textDiff(m.key, C.hero.old, C.hero.new)}<div class="stage-meta">${statsBadge(charStats(fn[m.key](C.hero.old, C.hero.new)), 'codepoints', similarity(C.hero.old, C.hero.new))}<code>&lt;${m.component}&gt;</code></div></div>`;
+}
+document.getElementById('grain').outerHTML = `<div class="grain">${radios}<div class="stage">${outs}</div></div>`;
+
+// ---- specimens ----
+const htmlResult = '<div class="text-diff text-diff-html"><p>Returns are accepted within <span class="diff-removed" data-change-index="0">14</span><span class="diff-added" data-change-index="1">30</span> days of delivery.</p><ul><li>Items must be unused</li><li>Keep the original box</li><li><span class="diff-added" data-change-index="2">Sale items are final</span></li></ul></div>';
+document.getElementById('specimens').innerHTML = C.modes.map(m => `<article class="specimen">`
+  + `<header><h3>${m.title}</h3><code>&lt;${m.component}&gt;</code></header>`
+  + `<p class="use">${m.use}</p>`
+  + `<dl class="inputs"><dt class="old">${MINUS}</dt><dd>${esc(m.old)}</dd><dt class="new">+</dt><dd>${esc(m.new)}</dd></dl>`
+  + `<div class="result">${m.key === 'html' ? htmlResult : textDiff(m.key, m.old, m.new)}</div></article>`).join('');
+
+// ---- line views (SPEC 13.2 / 13.3), approximated ----
+const lines = s => s.replace(/\n$/, '').split('\n');
+const oldL = lines(C.document.old), newL = lines(C.document.new);
+const lc = D.diffArrays(oldL, newL);
+const rows = []; let o = 1, n = 1;
+for (const p of lc) for (const v of p.value) rows.push(p.added ? { t: 'added', v, n: n++ } : p.removed ? { t: 'removed', v, o: o++ } : { t: 'equal', v, o: o++, n: n++ });
+const collapsed = k => `<div class="diff-row diff-row-collapsed">${k} unchanged line${k === 1 ? '' : 's'}</div>`;
+const sign = t => t === 'added' ? '+' : t === 'removed' ? MINUS : ' ';
+
+const ctx = 2;
+const keep = rows.map((r, i) => rows.slice(Math.max(0, i - ctx), i + ctx + 1).some(x => x.t !== 'equal'));
+let uni = '', hidden = 0, idx = 0, prevChanged = false;
+rows.forEach((r, i) => {
+  if (!keep[i]) { hidden++; prevChanged = false; return; }
+  if (hidden) { uni += collapsed(hidden); hidden = 0; }
+  const changed = r.t !== 'equal';
+  const attrs = changed ? ` role="group" aria-label="${r.t} line ${r.t === 'added' ? r.n : r.o}"${prevChanged ? '' : ` data-change-index="${idx++}"`}` : '';
+  prevChanged = changed;
+  uni += `<div class="diff-row diff-row-${r.t}"${attrs}><span class="diff-gutter diff-gutter-old">${r.o ?? ''}</span><span class="diff-gutter diff-gutter-new">${r.n ?? ''}</span><span class="diff-sign" aria-hidden="true">${sign(r.t)}</span><span class="diff-line">${esc(r.v)}</span></div>`;
+});
+if (hidden) uni += collapsed(hidden);
+
+const cell = (side, t, num, line) => t === 'empty' ? `<div class="diff-cell diff-cell-${side} diff-cell-empty"></div>`
+  : `<div class="diff-cell diff-cell-${side}${t === 'equal' ? '' : ` diff-cell-${t}" role="group" aria-label="${t} line ${num}`}"><span class="diff-gutter">${num}</span><span class="diff-sign" aria-hidden="true">${sign(t)}</span><span class="diff-line">${line}</span></div>`;
+let split = ''; o = 1; n = 1; idx = 0;
+for (let i = 0; i < lc.length; i++) {
+  const p = lc[i];
+  if (!p.added && !p.removed) { for (const v of p.value) split += `<div class="diff-row diff-row-equal">${cell('old', 'equal', o++, esc(v))}${cell('new', 'equal', n++, esc(v))}</div>`; continue; }
+  const dels = p.removed ? p.value : [], adds = p.removed && lc[i + 1]?.added ? lc[++i].value : p.added ? p.value : [];
+  for (let k = 0; k < Math.max(dels.length, adds.length); k++) {
+    const a = dels[k], b = adds[k];
+    let L = a != null ? esc(a) : '', R = b != null ? esc(b) : '';
+    if (a != null && b != null) {
+      const w = D.diffWords(a, b);
+      L = w.filter(x => !x.added).map(x => `<span${x.removed ? ' class="diff-removed"' : ''}>${esc(x.value)}</span>`).join('');
+      R = w.filter(x => !x.removed).map(x => `<span${x.added ? ' class="diff-added"' : ''}>${esc(x.value)}</span>`).join('');
+    }
+    const t = a != null && b != null ? 'modified' : a != null ? 'removed' : 'added';
+    split += `<div class="diff-row diff-row-${t}"${k === 0 ? ` data-change-index="${idx++}"` : ''}>`
+      + (a != null ? cell('old', 'removed', o++, L) : cell('old', 'empty')) + (b != null ? cell('new', 'added', n++, R) : cell('new', 'empty')) + '</div>';
+  }
+}
+const lineStats = { added: rows.filter(r => r.t === 'added').length, removed: rows.filter(r => r.t === 'removed').length, unchanged: rows.filter(r => r.t === 'equal').length };
+document.getElementById('docs').innerHTML =
+  `<div class="doc"><div class="doc-head"><h3>Side by side</h3><div class="doc-tags"><code>&lt;DiffSplit&gt;</code></div></div><div class="doc-body"><div class="text-diff text-diff-split">${split}</div></div></div>`
+  + `<div class="doc"><div class="doc-head"><h3>Unified, with folded context</h3><div class="doc-tags">${statsBadge(lineStats, 'lines', similarity(C.document.old, C.document.new))}<code>&lt;DiffUnified&gt;</code></div></div><div class="doc-body"><div class="text-diff text-diff-unified">${uni}</div></div></div>`;
+</script>
+</body>
+</html>

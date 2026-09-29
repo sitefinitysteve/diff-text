@@ -1,0 +1,67 @@
+{
+  "hero": {
+    "old": "Orders leave the warehouse at 6am and arrive within three business days. Tracking links are emailed once the parcel is scanned.",
+    "new": "Orders leave our Toronto warehouse at 7am and usually arrive within two business days. Tracking links are emailed once the parcel is scanned."
+  },
+  "modes": [
+    {
+      "key": "chars",
+      "component": "DiffChars",
+      "php": "DiffText::chars",
+      "title": "Characters",
+      "use": "Typos, digits, and single-letter fixes.",
+      "old": "Recieve your refund within 5 buisness days.",
+      "new": "Receive your refund within 3 business days."
+    },
+    {
+      "key": "words",
+      "component": "DiffWords",
+      "php": "DiffText::words",
+      "title": "Words",
+      "use": "Reworded copy, where spacing doesn't matter.",
+      "old": "The weekly sync starts at 9am in the east meeting room.",
+      "new": "The weekly standup starts at 9:30am in the north meeting room."
+    },
+    {
+      "key": "wordsWithSpace",
+      "component": "DiffWordsWithSpace",
+      "php": "DiffText::wordsWithSpace",
+      "title": "Words + whitespace",
+      "use": "Edits where spacing and indentation count.",
+      "old": "total = price * qty\nif total > 100:\n    apply(discount)",
+      "new": "total = price * quantity\nif total >= 100:\n  apply(discount)"
+    },
+    {
+      "key": "sentences",
+      "component": "DiffSentences",
+      "php": "DiffText::sentences",
+      "title": "Sentences",
+      "use": "Paragraph edits, reviewed one sentence at a time.",
+      "old": "Parking is free after 6pm. Guests should check in at the front desk. The pool closes at 10pm.",
+      "new": "Parking is free after 6pm. Guests can check in at the front desk or with the mobile app. The pool closes at 10pm."
+    },
+    {
+      "key": "lines",
+      "component": "DiffLines",
+      "php": "DiffText::lines",
+      "title": "Lines",
+      "use": "Lists, configs, and anything written one item per line.",
+      "old": "2 cups flour\n1 tsp baking soda\n1 cup sugar\n2 eggs\n1 cup milk\n",
+      "new": "2 cups flour\n1 tsp baking powder\n3/4 cup sugar\n2 eggs\n1 cup oat milk\n1 tsp vanilla\n"
+    },
+    {
+      "key": "html",
+      "component": "DiffHtml",
+      "php": "DiffText::html",
+      "title": "HTML",
+      "use": "Rich text from an editor, with the markup kept intact.",
+      "old": "<p>Returns are accepted within <strong>14 days</strong> of delivery.</p><ul><li>Items must be unused</li><li>Keep the original box</li></ul>",
+      "new": "<p>Returns are accepted within <strong>30 days</strong> of delivery.</p><ul><li>Items must be unused</li><li>Keep the original box</li><li>Sale items are final</li></ul>"
+    }
+  ],
+  "document": {
+    "title": "Store policy",
+    "old": "# Store policy\n\nHours\nMonday to Friday, 9am to 6pm.\nSaturday, 10am to 4pm.\nClosed Sundays and holidays.\n\nReturns\nReturns are accepted within 14 days.\nItems must be unused and in the original box.\nRefunds go back to the original payment method.\nGift cards cannot be refunded.\n\nShipping\nOrders ship from our warehouse.\nStandard shipping takes three business days.\nExpress shipping is available at checkout.\nWe do not ship to PO boxes.\n\nContact\nEmail support@example.com.\nPhone lines are open during store hours.\n",
+    "new": "# Store policy\n\nHours\nMonday to Friday, 9am to 7pm.\nSaturday, 10am to 4pm.\nSunday, 11am to 3pm.\n\nReturns\nReturns are accepted within 30 days.\nItems must be unused and in the original box.\nRefunds go back to the original payment method.\nGift cards cannot be refunded.\n\nShipping\nOrders ship from our Toronto warehouse.\nStandard shipping takes two business days.\nExpress shipping is available at checkout.\nWe do not ship to PO boxes.\n\nContact\nEmail support@example.com.\nPhone lines are open during store hours.\nLive chat is available on our website.\n"
+  }
+}

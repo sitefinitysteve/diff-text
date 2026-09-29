@@ -1,0 +1,565 @@
+[
+  {
+    "name": "words both empty",
+    "old": "",
+    "new": "",
+    "options": {
+      "view": "words",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"></nav>",
+      "diff": "<div class=\"text-diff text-diff-words\"></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-words\"></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"></nav></div>"
+    }
+  },
+  {
+    "name": "words identical",
+    "old": "same text here",
+    "new": "same text here",
+    "options": {
+      "view": "words",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"></nav>",
+      "diff": "<div class=\"text-diff text-diff-words\"><span>same text here</span></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-words\"><span>same text here</span></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"></nav></div>"
+    }
+  },
+  {
+    "name": "words all new",
+    "old": "",
+    "new": "all of this is new",
+    "options": {
+      "view": "words",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "added",
+          "top": 0,
+          "height": 10000
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-0\" style=\"top:0.00%;height:100.00%\" aria-label=\"Change 1: added\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-words\"><span class=\"diff-added\" id=\"mm-change-0\" data-change-index=\"0\">all of this is new</span></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-words\"><span class=\"diff-added\" id=\"mm-change-0\" data-change-index=\"0\">all of this is new</span></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-0\" style=\"top:0.00%;height:100.00%\" aria-label=\"Change 1: added\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "words all removed (empty new text)",
+    "old": "all of this goes",
+    "new": "",
+    "options": {
+      "view": "words",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "removed",
+          "top": 0,
+          "height": 0
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:0.00%;height:0.00%\" aria-label=\"Change 1: removed\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-words\"><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">all of this goes</span></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-words\"><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">all of this goes</span></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:0.00%;height:0.00%\" aria-label=\"Change 1: removed\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "words single change",
+    "old": "the quick brown fox",
+    "new": "the slow brown fox jumps",
+    "options": {
+      "view": "words",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "removed",
+          "top": 1667,
+          "height": 0
+        },
+        {
+          "index": 1,
+          "kind": "added",
+          "top": 1667,
+          "height": 1666
+        },
+        {
+          "index": 2,
+          "kind": "added",
+          "top": 7917,
+          "height": 2083
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:16.67%;height:0.00%\" aria-label=\"Change 1: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-1\" style=\"top:16.67%;height:16.66%\" aria-label=\"Change 2: added\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-2\" style=\"top:79.17%;height:20.83%\" aria-label=\"Change 3: added\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-words\"><span>the </span><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">quick</span><span class=\"diff-added\" id=\"mm-change-1\" data-change-index=\"1\">slow</span><span> brown fox </span><span class=\"diff-added\" id=\"mm-change-2\" data-change-index=\"2\">jumps</span></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-words\"><span>the </span><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">quick</span><span class=\"diff-added\" id=\"mm-change-1\" data-change-index=\"1\">slow</span><span> brown fox </span><span class=\"diff-added\" id=\"mm-change-2\" data-change-index=\"2\">jumps</span></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:16.67%;height:0.00%\" aria-label=\"Change 1: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-1\" style=\"top:16.67%;height:16.66%\" aria-label=\"Change 2: added\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-2\" style=\"top:79.17%;height:20.83%\" aria-label=\"Change 3: added\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "chars many changes",
+    "old": "abcdefghij",
+    "new": "aXcdYfghiZ",
+    "options": {
+      "view": "chars",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "removed",
+          "top": 1000,
+          "height": 0
+        },
+        {
+          "index": 1,
+          "kind": "added",
+          "top": 1000,
+          "height": 1000
+        },
+        {
+          "index": 2,
+          "kind": "removed",
+          "top": 4000,
+          "height": 0
+        },
+        {
+          "index": 3,
+          "kind": "added",
+          "top": 4000,
+          "height": 1000
+        },
+        {
+          "index": 4,
+          "kind": "removed",
+          "top": 9000,
+          "height": 0
+        },
+        {
+          "index": 5,
+          "kind": "added",
+          "top": 9000,
+          "height": 1000
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:10.00%;height:0.00%\" aria-label=\"Change 1: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-1\" style=\"top:10.00%;height:10.00%\" aria-label=\"Change 2: added\"></a><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-2\" style=\"top:40.00%;height:0.00%\" aria-label=\"Change 3: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-3\" style=\"top:40.00%;height:10.00%\" aria-label=\"Change 4: added\"></a><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-4\" style=\"top:90.00%;height:0.00%\" aria-label=\"Change 5: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-5\" style=\"top:90.00%;height:10.00%\" aria-label=\"Change 6: added\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-chars\"><span>a</span><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">b</span><span class=\"diff-added\" id=\"mm-change-1\" data-change-index=\"1\">X</span><span>cd</span><span class=\"diff-removed\" id=\"mm-change-2\" data-change-index=\"2\">e</span><span class=\"diff-added\" id=\"mm-change-3\" data-change-index=\"3\">Y</span><span>fghi</span><span class=\"diff-removed\" id=\"mm-change-4\" data-change-index=\"4\">j</span><span class=\"diff-added\" id=\"mm-change-5\" data-change-index=\"5\">Z</span></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-chars\"><span>a</span><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">b</span><span class=\"diff-added\" id=\"mm-change-1\" data-change-index=\"1\">X</span><span>cd</span><span class=\"diff-removed\" id=\"mm-change-2\" data-change-index=\"2\">e</span><span class=\"diff-added\" id=\"mm-change-3\" data-change-index=\"3\">Y</span><span>fghi</span><span class=\"diff-removed\" id=\"mm-change-4\" data-change-index=\"4\">j</span><span class=\"diff-added\" id=\"mm-change-5\" data-change-index=\"5\">Z</span></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:10.00%;height:0.00%\" aria-label=\"Change 1: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-1\" style=\"top:10.00%;height:10.00%\" aria-label=\"Change 2: added\"></a><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-2\" style=\"top:40.00%;height:0.00%\" aria-label=\"Change 3: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-3\" style=\"top:40.00%;height:10.00%\" aria-label=\"Change 4: added\"></a><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-4\" style=\"top:90.00%;height:0.00%\" aria-label=\"Change 5: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-5\" style=\"top:90.00%;height:10.00%\" aria-label=\"Change 6: added\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "chars half-up rounding",
+    "old": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "new": "yxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "options": {
+      "view": "chars",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "added",
+          "top": 0,
+          "height": 13
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-0\" style=\"top:0.00%;height:0.13%\" aria-label=\"Change 1: added\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-chars\"><span class=\"diff-added\" id=\"mm-change-0\" data-change-index=\"0\">y</span><span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-chars\"><span class=\"diff-added\" id=\"mm-change-0\" data-change-index=\"0\">y</span><span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-0\" style=\"top:0.00%;height:0.13%\" aria-label=\"Change 1: added\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "chars code points",
+    "old": "😀a😀",
+    "new": "😀b😀😁",
+    "options": {
+      "view": "chars",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "removed",
+          "top": 2500,
+          "height": 0
+        },
+        {
+          "index": 1,
+          "kind": "added",
+          "top": 2500,
+          "height": 2500
+        },
+        {
+          "index": 2,
+          "kind": "added",
+          "top": 7500,
+          "height": 2500
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:25.00%;height:0.00%\" aria-label=\"Change 1: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-1\" style=\"top:25.00%;height:25.00%\" aria-label=\"Change 2: added\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-2\" style=\"top:75.00%;height:25.00%\" aria-label=\"Change 3: added\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-chars\"><span>😀</span><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">a</span><span class=\"diff-added\" id=\"mm-change-1\" data-change-index=\"1\">b</span><span>😀</span><span class=\"diff-added\" id=\"mm-change-2\" data-change-index=\"2\">😁</span></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-chars\"><span>😀</span><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">a</span><span class=\"diff-added\" id=\"mm-change-1\" data-change-index=\"1\">b</span><span>😀</span><span class=\"diff-added\" id=\"mm-change-2\" data-change-index=\"2\">😁</span></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:25.00%;height:0.00%\" aria-label=\"Change 1: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-1\" style=\"top:25.00%;height:25.00%\" aria-label=\"Change 2: added\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-2\" style=\"top:75.00%;height:25.00%\" aria-label=\"Change 3: added\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "sentences",
+    "old": "One. Two. Three.",
+    "new": "One. Deux. Three. Four.",
+    "options": {
+      "view": "sentences",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "removed",
+          "top": 2174,
+          "height": 0
+        },
+        {
+          "index": 1,
+          "kind": "added",
+          "top": 2174,
+          "height": 2174
+        },
+        {
+          "index": 2,
+          "kind": "added",
+          "top": 7391,
+          "height": 2609
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:21.74%;height:0.00%\" aria-label=\"Change 1: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-1\" style=\"top:21.74%;height:21.74%\" aria-label=\"Change 2: added\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-2\" style=\"top:73.91%;height:26.09%\" aria-label=\"Change 3: added\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-sentences\"><span>One. </span><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">Two.</span><span class=\"diff-added\" id=\"mm-change-1\" data-change-index=\"1\">Deux.</span><span> Three.</span><span class=\"diff-added\" id=\"mm-change-2\" data-change-index=\"2\"> Four.</span></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-sentences\"><span>One. </span><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">Two.</span><span class=\"diff-added\" id=\"mm-change-1\" data-change-index=\"1\">Deux.</span><span> Three.</span><span class=\"diff-added\" id=\"mm-change-2\" data-change-index=\"2\"> Four.</span></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:21.74%;height:0.00%\" aria-label=\"Change 1: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-1\" style=\"top:21.74%;height:21.74%\" aria-label=\"Change 2: added\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-2\" style=\"top:73.91%;height:26.09%\" aria-label=\"Change 3: added\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "lines text mode",
+    "old": "a\nb\nc\n",
+    "new": "a\nB\nc\nd\n",
+    "options": {
+      "view": "lines",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "removed",
+          "top": 2500,
+          "height": 0
+        },
+        {
+          "index": 1,
+          "kind": "added",
+          "top": 2500,
+          "height": 2500
+        },
+        {
+          "index": 2,
+          "kind": "added",
+          "top": 7500,
+          "height": 2500
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:25.00%;height:0.00%\" aria-label=\"Change 1: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-1\" style=\"top:25.00%;height:25.00%\" aria-label=\"Change 2: added\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-2\" style=\"top:75.00%;height:25.00%\" aria-label=\"Change 3: added\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-lines\"><span>a\n</span><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">b\n</span><span class=\"diff-added\" id=\"mm-change-1\" data-change-index=\"1\">B\n</span><span>c\n</span><span class=\"diff-added\" id=\"mm-change-2\" data-change-index=\"2\">d\n</span></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-lines\"><span>a\n</span><span class=\"diff-removed\" id=\"mm-change-0\" data-change-index=\"0\">b\n</span><span class=\"diff-added\" id=\"mm-change-1\" data-change-index=\"1\">B\n</span><span>c\n</span><span class=\"diff-added\" id=\"mm-change-2\" data-change-index=\"2\">d\n</span></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:25.00%;height:0.00%\" aria-label=\"Change 1: removed\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-1\" style=\"top:25.00%;height:25.00%\" aria-label=\"Change 2: added\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-2\" style=\"top:75.00%;height:25.00%\" aria-label=\"Change 3: added\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "unified identical",
+    "old": "a\nb\n",
+    "new": "a\nb\n",
+    "options": {
+      "view": "unified",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"></nav>",
+      "diff": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-empty\">No changes</div></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-unified\"><div class=\"diff-empty\">No changes</div></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"></nav></div>"
+    }
+  },
+  {
+    "name": "unified one change in the middle",
+    "old": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+    "new": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nfifteen\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+    "options": {
+      "view": "unified",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "modified",
+          "top": 4667,
+          "height": 333
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-0\" style=\"top:46.67%;height:3.33%\" aria-label=\"Change 1: modified\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-collapsed\">11 unchanged lines</div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">12</span><span class=\"diff-gutter diff-gutter-new\">12</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 12</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">13</span><span class=\"diff-gutter diff-gutter-new\">13</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 13</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">14</span><span class=\"diff-gutter diff-gutter-new\">14</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 14</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-0\" role=\"group\" aria-label=\"removed line 15\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">15</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 15</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 15\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">15</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">fifteen</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">16</span><span class=\"diff-gutter diff-gutter-new\">16</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 16</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">17</span><span class=\"diff-gutter diff-gutter-new\">17</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 17</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">18</span><span class=\"diff-gutter diff-gutter-new\">18</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 18</span></div><div class=\"diff-row diff-row-collapsed\">12 unchanged lines</div></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-collapsed\">11 unchanged lines</div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">12</span><span class=\"diff-gutter diff-gutter-new\">12</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 12</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">13</span><span class=\"diff-gutter diff-gutter-new\">13</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 13</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">14</span><span class=\"diff-gutter diff-gutter-new\">14</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 14</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-0\" role=\"group\" aria-label=\"removed line 15\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">15</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 15</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 15\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">15</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">fifteen</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">16</span><span class=\"diff-gutter diff-gutter-new\">16</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 16</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">17</span><span class=\"diff-gutter diff-gutter-new\">17</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 17</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">18</span><span class=\"diff-gutter diff-gutter-new\">18</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 18</span></div><div class=\"diff-row diff-row-collapsed\">12 unchanged lines</div></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-0\" style=\"top:46.67%;height:3.33%\" aria-label=\"Change 1: modified\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "unified all new",
+    "old": "",
+    "new": "a\nb\nc\n",
+    "options": {
+      "view": "unified",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "added",
+          "top": 0,
+          "height": 10000
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-0\" style=\"top:0.00%;height:100.00%\" aria-label=\"Change 1: added\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-added\" id=\"mm-change-0\" role=\"group\" aria-label=\"added line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">c</span></div></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-added\" id=\"mm-change-0\" role=\"group\" aria-label=\"added line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">c</span></div></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-0\" style=\"top:0.00%;height:100.00%\" aria-label=\"Change 1: added\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "unified all removed",
+    "old": "a\nb\nc\n",
+    "new": "",
+    "options": {
+      "view": "unified",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "removed",
+          "top": 0,
+          "height": 0
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:0.00%;height:0.00%\" aria-label=\"Change 1: removed\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" id=\"mm-change-0\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 3\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">c</span></div></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" id=\"mm-change-0\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 3\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">c</span></div></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-0\" style=\"top:0.00%;height:0.00%\" aria-label=\"Change 1: removed\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "unified thirds",
+    "old": "a\nb\nc\n",
+    "new": "a\nB\nc\n",
+    "options": {
+      "view": "unified",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "modified",
+          "top": 3333,
+          "height": 3334
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-0\" style=\"top:33.33%;height:33.34%\" aria-label=\"Change 1: modified\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-0\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">B</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">c</span></div></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-0\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">B</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">c</span></div></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-0\" style=\"top:33.33%;height:33.34%\" aria-label=\"Change 1: modified\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "unified several runs with collapsed blocks",
+    "old": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\nline 31\nline 32\nline 33\nline 34\nline 35\nline 36\nline 37\nline 38\nline 39\nline 40\n",
+    "new": "line 1\nline 2\nthree\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\nline 31\nline 32\nline 33\nline 34\nline 35\nline 36\nx\nline 38\nline 39\nline 40\n",
+    "options": {
+      "view": "unified",
+      "contextLines": 1,
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "modified",
+          "top": 513,
+          "height": 256
+        },
+        {
+          "index": 1,
+          "kind": "removed",
+          "top": 4872,
+          "height": 0
+        },
+        {
+          "index": 2,
+          "kind": "modified",
+          "top": 8974,
+          "height": 257
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-0\" style=\"top:5.13%;height:2.56%\" aria-label=\"Change 1: modified\"></a><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-1\" style=\"top:48.72%;height:0.00%\" aria-label=\"Change 2: removed\"></a><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-2\" style=\"top:89.74%;height:2.57%\" aria-label=\"Change 3: modified\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 1</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 2</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-0\" role=\"group\" aria-label=\"removed line 3\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 3</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">three</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 4</span></div><div class=\"diff-row diff-row-collapsed\">14 unchanged lines</div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">19</span><span class=\"diff-gutter diff-gutter-new\">19</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 19</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-1\" role=\"group\" aria-label=\"removed line 20\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\">20</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 20</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">21</span><span class=\"diff-gutter diff-gutter-new\">20</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 21</span></div><div class=\"diff-row diff-row-collapsed\">14 unchanged lines</div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">36</span><span class=\"diff-gutter diff-gutter-new\">35</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 36</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-2\" role=\"group\" aria-label=\"removed line 37\" data-change-index=\"2\"><span class=\"diff-gutter diff-gutter-old\">37</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 37</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 36\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">36</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">x</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">38</span><span class=\"diff-gutter diff-gutter-new\">37</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 38</span></div><div class=\"diff-row diff-row-collapsed\">2 unchanged lines</div></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 1</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 2</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-0\" role=\"group\" aria-label=\"removed line 3\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 3</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">three</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 4</span></div><div class=\"diff-row diff-row-collapsed\">14 unchanged lines</div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">19</span><span class=\"diff-gutter diff-gutter-new\">19</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 19</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-1\" role=\"group\" aria-label=\"removed line 20\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\">20</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 20</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">21</span><span class=\"diff-gutter diff-gutter-new\">20</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 21</span></div><div class=\"diff-row diff-row-collapsed\">14 unchanged lines</div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">36</span><span class=\"diff-gutter diff-gutter-new\">35</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 36</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-2\" role=\"group\" aria-label=\"removed line 37\" data-change-index=\"2\"><span class=\"diff-gutter diff-gutter-old\">37</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 37</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 36\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">36</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">x</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">38</span><span class=\"diff-gutter diff-gutter-new\">37</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 38</span></div><div class=\"diff-row diff-row-collapsed\">2 unchanged lines</div></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-0\" style=\"top:5.13%;height:2.56%\" aria-label=\"Change 1: modified\"></a><a class=\"diff-minimap-mark diff-minimap-removed\" href=\"#mm-change-1\" style=\"top:48.72%;height:0.00%\" aria-label=\"Change 2: removed\"></a><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-2\" style=\"top:89.74%;height:2.57%\" aria-label=\"Change 3: modified\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "split several runs",
+    "old": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\n",
+    "new": "line 1\ntwo\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nnine\nline 10\nline 11\nline 12\nthirteen\n",
+    "options": {
+      "view": "split",
+      "contextLines": 1,
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "modified",
+          "top": 769,
+          "height": 769
+        },
+        {
+          "index": 1,
+          "kind": "modified",
+          "top": 6154,
+          "height": 769
+        },
+        {
+          "index": 2,
+          "kind": "added",
+          "top": 9231,
+          "height": 769
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-0\" style=\"top:7.69%;height:7.69%\" aria-label=\"Change 1: modified\"></a><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-1\" style=\"top:61.54%;height:7.69%\" aria-label=\"Change 2: modified\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-2\" style=\"top:92.31%;height:7.69%\" aria-label=\"Change 3: added\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-split\"><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 1</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 1</span></div></div><div class=\"diff-row diff-row-modified\" id=\"mm-change-0\" data-change-index=\"0\"><div class=\"diff-cell diff-cell-old diff-cell-removed\" role=\"group\" aria-label=\"removed line 2\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 2</span></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">two</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 3</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 3</span></div></div><div class=\"diff-row diff-row-collapsed\">4 unchanged lines</div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">8</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 8</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">8</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 8</span></div></div><div class=\"diff-row diff-row-modified\" id=\"mm-change-1\" data-change-index=\"1\"><div class=\"diff-cell diff-cell-old diff-cell-removed\" role=\"group\" aria-label=\"removed line 9\"><span class=\"diff-gutter\">9</span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 9</span></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 9\"><span class=\"diff-gutter\">9</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">nine</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">10</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 10</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">10</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 10</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">11</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 11</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">11</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 11</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">12</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 12</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">12</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 12</span></div></div><div class=\"diff-row diff-row-added\" id=\"mm-change-2\" data-change-index=\"2\"><div class=\"diff-cell diff-cell-old diff-cell-empty\"></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 13\"><span class=\"diff-gutter\">13</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">thirteen</span></div></div></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-split\"><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 1</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 1</span></div></div><div class=\"diff-row diff-row-modified\" id=\"mm-change-0\" data-change-index=\"0\"><div class=\"diff-cell diff-cell-old diff-cell-removed\" role=\"group\" aria-label=\"removed line 2\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 2</span></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">two</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 3</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 3</span></div></div><div class=\"diff-row diff-row-collapsed\">4 unchanged lines</div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">8</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 8</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">8</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 8</span></div></div><div class=\"diff-row diff-row-modified\" id=\"mm-change-1\" data-change-index=\"1\"><div class=\"diff-cell diff-cell-old diff-cell-removed\" role=\"group\" aria-label=\"removed line 9\"><span class=\"diff-gutter\">9</span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">line 9</span></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 9\"><span class=\"diff-gutter\">9</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">nine</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">10</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 10</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">10</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 10</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">11</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 11</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">11</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 11</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">12</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 12</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">12</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">line 12</span></div></div><div class=\"diff-row diff-row-added\" id=\"mm-change-2\" data-change-index=\"2\"><div class=\"diff-cell diff-cell-old diff-cell-empty\"></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 13\"><span class=\"diff-gutter\">13</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">thirteen</span></div></div></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-0\" style=\"top:7.69%;height:7.69%\" aria-label=\"Change 1: modified\"></a><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-1\" style=\"top:61.54%;height:7.69%\" aria-label=\"Change 2: modified\"></a><a class=\"diff-minimap-mark diff-minimap-added\" href=\"#mm-change-2\" style=\"top:92.31%;height:7.69%\" aria-label=\"Change 3: added\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "unified with moves",
+    "old": "m\nk1\nk2\nk3\n",
+    "new": "k1\nk2\nk3\nm\n",
+    "options": {
+      "view": "unified",
+      "detectMoves": true,
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "moved",
+          "top": 0,
+          "height": 0
+        },
+        {
+          "index": 1,
+          "kind": "moved",
+          "top": 7500,
+          "height": 2500
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-moved\" href=\"#mm-change-0\" style=\"top:0.00%;height:0.00%\" aria-label=\"Change 1: moved\"></a><a class=\"diff-minimap-mark diff-minimap-moved\" href=\"#mm-change-1\" style=\"top:75.00%;height:25.00%\" aria-label=\"Change 2: moved\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-moved-from diff-move-0\" id=\"mm-change-0\" role=\"group\" aria-label=\"line 1 moved to line 4\" data-move=\"0\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">m</span><a class=\"diff-move-link\" id=\"mm-move-0-from\" href=\"#mm-move-0-to\">moved to line 4</a></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k1</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k2</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k3</span></div><div class=\"diff-row diff-row-moved-to diff-move-0\" id=\"mm-change-1\" role=\"group\" aria-label=\"line 4 moved from line 1\" data-move=\"0\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">m</span><a class=\"diff-move-link\" id=\"mm-move-0-to\" href=\"#mm-move-0-from\">moved from line 1</a></div></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-moved-from diff-move-0\" id=\"mm-change-0\" role=\"group\" aria-label=\"line 1 moved to line 4\" data-move=\"0\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">m</span><a class=\"diff-move-link\" id=\"mm-move-0-from\" href=\"#mm-move-0-to\">moved to line 4</a></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k1</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k2</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">4</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k3</span></div><div class=\"diff-row diff-row-moved-to diff-move-0\" id=\"mm-change-1\" role=\"group\" aria-label=\"line 4 moved from line 1\" data-move=\"0\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">4</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">m</span><a class=\"diff-move-link\" id=\"mm-move-0-to\" href=\"#mm-move-0-from\">moved from line 1</a></div></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-moved\" href=\"#mm-change-0\" style=\"top:0.00%;height:0.00%\" aria-label=\"Change 1: moved\"></a><a class=\"diff-minimap-mark diff-minimap-moved\" href=\"#mm-change-1\" style=\"top:75.00%;height:25.00%\" aria-label=\"Change 2: moved\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "split with moves and edits",
+    "old": "m\nk1\nold\nk2\n",
+    "new": "k1\nnew\nk2\nm\n",
+    "options": {
+      "view": "split",
+      "detectMoves": true,
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "moved",
+          "top": 0,
+          "height": 0
+        },
+        {
+          "index": 1,
+          "kind": "modified",
+          "top": 2500,
+          "height": 2500
+        },
+        {
+          "index": 2,
+          "kind": "moved",
+          "top": 7500,
+          "height": 2500
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-moved\" href=\"#mm-change-0\" style=\"top:0.00%;height:0.00%\" aria-label=\"Change 1: moved\"></a><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-1\" style=\"top:25.00%;height:25.00%\" aria-label=\"Change 2: modified\"></a><a class=\"diff-minimap-mark diff-minimap-moved\" href=\"#mm-change-2\" style=\"top:75.00%;height:25.00%\" aria-label=\"Change 3: moved\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-split\"><div class=\"diff-row diff-row-moved-from diff-move-0\" id=\"mm-change-0\" data-move=\"0\" data-change-index=\"0\"><div class=\"diff-cell diff-cell-old diff-cell-moved-from\" role=\"group\" aria-label=\"line 1 moved to line 4\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">m</span><a class=\"diff-move-link\" id=\"mm-move-0-from\" href=\"#mm-move-0-to\">moved to line 4</a></div><div class=\"diff-cell diff-cell-new diff-cell-empty\"></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k1</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k1</span></div></div><div class=\"diff-row diff-row-modified\" id=\"mm-change-1\" data-change-index=\"1\"><div class=\"diff-cell diff-cell-old diff-cell-removed\" role=\"group\" aria-label=\"removed line 3\"><span class=\"diff-gutter\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">old</span></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">new</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">4</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k2</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k2</span></div></div><div class=\"diff-row diff-row-moved-to diff-move-0\" id=\"mm-change-2\" data-move=\"0\" data-change-index=\"2\"><div class=\"diff-cell diff-cell-old diff-cell-empty\"></div><div class=\"diff-cell diff-cell-new diff-cell-moved-to\" role=\"group\" aria-label=\"line 4 moved from line 1\"><span class=\"diff-gutter\">4</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">m</span><a class=\"diff-move-link\" id=\"mm-move-0-to\" href=\"#mm-move-0-from\">moved from line 1</a></div></div></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-split\"><div class=\"diff-row diff-row-moved-from diff-move-0\" id=\"mm-change-0\" data-move=\"0\" data-change-index=\"0\"><div class=\"diff-cell diff-cell-old diff-cell-moved-from\" role=\"group\" aria-label=\"line 1 moved to line 4\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">m</span><a class=\"diff-move-link\" id=\"mm-move-0-from\" href=\"#mm-move-0-to\">moved to line 4</a></div><div class=\"diff-cell diff-cell-new diff-cell-empty\"></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k1</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k1</span></div></div><div class=\"diff-row diff-row-modified\" id=\"mm-change-1\" data-change-index=\"1\"><div class=\"diff-cell diff-cell-old diff-cell-removed\" role=\"group\" aria-label=\"removed line 3\"><span class=\"diff-gutter\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">old</span></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">new</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">4</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k2</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k2</span></div></div><div class=\"diff-row diff-row-moved-to diff-move-0\" id=\"mm-change-2\" data-move=\"0\" data-change-index=\"2\"><div class=\"diff-cell diff-cell-old diff-cell-empty\"></div><div class=\"diff-cell diff-cell-new diff-cell-moved-to\" role=\"group\" aria-label=\"line 4 moved from line 1\"><span class=\"diff-gutter\">4</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">m</span><a class=\"diff-move-link\" id=\"mm-move-0-to\" href=\"#mm-move-0-from\">moved from line 1</a></div></div></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-moved\" href=\"#mm-change-0\" style=\"top:0.00%;height:0.00%\" aria-label=\"Change 1: moved\"></a><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-1\" style=\"top:25.00%;height:25.00%\" aria-label=\"Change 2: modified\"></a><a class=\"diff-minimap-mark diff-minimap-moved\" href=\"#mm-change-2\" style=\"top:75.00%;height:25.00%\" aria-label=\"Change 3: moved\"></a></nav></div>"
+    }
+  },
+  {
+    "name": "CRLF unified",
+    "old": "one\r\ntwo\r\nthree\r\n",
+    "new": "one\r\n2\r\nthree\r\n",
+    "options": {
+      "view": "unified",
+      "idPrefix": "mm",
+      "anchors": true
+    },
+    "expected": {
+      "marks": [
+        {
+          "index": 0,
+          "kind": "modified",
+          "top": 3333,
+          "height": 3334
+        }
+      ],
+      "minimap": "<nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-0\" style=\"top:33.33%;height:33.34%\" aria-label=\"Change 1: modified\"></a></nav>",
+      "diff": "<div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">one</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-0\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">two</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">2</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">three</span></div></div>",
+      "html": "<div class=\"text-diff-with-minimap\"><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">one</span></div><div class=\"diff-row diff-row-removed\" id=\"mm-change-0\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">two</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">2</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">three</span></div></div><nav class=\"text-diff-minimap\" aria-label=\"Change minimap\"><a class=\"diff-minimap-mark diff-minimap-modified\" href=\"#mm-change-0\" style=\"top:33.33%;height:33.34%\" aria-label=\"Change 1: modified\"></a></nav></div>"
+    }
+  }
+]

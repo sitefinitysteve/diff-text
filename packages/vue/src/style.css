@@ -1,18 +1,722 @@
-/* Vue Diff Text Global Styles */
+/* diff-text: canonical library styles for every view.
+   Shipped (as copies) by vue-diff-text, react-diff-text, and php-diff-text.
+   Theme by overriding the custom properties below; every color lives behind one. */
+
+/* Public custom properties (set them on :root or any ancestor to theme):
+     --text-diff-added-bg
+     --text-diff-added-color
+     --text-diff-added-decoration
+     --text-diff-removed-bg
+     --text-diff-removed-color
+     --text-diff-removed-decoration
+     --text-diff-line-added-bg
+     --text-diff-line-removed-bg
+     --text-diff-gutter-bg
+     --text-diff-gutter-color
+     --text-diff-sign-added-color
+     --text-diff-sign-removed-color
+     --text-diff-rule-color
+     --text-diff-collapsed-bg
+     --text-diff-collapsed-color
+     --text-diff-empty-color
+     --text-diff-font-mono
+     --text-diff-current-outline
+     --text-diff-heat-1-bg ... --text-diff-heat-4-bg   (heatmap buckets; 0 is transparent)
+     --text-diff-heat-0-bg
+     --text-diff-heat-removed-color
+     --text-diff-move-0 ... --text-diff-move-5          (moved-block color slots)
+     --text-diff-minimap-width
+     --text-diff-minimap-height
+     --text-diff-minimap-top
+     --text-diff-minimap-bg
+     --text-diff-minimap-added
+     --text-diff-minimap-removed
+     --text-diff-minimap-modified
+     --text-diff-minimap-moved
+     --text-diff-timeline-active-bg
+     --text-diff-timeline-active-color
+     --text-diff-playback-step       (delay between changes, default 350ms)
+     --text-diff-playback-duration   (per-change animation, default 400ms)
+   Internally each resolves to a private --_td-* property with a light default
+   and an opt-in dark default (see below). */
+.text-diff,
+.text-diff-stats,
+.text-diff-minimap,
+.text-diff-timeline,
+.text-diff-playback-wrap {
+  --_td-added-bg: var(--text-diff-added-bg, #ddfbe6);
+  --_td-added-color: var(--text-diff-added-color, #008000);
+  --_td-added-decoration: var(--text-diff-added-decoration, none);
+  --_td-removed-bg: var(--text-diff-removed-bg, #fce9e9);
+  --_td-removed-color: var(--text-diff-removed-color, #c70000);
+  --_td-removed-decoration: var(--text-diff-removed-decoration, line-through);
+  --_td-line-added-bg: var(--text-diff-line-added-bg, #f0fbf3);
+  --_td-line-removed-bg: var(--text-diff-line-removed-bg, #fdf3f3);
+  --_td-gutter-bg: var(--text-diff-gutter-bg, transparent);
+  --_td-gutter-color: var(--text-diff-gutter-color, #8a919e);
+  --_td-sign-added-color: var(--text-diff-sign-added-color, var(--_td-added-color));
+  --_td-sign-removed-color: var(--text-diff-sign-removed-color, var(--_td-removed-color));
+  --_td-rule-color: var(--text-diff-rule-color, #e2e5ea);
+  --_td-collapsed-bg: var(--text-diff-collapsed-bg, #f4f6f8);
+  --_td-collapsed-color: var(--text-diff-collapsed-color, #5b6270);
+  --_td-empty-color: var(--text-diff-empty-color, #5b6270);
+  --_td-font-mono: var(--text-diff-font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  --_td-heat-0: var(--text-diff-heat-0-bg, transparent);
+  --_td-heat-1: var(--text-diff-heat-1-bg, #fdf4c8);
+  --_td-heat-2: var(--text-diff-heat-2-bg, #fbe38e);
+  --_td-heat-3: var(--text-diff-heat-3-bg, #f9c27e);
+  --_td-heat-4: var(--text-diff-heat-4-bg, #f59d8f);
+  --_td-heat-removed-color: var(--text-diff-heat-removed-color, #8a919e);
+  --_td-move-0: var(--text-diff-move-0, #6d4fe0);
+  --_td-move-1: var(--text-diff-move-1, #0b8aa6);
+  --_td-move-2: var(--text-diff-move-2, #b86100);
+  --_td-move-3: var(--text-diff-move-3, #c2256d);
+  --_td-move-4: var(--text-diff-move-4, #2d5fd6);
+  --_td-move-5: var(--text-diff-move-5, #4d7c0f);
+  --_td-minimap-width: var(--text-diff-minimap-width, 14px);
+  --_td-minimap-bg: var(--text-diff-minimap-bg, #f4f6f8);
+  --_td-minimap-added: var(--text-diff-minimap-added, var(--_td-added-color));
+  --_td-minimap-removed: var(--text-diff-minimap-removed, var(--_td-removed-color));
+  --_td-minimap-modified: var(--text-diff-minimap-modified, #b7791f);
+  --_td-minimap-moved: var(--text-diff-minimap-moved, var(--_td-move-0));
+  --_td-timeline-active-bg: var(--text-diff-timeline-active-bg, #2f3542);
+  --_td-timeline-active-color: var(--text-diff-timeline-active-color, #ffffff);
+}
+
+/* Dark defaults are opt-in, so a light page on a dark OS is never recolored.
+   Enable them with data-theme="dark" or class "dark" on any ancestor, or the
+   class "text-diff-dark" on the component or an ancestor. */
+[data-theme='dark'] .text-diff,
+[data-theme='dark'] .text-diff-stats,
+[data-theme='dark'] .text-diff-minimap,
+[data-theme='dark'] .text-diff-timeline,
+[data-theme='dark'] .text-diff-playback-wrap,
+.dark .text-diff,
+.dark .text-diff-stats,
+.dark .text-diff-minimap,
+.dark .text-diff-timeline,
+.dark .text-diff-playback-wrap,
+.text-diff-dark .text-diff,
+.text-diff-dark .text-diff-stats,
+.text-diff-dark .text-diff-minimap,
+.text-diff-dark .text-diff-timeline,
+.text-diff-dark .text-diff-playback-wrap,
+.text-diff.text-diff-dark,
+.text-diff-stats.text-diff-dark,
+.text-diff-minimap.text-diff-dark,
+.text-diff-timeline.text-diff-dark,
+.text-diff-playback-wrap.text-diff-dark {
+  --_td-added-bg: var(--text-diff-added-bg, #173524);
+  --_td-added-color: var(--text-diff-added-color, #7fdca4);
+  --_td-removed-bg: var(--text-diff-removed-bg, #3d1a17);
+  --_td-removed-color: var(--text-diff-removed-color, #ff9d92);
+  --_td-line-added-bg: var(--text-diff-line-added-bg, #12261a);
+  --_td-line-removed-bg: var(--text-diff-line-removed-bg, #2a1413);
+  --_td-gutter-color: var(--text-diff-gutter-color, #7c8494);
+  --_td-rule-color: var(--text-diff-rule-color, #2a2e37);
+  --_td-collapsed-bg: var(--text-diff-collapsed-bg, #1d2027);
+  --_td-collapsed-color: var(--text-diff-collapsed-color, #9aa1ae);
+  --_td-empty-color: var(--text-diff-empty-color, #9aa1ae);
+  --_td-heat-1: var(--text-diff-heat-1-bg, #37321a);
+  --_td-heat-2: var(--text-diff-heat-2-bg, #4a3d12);
+  --_td-heat-3: var(--text-diff-heat-3-bg, #573416);
+  --_td-heat-4: var(--text-diff-heat-4-bg, #642822);
+  --_td-heat-removed-color: var(--text-diff-heat-removed-color, #7c8494);
+  --_td-move-0: var(--text-diff-move-0, #a996ff);
+  --_td-move-1: var(--text-diff-move-1, #5fcbe3);
+  --_td-move-2: var(--text-diff-move-2, #f0a64d);
+  --_td-move-3: var(--text-diff-move-3, #f47bb0);
+  --_td-move-4: var(--text-diff-move-4, #86a9ff);
+  --_td-move-5: var(--text-diff-move-5, #a3d65c);
+  --_td-minimap-bg: var(--text-diff-minimap-bg, #1d2027);
+  --_td-minimap-modified: var(--text-diff-minimap-modified, #e0b252);
+  --_td-timeline-active-bg: var(--text-diff-timeline-active-bg, #e8eaef);
+  --_td-timeline-active-color: var(--text-diff-timeline-active-color, #16181d);
+}
+
+/* ---- Text modes and HTML ---- */
 .text-diff {
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
   word-wrap: break-word;
 }
 
 .text-diff .diff-added {
-  background-color: var(--text-diff-added-bg, #ddfbe6);
-  color: var(--text-diff-added-color, #008000);
+  background-color: var(--_td-added-bg);
+  color: var(--_td-added-color);
+  text-decoration: var(--_td-added-decoration);
 }
 
 .text-diff .diff-removed {
-  background-color: var(--text-diff-removed-bg, #fce9e9);
-  color: var(--text-diff-removed-color, #c70000);
-  text-decoration: var(--text-diff-removed-decoration, line-through);
+  background-color: var(--_td-removed-bg);
+  color: var(--_td-removed-color);
+  text-decoration: var(--_td-removed-decoration);
 }
 
- 
+.text-diff-html {
+  white-space: normal;
+}
+
+/* Full replacement renders block-level wrappers. */
+.text-diff-html > div.diff-added,
+.text-diff-html > div.diff-removed {
+  display: block;
+}
+
+/* ---- Shared line-view pieces ---- */
+.text-diff-unified,
+.text-diff-split {
+  font-family: var(--_td-font-mono);
+  border: 1px solid var(--_td-rule-color);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+
+.text-diff .diff-gutter {
+  color: var(--_td-gutter-color);
+  background: var(--_td-gutter-bg);
+  text-align: right;
+  padding: 0 8px;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.text-diff .diff-sign {
+  user-select: none;
+  text-align: center;
+  white-space: pre;
+}
+
+.text-diff .diff-line {
+  padding: 0 8px 0 4px;
+  min-width: 0;
+}
+
+/* Inline highlights inside line views stay inline-colored; line washes come from the row. */
+.text-diff .diff-line .diff-added,
+.text-diff .diff-line .diff-removed {
+  border-radius: 2px;
+}
+
+.text-diff .diff-row-collapsed {
+  background: var(--_td-collapsed-bg);
+  color: var(--_td-collapsed-color);
+  border-top: 1px solid var(--_td-rule-color);
+  border-bottom: 1px solid var(--_td-rule-color);
+  padding: 2px 12px;
+  font-style: italic;
+  white-space: normal;
+}
+
+/* Frameworks may render the collapsed row as a button. */
+.text-diff button.diff-row-collapsed {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  appearance: none;
+  text-align: left;
+  font: inherit;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.text-diff button.diff-row-collapsed:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+
+.text-diff .diff-empty {
+  color: var(--_td-empty-color);
+  padding: 8px 12px;
+  font-style: italic;
+  white-space: normal;
+}
+
+/* ---- Unified ---- */
+.text-diff-unified .diff-row:not(.diff-row-collapsed) {
+  display: grid;
+  grid-template-columns: max-content max-content 1.5em minmax(0, 1fr);
+}
+
+.text-diff-unified .diff-gutter-old,
+.text-diff-unified .diff-gutter-new {
+  min-width: 3ch;
+  box-sizing: content-box;
+}
+
+.text-diff-unified .diff-gutter-new {
+  border-right: 1px solid var(--_td-rule-color);
+}
+
+.text-diff-unified .diff-row-added {
+  background: var(--_td-line-added-bg);
+}
+
+.text-diff-unified .diff-row-removed {
+  background: var(--_td-line-removed-bg);
+}
+
+.text-diff .diff-row-added .diff-sign,
+.text-diff .diff-cell-added .diff-sign {
+  color: var(--_td-sign-added-color);
+  font-weight: 700;
+}
+
+.text-diff .diff-row-removed .diff-sign,
+.text-diff .diff-cell-removed .diff-sign {
+  color: var(--_td-sign-removed-color);
+  font-weight: 700;
+}
+
+/* ---- Split ---- */
+.text-diff-split {
+  container-type: inline-size;
+}
+
+.text-diff-split .diff-row:not(.diff-row-collapsed) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.text-diff-split .diff-cell {
+  display: grid;
+  grid-template-columns: max-content 1.5em minmax(0, 1fr);
+  min-width: 0;
+}
+
+.text-diff-split .diff-cell-old {
+  border-right: 1px solid var(--_td-rule-color);
+}
+
+.text-diff-split .diff-gutter {
+  min-width: 3ch;
+  box-sizing: content-box;
+}
+
+.text-diff-split .diff-cell-added {
+  background: var(--_td-line-added-bg);
+}
+
+.text-diff-split .diff-cell-removed {
+  background: var(--_td-line-removed-bg);
+}
+
+.text-diff-split .diff-cell-empty {
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 6px,
+    var(--_td-rule-color) 6px 7px
+  );
+}
+
+/* Stack the two sides on narrow containers. */
+@container (max-width: 640px) {
+  .text-diff-split .diff-row:not(.diff-row-collapsed) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .text-diff-split .diff-cell-old {
+    border-right: 0;
+  }
+
+  .text-diff-split .diff-cell-empty,
+  .text-diff-split .diff-row-equal .diff-cell-new {
+    display: none;
+  }
+}
+
+/* ---- Stats badge ---- */
+.text-diff-stats {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.875em;
+}
+
+.text-diff-stats .diff-stat {
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--_td-rule-color);
+  white-space: nowrap;
+}
+
+.text-diff-stats .diff-stat-added {
+  background: var(--_td-added-bg);
+  color: var(--_td-added-color);
+}
+
+.text-diff-stats .diff-stat-removed {
+  background: var(--_td-removed-bg);
+  color: var(--_td-removed-color);
+}
+
+.text-diff-stats .diff-stat-unchanged,
+.text-diff-stats .diff-stat-similarity {
+  color: var(--_td-collapsed-color);
+}
+
+/* Visually hidden, still read by screen readers. */
+.text-diff-stats .diff-sr,
+.text-diff .diff-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (forced-colors: active) {
+  .text-diff .diff-added,
+  .text-diff .diff-removed {
+    border: 1px solid CanvasText;
+  }
+}
+
+/* ---- Rewrite heatmap ---- */
+.text-diff-heatmap {
+  line-height: 1.7;
+}
+
+.text-diff-heatmap .diff-heat {
+  border-radius: 3px;
+  padding: 0.1em 0;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.text-diff-heatmap .diff-heat[data-heat='1'] { background-color: var(--_td-heat-1); }
+.text-diff-heatmap .diff-heat[data-heat='2'] { background-color: var(--_td-heat-2); }
+.text-diff-heatmap .diff-heat[data-heat='3'] { background-color: var(--_td-heat-3); }
+.text-diff-heatmap .diff-heat[data-heat='4'] { background-color: var(--_td-heat-4); }
+
+/* A second, non-color cue for the two hottest buckets. */
+.text-diff-heatmap .diff-heat[data-heat='3'],
+.text-diff-heatmap .diff-heat[data-heat='4'] {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.text-diff-heatmap .diff-heat[data-heat='3'] { text-decoration-style: dotted; }
+.text-diff-heatmap .diff-heat[data-heat='4'] { text-decoration-style: solid; }
+
+.text-diff-heatmap .diff-heat-removed {
+  color: var(--_td-heat-removed-color);
+  text-decoration: line-through;
+  font-size: 0.875em;
+  margin-inline-end: 0.35em;
+}
+
+.text-diff-heatmap .diff-heat-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125em;
+  line-height: 1.4;
+  color: var(--_td-collapsed-color);
+  white-space: normal;
+}
+
+.text-diff-heatmap .diff-heat-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-diff-heatmap .diff-heat-swatch {
+  width: 0.9em;
+  height: 0.9em;
+  border-radius: 3px;
+  border: 1px solid var(--_td-rule-color);
+  background: var(--_td-heat-0);
+}
+
+.text-diff-heatmap .diff-heat-key[data-heat='1'] .diff-heat-swatch { background: var(--_td-heat-1); }
+.text-diff-heatmap .diff-heat-key[data-heat='2'] .diff-heat-swatch { background: var(--_td-heat-2); }
+.text-diff-heatmap .diff-heat-key[data-heat='3'] .diff-heat-swatch { background: var(--_td-heat-3); }
+.text-diff-heatmap .diff-heat-key[data-heat='4'] .diff-heat-swatch { background: var(--_td-heat-4); }
+
+.text-diff-heatmap .diff-heat-key-removed .diff-heat-swatch {
+  background: linear-gradient(transparent 44%, var(--_td-heat-removed-color) 44% 58%, transparent 58%);
+}
+
+/* ---- Moved blocks (unified and split) ---- */
+.text-diff .diff-move-0 { --_td-move: var(--_td-move-0); }
+.text-diff .diff-move-1 { --_td-move: var(--_td-move-1); }
+.text-diff .diff-move-2 { --_td-move: var(--_td-move-2); }
+.text-diff .diff-move-3 { --_td-move: var(--_td-move-3); }
+.text-diff .diff-move-4 { --_td-move: var(--_td-move-4); }
+.text-diff .diff-move-5 { --_td-move: var(--_td-move-5); }
+
+.text-diff-unified .diff-row.diff-row-moved-from,
+.text-diff-unified .diff-row.diff-row-moved-to {
+  grid-template-columns: max-content max-content 1.5em minmax(0, 1fr) max-content;
+  background: color-mix(in srgb, var(--_td-move) 9%, transparent);
+}
+
+.text-diff-split .diff-cell.diff-cell-moved-from,
+.text-diff-split .diff-cell.diff-cell-moved-to {
+  grid-template-columns: max-content 1.5em minmax(0, 1fr) max-content;
+  background: color-mix(in srgb, var(--_td-move) 9%, transparent);
+}
+
+.text-diff .diff-row-moved-from .diff-sign,
+.text-diff .diff-row-moved-to .diff-sign {
+  color: var(--_td-move);
+  font-weight: 700;
+}
+
+.text-diff .diff-row-moved-from .diff-line {
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--_td-move) 55%, transparent);
+}
+
+.text-diff .diff-move-link {
+  align-self: center;
+  padding: 0 8px;
+  font-size: 0.8em;
+  white-space: nowrap;
+  color: var(--_td-move);
+  text-decoration: underline dotted;
+  text-underline-offset: 0.2em;
+}
+
+.text-diff .diff-move-link:hover {
+  text-decoration-style: solid;
+}
+
+.text-diff .diff-move-link:focus-visible,
+.text-diff .diff-move-link:target {
+  outline: 2px solid var(--_td-move);
+  outline-offset: 1px;
+  border-radius: 3px;
+}
+
+.text-diff-unified .diff-row:has(.diff-move-link:target),
+.text-diff-split .diff-cell:has(.diff-move-link:target) {
+  background: color-mix(in srgb, var(--_td-move) 22%, transparent);
+}
+
+/* ---- Change minimap ---- */
+.text-diff-with-minimap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--_td-minimap-width);
+  gap: 8px;
+  align-items: start;
+  --_td-minimap-width: var(--text-diff-minimap-width, 14px);
+}
+
+.text-diff-minimap {
+  position: sticky;
+  top: var(--text-diff-minimap-top, 0px);
+  box-sizing: border-box;
+  width: var(--_td-minimap-width);
+  height: min(var(--text-diff-minimap-height, 100vh), 100%);
+  min-height: 48px;
+  border-radius: 4px;
+  background: var(--_td-minimap-bg);
+  border: 1px solid var(--_td-rule-color);
+}
+
+.text-diff-minimap .diff-minimap-mark {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  min-height: 3px;
+  border-radius: 2px;
+  background: var(--_td-minimap-modified);
+}
+
+.text-diff-minimap .diff-minimap-added { background: var(--_td-minimap-added); }
+.text-diff-minimap .diff-minimap-removed { background: var(--_td-minimap-removed); }
+.text-diff-minimap .diff-minimap-moved { background: var(--_td-minimap-moved); }
+
+.text-diff-minimap .diff-minimap-mark:hover {
+  left: 0;
+  right: 0;
+}
+
+.text-diff-minimap .diff-minimap-mark:focus-visible {
+  outline: 2px solid CanvasText;
+  outline-offset: 1px;
+}
+
+/* The anchored change a minimap mark (or any #...-change-N link) points at. */
+.text-diff [id]:target {
+  outline: var(--text-diff-current-outline, 2px solid currentColor);
+  outline-offset: 1px;
+}
+
+/* ---- Revision timeline ---- */
+.text-diff-timeline {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.text-diff-timeline > .diff-rev-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.text-diff-timeline > .diff-rev-label {
+  order: 0;
+  padding: 2px 10px;
+  border: 1px solid var(--_td-rule-color);
+  border-radius: 999px;
+  font-size: 0.875em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--_td-collapsed-color);
+  cursor: pointer;
+}
+
+.text-diff-timeline > .diff-rev-input:checked + .diff-rev-label {
+  background: var(--_td-timeline-active-bg);
+  border-color: var(--_td-timeline-active-bg);
+  color: var(--_td-timeline-active-color);
+}
+
+.text-diff-timeline > .diff-rev-input:focus-visible + .diff-rev-label {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.text-diff-timeline > .diff-rev-panel {
+  order: 1;
+  flex: 1 0 100%;
+  display: none;
+  margin-top: 8px;
+  min-width: 0;
+}
+
+.text-diff-timeline > .diff-rev-input:checked + .diff-rev-label + .diff-rev-panel {
+  display: block;
+}
+
+.text-diff-timeline .diff-rev-caption {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.text-diff-timeline .diff-rev-panel > .text-diff-stats {
+  margin-bottom: 8px;
+}
+
+.text-diff-timeline > .diff-empty {
+  color: var(--_td-empty-color);
+  font-style: italic;
+}
+
+/* ---- Animated playback ---- */
+.text-diff-playback-wrap > .diff-replay-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+}
+
+.text-diff-playback-wrap > .diff-replay {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 2px 10px;
+  border: 1px solid var(--_td-rule-color);
+  border-radius: 999px;
+  font-size: 0.875em;
+  color: var(--_td-collapsed-color);
+  cursor: pointer;
+  user-select: none;
+}
+
+.text-diff-playback-wrap > .diff-replay-input:focus-visible + .diff-replay {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.text-diff-playback .diff-added,
+.text-diff-playback .diff-removed {
+  animation-duration: var(--text-diff-playback-duration, 400ms);
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+  animation-delay: calc(var(--td-i, 0) * var(--text-diff-playback-step, 350ms));
+}
+
+.text-diff-playback .diff-added { animation-name: td-play-add-a; }
+.text-diff-playback .diff-removed { animation-name: td-play-del-a; opacity: 0.55; }
+
+/* Replay: toggling the checkbox swaps to an identical keyframes name, which restarts every animation. */
+.diff-replay-input:checked ~ .text-diff-playback .diff-added { animation-name: td-play-add-b; }
+.diff-replay-input:checked ~ .text-diff-playback .diff-removed { animation-name: td-play-del-b; }
+
+@keyframes td-play-add-a {
+  from { opacity: 0; background-color: transparent; }
+  to { opacity: 1; }
+}
+
+@keyframes td-play-add-b {
+  from { opacity: 0; background-color: transparent; }
+  to { opacity: 1; }
+}
+
+@keyframes td-play-del-a {
+  from { opacity: 1; background-color: transparent; text-decoration-color: transparent; }
+  to { opacity: 0.55; }
+}
+
+@keyframes td-play-del-b {
+  from { opacity: 1; background-color: transparent; text-decoration-color: transparent; }
+  to { opacity: 0.55; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-diff-playback .diff-added,
+  .text-diff-playback .diff-removed {
+    animation: none;
+  }
+
+  .text-diff-playback-wrap > .diff-replay-input,
+  .text-diff-playback-wrap > .diff-replay {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .text-diff-heatmap .diff-heat:not([data-heat='0']),
+  .text-diff-minimap .diff-minimap-mark {
+    border: 1px solid CanvasText;
+  }
+
+  .text-diff-minimap .diff-minimap-mark {
+    background: Highlight;
+  }
+}
+
+/* Current change, set by next() / prev() / goTo(). */
+.text-diff .is-current {
+  outline: var(--text-diff-current-outline, 2px solid currentColor);
+  outline-offset: 1px;
+  border-radius: 2px;
+}

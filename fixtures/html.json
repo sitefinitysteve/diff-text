@@ -1,0 +1,1521 @@
+[
+  {
+    "name": "attribute-only change",
+    "old": "<p class=\"a\">Hello world</p>",
+    "new": "<p class=\"b\">Hello world</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p class=\"b\">Hello world</p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "link href change",
+    "old": "<p><a href=\"/x\">link</a> text</p>",
+    "new": "<p><a href=\"/y\">link</a> text</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><a href=\"/y\">link</a> text</p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "link href and text change",
+    "old": "<p><a href=\"/x\">old link</a></p>",
+    "new": "<p><a href=\"/y\">new link</a></p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><a href=\"/y\"><span class=\"diff-removed\" data-change-index=\"0\">old</span><span class=\"diff-added\" data-change-index=\"1\">new</span> link</a></p></div>",
+      "addedText": "new",
+      "removedText": "old",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "new paragraph",
+    "old": "<p>One</p>",
+    "new": "<p>One</p><p>Two</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>One</p><p><span class=\"diff-added\" data-change-index=\"0\">Two</span></p></div>",
+      "addedText": "Two",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "removed paragraph",
+    "old": "<p>One</p><p>Two</p>",
+    "new": "<p>One</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>One</p><p><span class=\"diff-removed\" data-change-index=\"0\">Two</span></p></div>",
+      "addedText": "",
+      "removedText": "Two",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "word change in paragraph",
+    "old": "<p>The quick brown fox</p>",
+    "new": "<p>The quick red fox</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>The quick <span class=\"diff-removed\" data-change-index=\"0\">brown</span><span class=\"diff-added\" data-change-index=\"1\">red</span> fox</p></div>",
+      "addedText": "red",
+      "removedText": "brown",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "entities",
+    "old": "<p>Tom &amp; Jerry</p>",
+    "new": "<p>Tom &amp; Jerry &lt;3</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>Tom &amp; Jerry<span class=\"diff-added\" data-change-index=\"0\"> &lt;3</span></p></div>",
+      "addedText": "<3",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "comments",
+    "old": "<p>a<!-- c1 --> b</p>",
+    "new": "<p>a<!-- c2 --> c</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>a <span class=\"diff-removed\" data-change-index=\"0\">b</span><span class=\"diff-added\" data-change-index=\"1\">c</span></p></div>",
+      "addedText": "c",
+      "removedText": "b",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "br and img",
+    "old": "<p>a<br>b</p>",
+    "new": "<p>a<br>c<img src=\"x.png\" alt=\"\"></p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>a<br><span class=\"diff-removed\" data-change-index=\"0\">b</span><span class=\"diff-added\" data-change-index=\"1\">c<img src=\"x.png\" alt=\"\"></span></p></div>",
+      "addedText": "c",
+      "removedText": "b",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "quoted > in attribute",
+    "old": "<p title=\"a>b\">x y</p>",
+    "new": "<p title=\"a>b\">x z</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p title=\"a>b\">x <span class=\"diff-removed\" data-change-index=\"0\">y</span><span class=\"diff-added\" data-change-index=\"1\">z</span></p></div>",
+      "addedText": "z",
+      "removedText": "y",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "list edit",
+    "old": "<ul><li>a</li><li>b</li></ul>",
+    "new": "<ul><li>a</li><li>c</li><li>d</li></ul>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><ul><li>a</li><li><span class=\"diff-removed\" data-change-index=\"0\">b</span><span class=\"diff-added\" data-change-index=\"1\">c</span></li><li><span class=\"diff-added\" data-change-index=\"2\">d</span></li></ul></div>",
+      "addedText": "cd",
+      "removedText": "b",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "table cell edit",
+    "old": "<table><tr><td>1</td><td>2</td></tr></table>",
+    "new": "<table><tr><td>1</td><td>3</td></tr></table>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><table><tr><td>1</td><td><span class=\"diff-removed\" data-change-index=\"0\">2</span><span class=\"diff-added\" data-change-index=\"1\">3</span></td></tr></table></div>",
+      "addedText": "3",
+      "removedText": "2",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "formatting tags ignored",
+    "old": "<p>Hello <strong>world</strong></p>",
+    "new": "<p>Hello world</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>Hello world</p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "smart quotes normalized",
+    "old": "<p>“Hello”</p>",
+    "new": "<p>\"Hello\"</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>\"Hello\"</p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "full replacement",
+    "old": "<p>It is expressly agreed and understood by the parties that the Husband shall maintain his policy.</p>",
+    "new": "<ul><li>Item 1: House.</li><li>Item 2: Car.</li></ul>",
+    "options": {
+      "similarityThreshold": 0.3
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div class=\"diff-removed\" data-change-index=\"0\"><p>It is expressly agreed and understood by the parties that the Husband shall maintain his policy.</p></div><div class=\"diff-added\" data-change-index=\"1\"><ul><li>Item 1: House.</li><li>Item 2: Car.</li></ul></div></div>",
+      "addedText": "Item 1: House.Item 2: Car.",
+      "removedText": "It is expressly agreed and understood by the parties that the Husband shall maintain his policy.",
+      "fullReplacement": true,
+      "similarity": 0.019417475728155338
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "above threshold stays word level",
+    "old": "<p>The quick brown fox jumps over the lazy dog.</p>",
+    "new": "<p>The quick brown fox leaps over the lazy dog.</p>",
+    "options": {
+      "similarityThreshold": 0.3
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>The quick brown fox <span class=\"diff-removed\" data-change-index=\"0\">jumps</span><span class=\"diff-added\" data-change-index=\"1\">leaps</span> over the lazy dog.</p></div>",
+      "addedText": "leaps",
+      "removedText": "jumps",
+      "fullReplacement": false,
+      "similarity": 0.8611111111111112
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "both empty",
+    "old": "",
+    "new": "",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "old empty",
+    "old": "",
+    "new": "<p>New text</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-added\" data-change-index=\"0\">New text</span></p></div>",
+      "addedText": "New text",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "new empty",
+    "old": "<p>Old text</p>",
+    "new": "",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-removed\" data-change-index=\"0\">Old text</span></p></div>",
+      "addedText": "",
+      "removedText": "Old text",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "empty side never fully replaced",
+    "old": "",
+    "new": "<p>New text</p>",
+    "options": {
+      "similarityThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-added\" data-change-index=\"0\">New text</span></p></div>",
+      "addedText": "New text",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "plain text",
+    "old": "Hello world",
+    "new": "Hello brave new world",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\">Hello <span class=\"diff-added\" data-change-index=\"0\">brave new </span>world</div>",
+      "addedText": "brave new",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "second sentence replaced, no interleaving",
+    "old": "The quick brown fox jumps over the lazy dog. Each party acknowledges that any term of this agreement will be interpreted accordingly.",
+    "new": "The quick brown fox jumps over the lazy dog. Test writing new content.",
+    "options": {
+      "similarityThreshold": 0.3
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\">The quick brown fox jumps over the lazy dog. <span class=\"diff-removed\" data-change-index=\"0\">Each party acknowledges that any term of this agreement will be interpreted accordingly</span><span class=\"diff-added\" data-change-index=\"1\">Test writing new content</span>.</div>",
+      "addedText": "Test writing new content",
+      "removedText": "Each party acknowledges that any term of this agreement will be interpreted accordingly",
+      "fullReplacement": false,
+      "similarity": 0.43529411764705883
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "long paragraph, second sentence replaced",
+    "old": "<p>Each Party acknowledges that at all times during the Term of this Agreement the Surrogate will retain bodily autonomy and the right to obtain a second medical opinion with respect to any proposed test, procedure, treatment, or medication which will be covered by the Intended Parents as an Additional Expense Amounts. Each Party acknowledges that any term of this Agreement where the Surrogate gives her consent with respect to any proposed test, procedure, treatment, or medication will be interpreted by the Parties to mean that the Surrogate intends to give her consent at the relevant time if such consent is fully informed and voluntary.</p>\n",
+    "new": "<p>Each Party acknowledges that at all times during the Term of this Agreement the Surrogate will retain bodily autonomy and the right to obtain a second medical opinion with respect to any proposed test, procedure, treatment, or medication which will be covered by the Intended Parents as an Additional Expense Amounts. Test writing new content.</p>\n",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>Each Party acknowledges that at all times during the Term of this Agreement the Surrogate will retain bodily autonomy and the right to obtain a second medical opinion with respect to any proposed test, procedure, treatment, or medication which will be covered by the Intended Parents as an Additional Expense Amounts. <span class=\"diff-removed\" data-change-index=\"0\">Each Party acknowledges that any term of this Agreement where the Surrogate gives her consent with respect to any proposed test, procedure, treatment, or medication will be interpreted by the Parties to mean that the Surrogate intends to give her consent at the relevant time if such consent is fully informed and voluntary</span><span class=\"diff-added\" data-change-index=\"1\">Test writing new content</span>.</p>\n</div>",
+      "addedText": "Test writing new content",
+      "removedText": "Each Party acknowledges that any term of this Agreement where the Surrogate gives her consent with respect to any proposed test, procedure, treatment, or medication will be interpreted by the Parties to mean that the Surrogate intends to give her consent at the relevant time if such consent is fully informed and voluntary",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "paragraph with strong, sentences replaced",
+    "old": "<p>The Surrogate has offered to act as an altruistic surrogate and to gestate the Embryo created with the Ova and the Sperm until the Birth of the Child. The Surrogate is over the age of TWENTY-ONE (21) years and is in a relationship of permanence with the Spouse. The Surrogate has 3 dependant child or children (\"<strong>Surrogate's Dependant(s)</strong>\").</p>\n",
+    "new": "<p>The Surrogate has offered to act as an altruistic surrogate and to gestate the Embryo created with the Ova and the Sperm until the Birth of the Child. Test writing new content.</p>\n",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>The Surrogate has offered to act as an altruistic surrogate and to gestate the Embryo created with the Ova and the Sperm until the Birth of the Child. <span class=\"diff-removed\" data-change-index=\"0\">The Surrogate is over the age of TWENTY-ONE (21) years and is in a relationship of permanence with the Spouse. The Surrogate has 3 dependant child or children (\"Surrogate's Dependant(s)\").</span><span class=\"diff-added\" data-change-index=\"1\">Test writing new content.</span></p>\n</div>",
+      "addedText": "Test writing new content.",
+      "removedText": "The Surrogate is over the age of TWENTY-ONE (21) years and is in a relationship of permanence with the Spouse. The Surrogate has 3 dependant child or children (\"Surrogate's Dependant(s)\").",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "nested formatting tags ignored",
+    "old": "<strong><em>\"Clinic\"</em></strong> means selected.",
+    "new": "\"Clinic\" means selected and revised.",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\">\"Clinic\" means selected<span class=\"diff-added\" data-change-index=\"0\"> and revised</span>.</div>",
+      "addedText": "and revised",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "formatting tags kept when ignoreFormattingTags is false",
+    "old": "<strong>\"Clinic\"</strong> means selected.",
+    "new": "\"Clinic\" means selected.",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><strong><span class=\"diff-removed\" data-change-index=\"0\">\"Clinic\"</span></strong><span class=\"diff-added\" data-change-index=\"1\">\"Clinic\"</span> means selected.</div>",
+      "addedText": "\"Clinic\"",
+      "removedText": "\"Clinic\"",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "threshold 0 never fully replaces",
+    "old": "Completely different text here.",
+    "new": "XYZ 123.",
+    "options": {
+      "similarityThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><span class=\"diff-removed\" data-change-index=\"0\">Completely different text here</span><span class=\"diff-added\" data-change-index=\"1\">XYZ 123</span>.</div>",
+      "addedText": "XYZ 123",
+      "removedText": "Completely different text here",
+      "fullReplacement": false,
+      "similarity": 0.05714285714285714
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "threshold 1 fully replaces any change",
+    "old": "Hello world",
+    "new": "Hello worlds",
+    "options": {
+      "similarityThreshold": 1
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div class=\"diff-removed\" data-change-index=\"0\">Hello world</div><div class=\"diff-added\" data-change-index=\"1\">Hello worlds</div></div>",
+      "addedText": "Hello worlds",
+      "removedText": "Hello world",
+      "fullReplacement": true,
+      "similarity": 0.47619047619047616
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "threshold 1 keeps identical text",
+    "old": "Hello world",
+    "new": "Hello world",
+    "options": {
+      "similarityThreshold": 1
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\">Hello world</div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false,
+      "similarity": 1
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "content after a script is kept",
+    "old": "<p>alpha</p>",
+    "new": "<p>alpha</p><script>var s = \"</div>\";</script><p>beta</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>alpha</p><script>var s = \"</div>\";</script><p><span class=\"diff-added\" data-change-index=\"0\">beta</span></p></div>",
+      "addedText": "beta",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "uppercase script end tag",
+    "old": "<script>var s = \"</div>\";</SCRIPT><p>tail one</p>",
+    "new": "<script>var s = \"</div>\";</script><p>tail two</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><script>var s = \"</div>\";</script><p>tail <span class=\"diff-removed\" data-change-index=\"0\">one</span><span class=\"diff-added\" data-change-index=\"1\">two</span></p></div>",
+      "addedText": "two",
+      "removedText": "one",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "changed style body",
+    "old": "<p>x</p><style>p { color: red }</style><p>after</p>",
+    "new": "<p>x</p><style>p { color: blue }</style><p>after 2</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>x</p><style>p { color: blue }</style><p>after<span class=\"diff-added\" data-change-index=\"0\"> 2</span></p></div>",
+      "addedText": "2",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "unterminated script",
+    "old": "<p>a</p>",
+    "new": "<p>a</p><script>if (x) <p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>a</p><script>if (x) <p></script></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "added paragraph after a table",
+    "old": "<table><tr><td></td></tr></table>",
+    "new": "<table><tr><td>one</td></tr></table><p>one<br>one</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><table><tr><td><span class=\"diff-added\" data-change-index=\"0\">one</span></td></tr></table><p><span class=\"diff-added\" data-change-index=\"1\">one</span><br><span class=\"diff-added\" data-change-index=\"2\">one</span></p></div>",
+      "addedText": "oneoneone",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "removed list item",
+    "old": "<ul><li>a</li><li>b</li></ul>",
+    "new": "<ul><li>a</li></ul>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><ul><li>a</li><li><span class=\"diff-removed\" data-change-index=\"0\">b</span></li></ul></div>",
+      "addedText": "",
+      "removedText": "b",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "removed table row",
+    "old": "<table><tr><td>a</td></tr><tr><td>b</td></tr></table>",
+    "new": "<table><tr><td>a</td></tr></table>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><table><tr><td>a</td></tr><tr><td><span class=\"diff-removed\" data-change-index=\"0\">b</span></td></tr></table></div>",
+      "addedText": "",
+      "removedText": "b",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "removed div with a paragraph",
+    "old": "<div><p>a</p></div><p>b</p>",
+    "new": "<p>b</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div><p><span class=\"diff-removed\" data-change-index=\"0\">a</span></p></div><p>b</p></div>",
+      "addedText": "",
+      "removedText": "a",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "link inside a link",
+    "old": "<p>see <a href=\"/y\">docs</a> now</p>",
+    "new": "<p><a href=\"/x\">see now</a></p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><a href=\"/x\">see <span class=\"diff-removed\" data-change-index=\"0\">docs </span>now</a></p></div>",
+      "addedText": "",
+      "removedText": "docs",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "nested same-name elements",
+    "old": "<div><div>a</div><div>b</div></div>",
+    "new": "<div><div>a</div></div>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div><div>a</div><div><span class=\"diff-removed\" data-change-index=\"0\">b</span></div></div></div>",
+      "addedText": "",
+      "removedText": "b",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "removed wrapper",
+    "old": "<div><div>a</div></div>",
+    "new": "<div>a</div>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div>a</div></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "dropped boundary separates words",
+    "old": "<p>x</p><p>a</p><p>b</p><p>y</p>",
+    "new": "<p>x</p><p>y</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>x</p><p><span class=\"diff-removed\" data-change-index=\"0\">a</span></p><p><span class=\"diff-removed\" data-change-index=\"1\">b</span></p><p>y</p></div>",
+      "addedText": "",
+      "removedText": "ab",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "unclosed and stray tags in the new document",
+    "old": "<div>a</div>",
+    "new": "<div>a<p>b</div></span>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div>a<p><span class=\"diff-added\" data-change-index=\"0\">b</span></p></div></div>",
+      "addedText": "b",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "entities compare decoded",
+    "old": "<p>&eacute;cole &amp; co&nbsp;x &#233;t&#xE9; &#x1F600;</p>",
+    "new": "<p>école & co x été 😀</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>école & co x été 😀</p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "stray < equals &lt;",
+    "old": "<p>a &lt; b</p>",
+    "new": "<p>a < b</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>a &lt; b</p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "unknown entity is literal",
+    "old": "<p>&check;</p>",
+    "new": "<p>✓</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-removed\" data-change-index=\"0\">&check;</span><span class=\"diff-added\" data-change-index=\"1\">✓</span></p></div>",
+      "addedText": "✓",
+      "removedText": "&check;",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "unbalanced attribute quote",
+    "old": "<p>one</p>",
+    "new": "<p>one</p><p title=\"x>two</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>one</p><span class=\"diff-added\" data-change-index=\"0\">&lt;p title=\"x>two</span></div>",
+      "addedText": "<p title=\"x>two",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "orphan below the threshold",
+    "old": "ab XY cde",
+    "new": "fg XY hij",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><span class=\"diff-removed\" data-change-index=\"0\">ab XY cde</span><span class=\"diff-added\" data-change-index=\"1\">fg XY hij</span></div>",
+      "addedText": "fg XY hij",
+      "removedText": "ab XY cde",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "orphan exactly at the threshold",
+    "old": "ab XYZ cde",
+    "new": "fg XYZ hij",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><span class=\"diff-removed\" data-change-index=\"0\">ab</span><span class=\"diff-added\" data-change-index=\"1\">fg</span> XYZ <span class=\"diff-removed\" data-change-index=\"2\">cde</span><span class=\"diff-added\" data-change-index=\"3\">hij</span></div>",
+      "addedText": "fghij",
+      "removedText": "abcde",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "orphan run containing a tag",
+    "old": "<p>alpha <a href=\"#\">beta</a> gamma</p>",
+    "new": "<p>one <a href=\"#\">beta</a> two</p>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-removed\" data-change-index=\"0\">alpha</span><span class=\"diff-added\" data-change-index=\"1\">one</span> <a href=\"#\">beta</a> <span class=\"diff-removed\" data-change-index=\"2\">gamma</span><span class=\"diff-added\" data-change-index=\"3\">two</span></p></div>",
+      "addedText": "onetwo",
+      "removedText": "alphagamma",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "orphanMatchThreshold 0",
+    "old": "alpha beta gamma delta",
+    "new": "one beta two three",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><span class=\"diff-removed\" data-change-index=\"0\">alpha</span><span class=\"diff-added\" data-change-index=\"1\">one</span> beta <span class=\"diff-removed\" data-change-index=\"2\">gamma</span><span class=\"diff-added\" data-change-index=\"3\">two</span> <span class=\"diff-removed\" data-change-index=\"4\">delta</span><span class=\"diff-added\" data-change-index=\"5\">three</span></div>",
+      "addedText": "onetwothree",
+      "removedText": "alphagammadelta",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "orphanMatchThreshold 0.9",
+    "old": "the quick brown fox jumps",
+    "new": "the slow brown dog jumps",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\">the <span class=\"diff-removed\" data-change-index=\"0\">quick brown fox</span><span class=\"diff-added\" data-change-index=\"1\">slow brown dog</span> jumps</div>",
+      "addedText": "slow brown dog",
+      "removedText": "quick brown fox",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "emoji and ZWJ sequences",
+    "old": "<p>x😀y 👨‍👩‍👧 🇨🇦 é</p>",
+    "new": "<p>x😁y 👨‍👩‍👦 🇫🇷 e</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>x<span class=\"diff-removed\" data-change-index=\"0\">😀y 👨‍👩‍👧 🇨🇦 é</span><span class=\"diff-added\" data-change-index=\"1\">😁y 👨‍👩‍👦 🇫🇷 e</span></p></div>",
+      "addedText": "😁y 👨‍👩‍👦 🇫🇷 e",
+      "removedText": "😀y 👨‍👩‍👧 🇨🇦 é",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "ignoreCase with a real change",
+    "old": "<p>Hello World</p>",
+    "new": "<p>hello there WORLD</p>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>hello <span class=\"diff-added\" data-change-index=\"0\">there </span>WORLD</p></div>",
+      "addedText": "there",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "formatting added, ignoreFormattingTags false",
+    "old": "<p>make this bold now</p>",
+    "new": "<p>make <strong>this bold</strong> now</p>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>make <span class=\"diff-removed\" data-change-index=\"0\">this bold</span><strong><span class=\"diff-added\" data-change-index=\"1\">this bold</span></strong> now</p></div>",
+      "addedText": "this bold",
+      "removedText": "this bold",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "doctype, CDATA and processing instructions",
+    "old": "<!DOCTYPE html><?pi x?><p><![CDATA[x<y]]>a</p>",
+    "new": "<!doctype html><?pi x?><p><![CDATA[x<y]]>b</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><!doctype html><?pi x?><p><![CDATA[x<y]]><span class=\"diff-removed\" data-change-index=\"0\">a</span><span class=\"diff-added\" data-change-index=\"1\">b</span></p></div>",
+      "addedText": "b",
+      "removedText": "a",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "uppercase tags and void spellings",
+    "old": "<P CLASS=\"x\">Hello<BR>there<img src=\"x.png\"></P>",
+    "new": "<p class=\"y\">Hello<br />there<img src=\"x.png\"/></p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p class=\"y\">Hello<br />there<img src=\"x.png\"/></p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "whitespace runs are equal",
+    "old": "<p>a b</p>",
+    "new": "<p>a \n  b</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>a \n  b</p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "maxEditLength fallback",
+    "old": "<p>a b c d</p>",
+    "new": "<p>w b y d</p>",
+    "options": {
+      "maxEditLength": 1,
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-removed\" data-change-index=\"0\">a b c d</span></p><p><span class=\"diff-added\" data-change-index=\"1\">w b y d</span></p></div>",
+      "addedText": "w b y d",
+      "removedText": "a b c d",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 1",
+    "old": "<ul><li><!-- <b>x</b> --> &#x1F600; &eacute;cole école delta école</li><li><!-- note --> <span class=\"k\">the “quoted” \"quoted\"</span> a café delta Fox &nbsp;</li></ul><p><!-- note --></p>",
+    "new": "<ul><li>\"quoted\"\ndelta\n“quoted”\n&#233;\ndelta <br /> <span class=\"k\">&lt;\nbeta\n😀</span></li></ul><p><!-- note --></p><p><!-- <b>x</b> --> “quoted” &#233; 👨‍👩‍👧 &#233; gamma</p><ol><li><img src=\"i2.png\" alt=\"\"></li></ol>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><ul><li><span class=\"diff-removed\" data-change-index=\"0\"> &#x1F600; &eacute;cole école</span><span class=\"diff-added\" data-change-index=\"1\">\"quoted\"\ndelta\n“quoted”\n&#233;</span>\ndelta <span class=\"diff-removed\" data-change-index=\"2\">école</span><br /> <span class=\"k\"><span class=\"diff-removed\" data-change-index=\"3\">the “quoted” </span><span class=\"diff-added\" data-change-index=\"4\">&lt;\nbeta\n😀</span></span></li></ul><p></p><p><span class=\"diff-added\" data-change-index=\"5\"> </span>“quoted”<span class=\"diff-removed\" data-change-index=\"6\"> a café delta Fox &nbsp;</span><span class=\"diff-added\" data-change-index=\"7\"> &#233; 👨‍👩‍👧 &#233; gamma</span></p><ol><li><span class=\"diff-added\" data-change-index=\"8\"><img src=\"i2.png\" alt=\"\"></span></li></ol></div>",
+      "addedText": "\"quoted\" delta “quoted” é< beta 😀 é 👨‍👩‍👧 é gamma",
+      "removedText": "😀 &eacute;cole écoleécolethe “quoted” a café delta Fox",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 2",
+    "old": "<div><SCRIPT>x = \"<p>\";</SCRIPT></div><p>😀 1 < 2 delta “quoted” &amp; &#x1F600;</p><p class=\"a\"><b title=\"a>b\">a &eacute;cole &amp; beta école 😀 alpha &#x1F600; beta &#x1F600;</b></p>",
+    "new": "<div><SCRIPT>x = \"<p>&lt; alpha 👨‍👩‍👧 👨‍👩‍👧 &#233;\nbeta\n\"quoted\" \";</SCRIPT></div><p>😀 1 < 2 delta “quoted” &amp; &#x1F600;</p><p class=\"a\"><b title=\"a>b\">a &eacute;cole &amp; beta école 😀 alpha &#x1F600; beta &#x1F600;</b></p>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div><SCRIPT>x = \"<p>&lt; alpha 👨‍👩‍👧 👨‍👩‍👧 &#233;\nbeta\n\"quoted\" \";</SCRIPT></div><p>😀 1 &lt; 2 delta “quoted” &amp; &#x1F600;</p><p class=\"a\">a &eacute;cole &amp; beta école 😀 alpha &#x1F600; beta &#x1F600;</p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 3",
+    "old": "<ul><li><blockquote><ol><li><strong>Fox\n“quoted”\nfox\n“quoted”\n&lt; 猫</strong></li></ol><p><br /> alpha “quoted” 😀 1 < 2 1 < 2</p></blockquote><div><p>café 👨‍👩‍👧 “quoted” &eacute;cole  &#x1F600;  猫  \"quoted\"</p><p><code>fox &eacute;cole &lt; delta  &#233;  x&gt;y  café delta  “quoted”  café</code></p></div><p>&#233; 😀 Fox x&gt;y &#233; x&gt;y <!-- <b>x</b> --></p></li><li><ol><li>fox</li><li><a href=\"/x\">“quoted”  😀  gamma  the  gamma \"quoted\" Fox &#233;</a></li></ol><ol><li>“quoted” alpha &eacute;cole\n&amp;</li><li><ul><li>beta Fox <br> alpha &lt;</li></ul></li></ol><p><!-- note --></p></li></ul><p class=\"a\">1 < 2 delta &#x1F600;</p><ul><li>1 < 2\n猫\nx&gt;y fox 1 < 2 &#x1F600; école <img src=\"i1.png\"></li></ul>",
+    "new": "<ul><li>猫 &nbsp; 😀 <blockquote><ol><li>a\ncafé\n&eacute;cole\n“quoted” &nbsp;  the  beta  the  “quoted” \"quoted\"\na</li></ol><p><br /> alpha “quoted” 😀 1 < 2 1 < 2</p></blockquote><div><p>café 👨‍👩‍👧 “quoted” &eacute;cole  &#x1F600;  猫  \"quoted\"</p><p><code>fox &eacute;cole &lt; delta  &#233;  x&gt;y  café delta  “quoted”  café</code></p></div><p>&#233; 😀 Fox x&gt;y &#233; x&gt;y <!-- <b>x</b> --></p></li><li><ol><li>fox</li><li><a href=\"/x\">“quoted”  😀  gamma  the  gamma \"quoted\" Fox &#233;</a></li></ol><ol><li>“quoted” alpha &eacute;cole\n&amp;</li><li><ul><li>beta Fox <br> alpha &lt;</li></ul></li></ol><p><!-- note --></p></li></ul><p class=\"a\">1 < 2 delta &#x1F600;</p><ul><li>1 < 2\n猫\nx&gt;y fox 1 < 2 &#x1F600; école <img src=\"i1.png\"></li></ul><p><img src=\"i1.png\"/></p><blockquote><p>猫  👨‍👩‍👧</p><p><img src=\"i1.png\"></p></blockquote>",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><ul><li><span class=\"diff-added\" data-change-index=\"0\">猫 &nbsp; 😀 </span><blockquote><ol><li><span class=\"diff-removed\" data-change-index=\"1\">Fox</span><span class=\"diff-added\" data-change-index=\"2\">a</span>\n<span class=\"diff-added\" data-change-index=\"3\">café\n&eacute;cole\n</span>“quoted” &nbsp;  <span class=\"diff-removed\" data-change-index=\"4\">fox</span><span class=\"diff-added\" data-change-index=\"5\">the</span>  <span class=\"diff-added\" data-change-index=\"6\">beta  the  </span>“quoted” <span class=\"diff-removed\" data-change-index=\"7\">&lt;</span><span class=\"diff-added\" data-change-index=\"8\">\"quoted\"</span>\n<span class=\"diff-removed\" data-change-index=\"9\">猫</span><span class=\"diff-added\" data-change-index=\"10\">a</span></li></ol><p><br /> alpha “quoted” 😀 1 &lt; 2 1 &lt; 2</p></blockquote><div><p>café 👨‍👩‍👧 “quoted” &eacute;cole  &#x1F600;  猫  \"quoted\"</p><p><code>fox &eacute;cole &lt; delta  &#233;  x&gt;y  café delta  “quoted”  café</code></p></div><p>&#233; 😀 Fox x&gt;y &#233; x&gt;y </p></li><li><ol><li>fox</li><li><a href=\"/x\">“quoted”  😀  gamma  the  gamma \"quoted\" Fox &#233;</a></li></ol><ol><li>“quoted” alpha &eacute;cole\n&amp;</li><li><ul><li>beta Fox <br> alpha &lt;</li></ul></li></ol><p></p></li></ul><p class=\"a\">1 &lt; 2 delta &#x1F600;</p><ul><li>1 &lt; 2\n猫\nx&gt;y fox 1 &lt; 2 &#x1F600; école <img src=\"i1.png\"></li></ul><p><span class=\"diff-added\" data-change-index=\"11\"><img src=\"i1.png\"/></span></p><blockquote><p><span class=\"diff-added\" data-change-index=\"12\">猫  👨‍👩‍👧</span></p><p><span class=\"diff-added\" data-change-index=\"13\"><img src=\"i1.png\"></span></p></blockquote></div>",
+      "addedText": "猫 😀 acafé &eacute;cole thebeta the \"quoted\"a猫 👨‍👩‍👧",
+      "removedText": "Foxfox<猫",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 4",
+    "old": "<div><ol><li>“quoted”\ncafé\n&amp;\n\"quoted\"</li></ol></div><p>&#x1F600;  &eacute;cole  &amp;  😀  fox &eacute;cole alpha</p><SCRIPT>x = \"<p>\";</SCRIPT>",
+    "new": "<blockquote><script>if (a < b) { s = \"</div>\"; }</script></blockquote><p><img src=\"i1.png\"/> &amp;  the  “quoted”  école  beta</p><p class=\"a\">&#x1F600; fox café alpha\na\nécole\n😀 <code>fox\n\"quoted\"\ncafé\nFox &#x1F600;</code></p>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div><ol><li><span class=\"diff-removed\" data-change-index=\"0\">“quoted”\ncafé\n&amp;\n\"quoted\"</span></li></ol></div><blockquote><script>if (a < b) { s = \"</div>\"; }</script></blockquote><p><span class=\"diff-added\" data-change-index=\"1\"><img src=\"i1.png\"/> &amp;  the  “quoted”  école  beta</span></p><p class=\"a\">&#x1F600; <span class=\"diff-removed\" data-change-index=\"2\">&eacute;cole  &amp;  😀  fox &eacute;cole alpha</span><span class=\"diff-added\" data-change-index=\"3\">fox café alpha\na\nécole\n😀 </span><code><span class=\"diff-added\" data-change-index=\"4\">fox\n\"quoted\"\ncafé\nFox &#x1F600;</span></code></p></div>",
+      "addedText": "& the “quoted” école betafox café alpha a école 😀 fox \"quoted\" café Fox 😀",
+      "removedText": "“quoted” café & \"quoted\"&eacute;cole & 😀 fox &eacute;cole alpha",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 5",
+    "old": "<p class=\"b\">&eacute;cole  猫  a  café</p><p class=\"a\">café \"quoted\"</p><ol><li><code><br> &nbsp; &#x1F600; 👨‍👩‍👧\n\"quoted\"</code></li><li>x&gt;y <!-- <b>x</b> --> &#233;</li><li><br> &#x1F600; alpha “quoted” beta</li></ol>",
+    "new": "<p class=\"b\">&eacute;cole  猫  a  café</p><p class=\"a\">café \"quoted\"</p><ol><li>x&gt;y <!-- <b>x</b> --> &#233;</li><li><br> &#x1F600; alpha “quoted” beta</li></ol>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p class=\"b\">&eacute;cole  猫  a  café</p><p class=\"a\">café \"quoted\"</p><ol><li><code><span class=\"diff-removed\" data-change-index=\"0\"> &nbsp; &#x1F600; 👨‍👩‍👧\n\"quoted\"</span></code></li><li>x&gt;y  &#233;</li><li><br> &#x1F600; alpha “quoted” beta</li></ol></div>",
+      "addedText": "",
+      "removedText": "😀 👨‍👩‍👧 \"quoted\"",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 6",
+    "old": "<ul><li><a href=\"#\">&#233; &amp; 😀 x&gt;y école <img src=\"i1.png\"/></a> &#233;\n👨‍👩‍👧</li><li>a\n&lt;\nthe\nfox\nthe 1 < 2\n猫\n1 < 2 fox 👨‍👩‍👧 😀</li></ul><div><ul><li><!-- note --></li></ul><ol><li><script>if (a < b) { s = \"</div>\"; }</script><h2><code>&#233; gamma \"quoted\" 猫 delta 1 < 2 the</code> <a href=\"#\">école 猫 café the &lt; delta</a></h2><ol><li>x&gt;y 😀 👨‍👩‍👧 &#233; &amp;</li><li><span class=\"k\"><img src=\"i2.png\" alt=\"\"></span> fox &#x1F600; &#233; fox  fox  &amp;  &lt;</li></ol></li><li><p class=\"a\">beta 猫 Fox école école <br /> <!-- note --></p></li></ol></div>",
+    "new": "<ul></ul><div><ul><li>école <!-- note --></li></ul><ol><li><script>if (a < b) { s = \"</div>\"; }</script><h2><code>&#233; gamma \"quoted\" 猫 delta 1 < 2 the</code> <a href=\"#\">école 猫 café the &lt; delta</a></h2><ol><li>x&gt;y 😀 👨‍👩‍👧 &#233; &amp;</li><li><span class=\"k\"><img src=\"i2.png\" alt=\"\"></span> fox &#x1F600; &#233; fox  fox  &amp;  &lt;</li></ol></li><li><p class=\"b\">beta 猫 Fox école école <br /> <!-- note --></p></li></ol></div>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><ul><li><a href=\"#\"><span class=\"diff-removed\" data-change-index=\"0\">&#233; &amp; 😀 x&gt;y école <img src=\"i1.png\"/></span></a><span class=\"diff-removed\" data-change-index=\"1\"> &#233;\n👨‍👩‍👧</span></li><li><span class=\"diff-removed\" data-change-index=\"2\">a\n&lt;\nthe\nfox\nthe 1 &lt; 2\n猫\n1 &lt; 2 fox 👨‍👩‍👧 😀</span></li></ul><div><ul><li><span class=\"diff-added\" data-change-index=\"3\">école </span></li></ul><ol><li><script>if (a < b) { s = \"</div>\"; }</script><h2><code>&#233; gamma \"quoted\" 猫 delta 1 &lt; 2 the</code> <a href=\"#\">école 猫 café the &lt; delta</a></h2><ol><li>x&gt;y 😀 👨‍👩‍👧 &#233; &amp;</li><li><span class=\"k\"><img src=\"i2.png\" alt=\"\"></span> fox &#x1F600; &#233; fox  fox  &amp;  &lt;</li></ol></li><li><p class=\"b\">beta 猫 Fox école école <br /> </p></li></ol></div></div>",
+      "addedText": "école",
+      "removedText": "é & 😀 x>y école é 👨‍👩‍👧a < the fox the 1 < 2 猫 1 < 2 fox 👨‍👩‍👧 😀",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 7",
+    "old": "<ul><li>a &lt; \"quoted\" <img src=\"i2.png\" alt=\"\"></li><li><!-- note --></li><li>猫 the</li></ul>",
+    "new": "<p><br> the x&gt;y</p><p>alpha the &amp; &nbsp; alpha &nbsp;\n&eacute;cole</p><ul><li>猫 a &lt; \"quoted\" <img src=\"i2.png\" alt=\"\"></li><li><!-- note --></li><li>猫 the</li></ul>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><br><span class=\"diff-added\" data-change-index=\"0\"> the x&gt;y</span></p><p><span class=\"diff-added\" data-change-index=\"1\">alpha the &amp; &nbsp; alpha &nbsp;\n&eacute;cole</span></p><ul><li><span class=\"diff-added\" data-change-index=\"2\">猫 </span>a &lt; \"quoted\" <img src=\"i2.png\" alt=\"\"></li><li></li><li>猫 the</li></ul></div>",
+      "addedText": "the x>yalpha the & alpha &eacute;cole猫",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 8",
+    "old": "<p>😀 a école 1 < 2 <img src=\"i1.png\"/></p>",
+    "new": "<p>😀 a école 1 < 2 <img src=\"i1.png\"/></p>",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>😀 a école 1 &lt; 2 <img src=\"i1.png\"/></p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 9",
+    "old": "<p class=\"b\">&#233;  delta fox  &#233;  fox &lt;\n猫</p>",
+    "new": "<p class=\"b\">&#233;  delta fox  &#233;  fox &lt;\n猫</p>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p class=\"b\">&#233;  delta fox  &#233;  fox &lt;\n猫</p></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 10",
+    "old": "<p>the\nbeta\nalpha &nbsp; fox  😀  &#233;  delta  &amp;</p><style>p > b { color: red }</style>",
+    "new": "<style>p > b { color: red }</style>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-removed\" data-change-index=\"0\">the\nbeta\nalpha &nbsp; fox  😀  &#233;  delta  &amp;</span></p><style>p > b { color: red }</style></div>",
+      "addedText": "",
+      "removedText": "the beta alpha fox 😀 é delta &",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 11",
+    "old": "<style>p > b { color: red }</style><SCRIPT>x = \"<p>\";</SCRIPT>",
+    "new": "<style>p > b { color: red }</style><SCRIPT>x = \"<p>\";</SCRIPT>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><style>p > b { color: red }</style><SCRIPT>x = \"<p>\";</SCRIPT></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 12",
+    "old": "<ul><li><strong>alpha  &#233;  Fox  école 😀 &#x1F600; a</strong></li><li>delta &nbsp; <!-- note --></li></ul>",
+    "new": "<table><tbody><tr><td>delta alpha 1 < 2 école</td></tr><tr><td><!-- note --> 👨‍👩‍👧 beta café <img src=\"i1.png\"></td></tr></tbody></table><ul><li>alpha <strong>alpha  &#233;  Fox  école 😀 &#x1F600; a</strong></li><li>delta &nbsp; <!-- note --></li></ul>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><table><tbody><tr><td><span class=\"diff-added\" data-change-index=\"0\">delta alpha 1 &lt; 2 école</span></td></tr><tr><td><span class=\"diff-added\" data-change-index=\"1\"> 👨‍👩‍👧 beta café <img src=\"i1.png\"></span></td></tr></tbody></table><ul><li>alpha <span class=\"diff-added\" data-change-index=\"2\">alpha  </span>&#233;  Fox  école 😀 &#x1F600; a</li><li>delta &nbsp; </li></ul></div>",
+      "addedText": "delta alpha 1 < 2 école 👨‍👩‍👧 beta café alpha",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 13",
+    "old": "<div><ul><li><div>café fox delta &lt; gamma x&gt;y &nbsp; “quoted”</div></li></ul></div><p><!-- note --></p>",
+    "new": "<p><br /> <!-- <b>x</b> --> <code><img src=\"i1.png\"></code></p>",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><span class=\"diff-removed\" data-change-index=\"0\">café</span><p><br /> <span class=\"diff-removed\" data-change-index=\"1\">fox</span> <span class=\"diff-removed\" data-change-index=\"2\">delta &lt; gamma x&gt;y &nbsp; “quoted”</span><code><span class=\"diff-added\" data-change-index=\"3\"><img src=\"i1.png\"></span></code></p></div>",
+      "addedText": "",
+      "removedText": "caféfoxdelta < gamma x>y “quoted”",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 14",
+    "old": "<blockquote><div><h2><b title=\"a>b\">café <br /> beta\nx&gt;y\na\ncafé\n&nbsp;</b> a a beta x&gt;y a beta &#233;</h2></div><p><!-- note --> &nbsp;</p></blockquote><p class=\"a\">&nbsp;</p>",
+    "new": "<blockquote><p>&lt; \"quoted\" fox &nbsp; &lt;\nbeta\nthe\n&lt;\n1 < 2</p><script>if (a < b) { s = \"</div>\"; }</script></blockquote><p>école\n猫 fox</p>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><blockquote><div><h2><span class=\"diff-removed\" data-change-index=\"0\">café  beta\nx&gt;y\na\ncafé\n&nbsp; a a beta x&gt;y a beta &#233;</span></h2></div><span class=\"diff-removed\" data-change-index=\"1\"> &nbsp;</span><p><span class=\"diff-added\" data-change-index=\"2\">&lt; \"quoted\" fox &nbsp; &lt;\nbeta\nthe\n&lt;\n1 &lt; 2</span></p><script>if (a < b) { s = \"</div>\"; }</script></blockquote><p><span class=\"diff-removed\" data-change-index=\"3\">&nbsp;</span><span class=\"diff-added\" data-change-index=\"4\">école\n猫 fox</span></p></div>",
+      "addedText": "< \"quoted\" fox < beta the < 1 < 2école 猫 fox",
+      "removedText": "café beta x>y a café a a beta x>y a beta é",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 15",
+    "old": "<blockquote><blockquote><p><span class=\"k\">\"quoted\" &#233;</span></p></blockquote><p>&nbsp;</p></blockquote>",
+    "new": "<div><script>if (a < b) { s = \"</div>\"; }</script><p><br></p></div><blockquote><blockquote><p><span class=\"k\">\"quoted\" &#233;</span></p></blockquote><p>&nbsp;</p></blockquote>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div><script>if (a < b) { s = \"</div>\"; }</script><p><br></p></div><blockquote><blockquote><p><span class=\"k\">\"quoted\" &#233;</span></p></blockquote><p>&nbsp;</p></blockquote></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 16",
+    "old": "<ol><li><b title=\"a>b\"><img src=\"i1.png\"/> fox</b> Fox &nbsp; 👨‍👩‍👧 delta \"quoted\"</li><li>😀 😀 delta 猫 &lt; “quoted” 😀</li><li>the\nthe\n😀 <a href=\"/x\">the &lt; beta fox</a> <!-- <b>x</b> --></li></ol><table><tr><td>&eacute;cole &#233; 1 < 2</td></tr></table>",
+    "new": "<p class=\"a\">&#x1F600;\n\"quoted\" <!-- note --></p><ol><li>&#x1F600; delta café 猫 <b title=\"a>b\"><img src=\"i1.png\"/> fox</b> Fox &nbsp; 👨‍👩‍👧 delta \"quoted\"</li><li>😀 😀 delta 猫 &lt; “quoted” 😀</li><li>the\nthe\n😀 <a href=\"/x\">the &lt; beta fox</a> <!-- <b>x</b> --></li></ol><table><tr><td>&eacute;cole &#233; 1 < 2</td></tr></table>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p class=\"a\"><span class=\"diff-added\" data-change-index=\"0\">&#x1F600;\n\"quoted\" </span></p><ol><li><span class=\"diff-added\" data-change-index=\"1\">&#x1F600; delta café 猫 </span><b title=\"a>b\"><img src=\"i1.png\"/> fox</b> Fox &nbsp; 👨‍👩‍👧 delta \"quoted\"</li><li>😀 😀 delta 猫 &lt; “quoted” 😀</li><li>the\nthe\n😀 <a href=\"/x\">the &lt; beta fox</a> </li></ol><table><tr><td>&eacute;cole &#233; 1 &lt; 2</td></tr></table></div>",
+      "addedText": "😀 \"quoted\" 😀 delta café 猫",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 17",
+    "old": "<ul><li><p><!-- <b>x</b> --> a  the</p></li><li>“quoted” &lt; 1 < 2 1 < 2</li></ul><ol><li>beta\na\n😀\ngamma <!-- note --></li><li>gamma\ncafé\na\n😀</li><li><img src=\"i1.png\"/></li></ol><p class=\"a\">beta  café  &#233;  fox  beta <br /> &lt; “quoted” 😀 café</p>",
+    "new": "<style>p > b { color: red }</style><ul><li><ul><li><img src=\"i1.png\"> café</li></ul><p>gamma  1 < 2</p></li><li>a &#233; &nbsp; &#233; fox 😀 &nbsp; &nbsp;</li><li><div><ul><li><img src=\"i1.png\"></li><li><br> alpha\n👨‍👩‍👧\nécole\nx&gt;y\nalpha <span class=\"k\">gamma  &#x1F600;  &#233; &nbsp; &amp;</span></li></ul><ul><li><!-- note --> &lt;\n👨‍👩‍👧\nbeta\n1 < 2\nfox</li></ul><p><img src=\"i1.png\"></p></div></li></ul>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><style>p > b { color: red }</style><ul><li><p><span class=\"diff-removed\" data-change-index=\"0\"> a  the</span></p><ul><li><span class=\"diff-added\" data-change-index=\"1\"><img src=\"i1.png\"> café</span></li><li><span class=\"diff-removed\" data-change-index=\"2\">“quoted” &lt; </span></li></ul><p><span class=\"diff-added\" data-change-index=\"3\">gamma  </span>1 &lt; 2<span class=\"diff-removed\" data-change-index=\"4\"> 1 &lt; 2</span></p></li><li><span class=\"diff-added\" data-change-index=\"5\">a &#233; &nbsp; &#233; fox 😀 &nbsp; &nbsp;</span></li><li><span class=\"diff-removed\" data-change-index=\"6\">beta\na\n😀\ngamma gamma\ncafé\na\n😀</span><div><ul><li><span class=\"diff-added\" data-change-index=\"7\"><img src=\"i1.png\"></span></li><li><br><span class=\"diff-added\" data-change-index=\"8\"> alpha\n👨‍👩‍👧\nécole\nx&gt;y\nalpha </span><span class=\"k\"><span class=\"diff-added\" data-change-index=\"9\">gamma  &#x1F600;  &#233; &nbsp; &amp;</span></span></li></ul><ul><li><span class=\"diff-removed\" data-change-index=\"10\"><img src=\"i1.png\"/> beta  café  &#233;  fox  </span><span class=\"diff-added\" data-change-index=\"11\"> &lt;\n👨‍👩‍👧\n</span>beta\n<span class=\"diff-removed\" data-change-index=\"12\"> &lt; “quoted” 😀 café</span><span class=\"diff-added\" data-change-index=\"13\">1 &lt; 2\nfox</span></li></ul><p><span class=\"diff-added\" data-change-index=\"14\"><img src=\"i1.png\"></span></p></div></li></ul></div>",
+      "addedText": "cafégamma a é é fox 😀 alpha 👨‍👩‍👧 école x>y alpha gamma 😀 é & < 👨‍👩‍👧 1 < 2 fox",
+      "removedText": "a the“quoted” < 1 < 2beta a 😀 gamma gamma café a 😀 beta café é fox < “quoted” 😀 café",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 18",
+    "old": "<p>\"quoted\" the delta</p><div><table><tbody><tr><td>猫 école gamma café</td><td><img src=\"i2.png\" alt=\"\"> <br /> Fox\n&nbsp;</td></tr></tbody></table><p>👨‍👩‍👧 école &lt;\n&nbsp;\nfox\n👨‍👩‍👧</p></div>",
+    "new": "<p><br></p><p>the &#233;</p><p>&#x1F600; 1 < 2 &lt; &#233; &#x1F600; <a href=\"#\">👨‍👩‍👧 &#233; fox café &lt; <br> a  &nbsp;  café  beta  \"quoted\"</a> 猫 fox</p>",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-removed\" data-change-index=\"0\">\"quoted\" </span><br></p><p>the <span class=\"diff-removed\" data-change-index=\"1\">delta</span><span class=\"diff-added\" data-change-index=\"2\">&#233;</span></p><span class=\"diff-removed\" data-change-index=\"3\">猫</span><p><span class=\"diff-added\" data-change-index=\"4\">&#x1F600;</span> <span class=\"diff-removed\" data-change-index=\"5\">école</span><span class=\"diff-added\" data-change-index=\"6\">1</span> <span class=\"diff-removed\" data-change-index=\"7\">gamma</span><span class=\"diff-added\" data-change-index=\"8\">&lt;</span> <span class=\"diff-removed\" data-change-index=\"9\">café <img src=\"i2.png\" alt=\"\"></span><span class=\"diff-added\" data-change-index=\"10\">2</span> <span class=\"diff-added\" data-change-index=\"11\">&lt;</span> <span class=\"diff-removed\" data-change-index=\"12\">Fox</span><span class=\"diff-added\" data-change-index=\"13\">&#233;</span> <span class=\"diff-added\" data-change-index=\"14\">&#x1F600; </span><a href=\"#\">👨‍👩‍👧 <span class=\"diff-removed\" data-change-index=\"15\">école</span><span class=\"diff-added\" data-change-index=\"16\">&#233;</span> <span class=\"diff-added\" data-change-index=\"17\">fox café </span>&lt; <span class=\"diff-removed\" data-change-index=\"18\">fox</span><br> <span class=\"diff-removed\" data-change-index=\"19\">👨‍👩‍👧</span><span class=\"diff-added\" data-change-index=\"20\">a  &nbsp;  café  beta  \"quoted\"</span></a><span class=\"diff-added\" data-change-index=\"21\"> 猫 fox</span></p></div>",
+      "addedText": "é😀1<2<é😀 éfox café a café beta \"quoted\" 猫 fox",
+      "removedText": "\"quoted\" delta猫écolegammacafé Foxécolefox👨‍👩‍👧",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 19",
+    "old": "<div><p>&lt; 😀 gamma</p><style>p > b { color: red }</style></div>",
+    "new": "<div><p>&lt; 😀 gamma</p><style>p > b { color: red }</style></div>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div><p>&lt; 😀 gamma</p><style>p > b { color: red }</style></div></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 20",
+    "old": "<div><table><tbody><tr><td>&#x1F600; a delta the &#x1F600; <br /></td></tr></tbody></table><div><p>the &eacute;cole <img src=\"i1.png\"> <br></p><ul><li>&lt; x&gt;y 😀 the alpha a alpha école &#x1F600;  &eacute;cole  1 < 2  😀  fox</li><li>\"quoted\" école &#233; \"quoted\"</li><li>delta &lt; a a <!-- <b>x</b> --> fox Fox 猫 delta &#233;</li></ul></div></div><SCRIPT>x = \"<p>\";</SCRIPT><div><blockquote><ul><li><!-- <b>x</b> --> <!-- <b>x</b> --></li><li><!-- <b>x</b> --> <b title=\"a>b\">beta  Fox</b></li><li><code>a 猫 猫 Fox alpha delta 猫</code> <a href=\"/x\">école\n👨‍👩‍👧\n&lt;\n1 < 2\na <br></a> &nbsp; 猫</li></ul></blockquote><p><img src=\"i1.png\"/></p><p>😀 école\n😀\n😀 &#233;  &#233;</p></div>",
+    "new": "<ul><li>👨‍👩‍👧 &eacute;cole café &lt;</li><li>&lt; 👨‍👩‍👧 &#233; Fox &#233; <b title=\"a>b\">the 猫  café  😀  1 < 2  😀 1 < 2 &amp; beta a &nbsp;</b></li></ul><div><ol><li>😀 delta 👨‍👩‍👧 &amp; alpha “quoted”</li><li>fox 👨‍👩‍👧 alpha\ncafé\n&#233;\n&eacute;cole\n\"quoted\"</li><li>&amp;\n👨‍👩‍👧 fox a école &nbsp;</li></ol><ul><li>delta &eacute;cole &eacute;cole 👨‍👩‍👧 猫 alpha</li></ul><table><tbody><tr><td><a href=\"/x\">&#233; école café école école 😀 café “quoted” école café</a> <br></td></tr><tr><td><!-- note --> <span class=\"k\">café 👨‍👩‍👧 x&gt;y &nbsp; x&gt;y école delta 1 < 2 alpha \"quoted\"</span> <em>1 < 2\nbeta\n“quoted” école  &nbsp; alpha</em></td><td>fox\n1 < 2</td></tr></tbody></table></div>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><table><tbody><tr><td><span class=\"diff-removed\" data-change-index=\"0\">&#x1F600; a delta the &#x1F600; </span></td></tr></tbody></table><p><span class=\"diff-removed\" data-change-index=\"1\">the &eacute;cole <img src=\"i1.png\"> </span></p><ul><li><span class=\"diff-added\" data-change-index=\"2\">👨‍👩‍👧 &eacute;cole café &lt;</span></li><li>&lt; <span class=\"diff-removed\" data-change-index=\"3\">x&gt;y 😀 the alpha a alpha école &#x1F600;  &eacute;cole  1 &lt; 2  😀  fox</span><span class=\"diff-added\" data-change-index=\"4\">👨‍👩‍👧 &#233; Fox &#233; the 猫  café  😀  1 &lt; 2  😀 1 &lt; 2 &amp; beta a &nbsp;</span></li></ul><div><ol><li><span class=\"diff-added\" data-change-index=\"5\">😀 delta 👨‍👩‍👧 &amp; alpha </span>“quoted”<span class=\"diff-removed\" data-change-index=\"6\"> école &#233; </span></li><li><span class=\"diff-added\" data-change-index=\"7\">fox 👨‍👩‍👧 alpha\ncafé\n&#233;\n&eacute;cole\n</span>\"quoted\"</li><li><span class=\"diff-removed\" data-change-index=\"8\">delta &lt; a a  fox Fox 猫 delta &#233;</span><span class=\"diff-added\" data-change-index=\"9\">&amp;\n👨‍👩‍👧 fox a école &nbsp;</span></li></ol><ul><li><span class=\"diff-added\" data-change-index=\"10\">delta &eacute;cole &eacute;cole 👨‍👩‍👧 猫 alpha</span></li></ul><span class=\"diff-removed\" data-change-index=\"11\">  beta  Fox</span><code><span class=\"diff-removed\" data-change-index=\"12\">a 猫 猫 Fox alpha delta 猫</span></code><span class=\"diff-removed\" data-change-index=\"13\"> école\n</span><table><tbody><tr><td><a href=\"/x\"><span class=\"diff-added\" data-change-index=\"14\">&#233; école café école école 😀 café “quoted” école café</span></a><span class=\"diff-added\" data-change-index=\"15\"> </span><br></td></tr><tr><td><span class=\"diff-added\" data-change-index=\"16\"> </span><span class=\"k\"><span class=\"diff-added\" data-change-index=\"17\">café </span>👨‍👩‍👧 <span class=\"diff-removed\" data-change-index=\"18\">&lt;\n1 &lt; 2\na  &nbsp; 猫 <img src=\"i1.png\"/> 😀 école\n😀\n😀 &#233;  &#233;</span><span class=\"diff-added\" data-change-index=\"19\">x&gt;y &nbsp; x&gt;y école delta 1 &lt; 2 alpha \"quoted\"</span></span><span class=\"diff-added\" data-change-index=\"20\"> 1 &lt; 2\nbeta\n“quoted” école  &nbsp; alpha</span></td><td><span class=\"diff-added\" data-change-index=\"21\">fox\n1 &lt; 2</span></td></tr></tbody></table></div></div>",
+      "addedText": "👨‍👩‍👧 &eacute;cole café <👨‍👩‍👧 é Fox é the 猫 café 😀 1 < 2 😀 1 < 2 & beta a 😀 delta 👨‍👩‍👧 & alpha fox 👨‍👩‍👧 alpha café é &eacute;cole & 👨‍👩‍👧 fox a école delta &eacute;cole &eacute;cole 👨‍👩‍👧 猫 alphaé école café école école 😀 café “quoted” école café café x>y x>y école delta 1 < 2 alpha \"quoted\" 1 < 2 beta “quoted” école alphafox 1 < 2",
+      "removedText": "😀 a delta the 😀 the &eacute;cole x>y 😀 the alpha a alpha école 😀 &eacute;cole 1 < 2 😀 fox école é delta < a a fox Fox 猫 delta é beta Foxa 猫 猫 Fox alpha delta 猫 école < 1 < 2 a 猫 😀 école 😀 😀 é é",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 21",
+    "old": "<blockquote><div><p>the Fox x&gt;y Fox &lt; 😀</p><h2>gamma\n“quoted”\n😀</h2></div></blockquote><p><!-- note --></p>",
+    "new": "<blockquote><div></div></blockquote><p><!-- note --></p>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><blockquote><div><p><span class=\"diff-removed\" data-change-index=\"0\">the Fox x&gt;y Fox &lt; 😀</span></p><h2><span class=\"diff-removed\" data-change-index=\"1\">gamma\n“quoted”\n😀</span></h2></div></blockquote><p></p></div>",
+      "addedText": "",
+      "removedText": "the Fox x>y Fox < 😀gamma “quoted” 😀",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 22",
+    "old": "<table><tbody><tr><td>“quoted” café alpha <br></td></tr></tbody></table><ul><li>café gamma “quoted” &nbsp; <strong><br /> fox</strong></li><li><br /></li></ul>",
+    "new": "<blockquote><p><code>&nbsp;</code></p></blockquote>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><table><tbody><tr><td><span class=\"diff-removed\" data-change-index=\"0\">“quoted” café alpha </span></td></tr></tbody></table><ul><li><span class=\"diff-removed\" data-change-index=\"1\">café gamma “quoted” &nbsp;  fox</span></li><li></li></ul><blockquote><p><code><span class=\"diff-added\" data-change-index=\"2\">&nbsp;</span></code></p></blockquote></div>",
+      "addedText": "",
+      "removedText": "“quoted” café alpha café gamma “quoted” fox",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 23",
+    "old": "<ol><li><img src=\"i1.png\"></li><li><strong>👨‍👩‍👧  &eacute;cole  café  beta  &eacute;cole</strong> 👨‍👩‍👧 a \"quoted\"</li></ol>",
+    "new": "<p><!-- <b>x</b> --></p><ol></ol>",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p></p><ol><li><span class=\"diff-removed\" data-change-index=\"0\"><img src=\"i1.png\"></span></li><li><span class=\"diff-removed\" data-change-index=\"1\">👨‍👩‍👧  &eacute;cole  café  beta  &eacute;cole 👨‍👩‍👧 a \"quoted\"</span></li></ol></div>",
+      "addedText": "",
+      "removedText": "👨‍👩‍👧 &eacute;cole café beta &eacute;cole 👨‍👩‍👧 a \"quoted\"",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 24",
+    "old": "<p>fox</p>",
+    "new": "<div></div><p>fox</p><table><tr><td>café &amp;  猫  café</td><td><!-- <b>x</b> --> <img src=\"i1.png\"/></td></tr><tr><td>\"quoted\"\nalpha\n&#x1F600;\n\"quoted\" gamma\n&#233;\n“quoted”</td><td>&amp; 😀 gamma &#x1F600;</td></tr></table><ul><li>école  alpha <em>beta  Fox</em> <!-- <b>x</b> --></li><li><!-- <b>x</b> --></li></ul>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div></div><p>fox</p><table><tr><td><span class=\"diff-added\" data-change-index=\"0\">café &amp;  猫  café</span></td><td><span class=\"diff-added\" data-change-index=\"1\"> <img src=\"i1.png\"/></span></td></tr><tr><td><span class=\"diff-added\" data-change-index=\"2\">\"quoted\"\nalpha\n&#x1F600;\n\"quoted\" gamma\n&#233;\n“quoted”</span></td><td><span class=\"diff-added\" data-change-index=\"3\">&amp; 😀 gamma &#x1F600;</span></td></tr></table><ul><li><span class=\"diff-added\" data-change-index=\"4\">école  alpha beta  Fox </span></li><li></li></ul></div>",
+      "addedText": "café & 猫 café \"quoted\" alpha 😀 \"quoted\" gamma é “quoted”& 😀 gamma 😀école alpha beta Fox",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 25",
+    "old": "<p><!-- note --> Fox a a café</p><table><tr><td>😀 &#233; beta delta fox <a href=\"/x\">&amp;\n👨‍👩‍👧\n&nbsp;\na\n&amp; <img src=\"i1.png\"></a> 猫 Fox &#233; x&gt;y</td></tr></table>",
+    "new": "<p>gamma \"quoted\" <!-- note --> Fox a a café</p><table><tr><td>😀 &#233; 1 < 2 delta fox <a href=\"/x\">&amp;\n👨‍👩‍👧\n&nbsp;\na\n&amp; <img src=\"i1.png\"></a> 猫 Fox &#233; x&gt;y</td></tr></table>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-removed\" data-change-index=\"0\"> </span><span class=\"diff-added\" data-change-index=\"1\">gamma \"quoted\"  </span>Fox a a café</p><table><tr><td>😀 &#233; <span class=\"diff-removed\" data-change-index=\"2\">beta </span><span class=\"diff-added\" data-change-index=\"3\">1 &lt; 2 </span>delta fox <a href=\"/x\">&amp;\n👨‍👩‍👧\n&nbsp;\na\n&amp; <img src=\"i1.png\"></a> 猫 Fox &#233; x&gt;y</td></tr></table></div>",
+      "addedText": "gamma \"quoted\" 1 < 2",
+      "removedText": "beta",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 26",
+    "old": "<p>&#x1F600;\ncafé\n👨‍👩‍👧</p><table><tbody><tr><td>“quoted” 1 < 2 &lt;\na\n\"quoted\"\n\"quoted\"\nx&gt;y</td><td>beta</td></tr></tbody></table>",
+    "new": "<table><tbody><tr><td>the &nbsp; 猫 \"quoted\" café <br /></td><td>beta</td></tr></tbody></table>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-removed\" data-change-index=\"0\">&#x1F600;\ncafé\n👨‍👩‍👧</span></p><table><tbody><tr><td><span class=\"diff-removed\" data-change-index=\"1\">“quoted” 1 &lt; 2 &lt;\na\n</span><span class=\"diff-added\" data-change-index=\"2\">the &nbsp; 猫 </span>\"quoted\" <span class=\"diff-removed\" data-change-index=\"3\">\"quoted\"\nx&gt;y</span><span class=\"diff-added\" data-change-index=\"4\">café </span><br /></td><td>beta</td></tr></tbody></table></div>",
+      "addedText": "the 猫 café",
+      "removedText": "😀 café 👨‍👩‍👧“quoted” 1 < 2 < a \"quoted\" x>y",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 27",
+    "old": "<ul><li><table><tr><td>école &eacute;cole <br></td></tr></table><div><p>👨‍👩‍👧 the <br></p><ol><li>👨‍👩‍👧</li><li>the  gamma école “quoted”</li></ol><ul><li>&amp; x&gt;y</li></ul></div><table><tbody><tr><td><!-- note --> <br> <!-- note --></td><td>&amp; 1 < 2 a <!-- <b>x</b> --> beta école gamma &eacute;cole a</td></tr></tbody></table></li></ul><p>&eacute;cole <img src=\"i2.png\" alt=\"\"> <!-- note --></p>",
+    "new": "<ul><li><table><tr><td>delta 猫 &#x1F600; fox <strong>&nbsp; Fox delta delta delta fox 猫 a the Fox</strong> beta 😀 delta</td></tr></table><div><p>👨‍👩‍👧 the <br></p><ol><li>👨‍👩‍👧</li><li>the  gamma école “quoted”</li></ol><ul><li>&amp; x&gt;y</li></ul></div><table><tbody><tr><td><!-- note --> <br> <!-- note --></td><td>&amp; 1 < 2 a <!-- <b>x</b> --> beta école gamma &eacute;cole a</td></tr></tbody></table></li></ul><p>&eacute;cole <img src=\"i2.png\" alt=\"\"> <!-- note --></p>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><ul><li><table><tr><td><span class=\"diff-removed\" data-change-index=\"0\">école &eacute;cole </span><span class=\"diff-added\" data-change-index=\"1\">delta 猫 &#x1F600; fox &nbsp; Fox delta delta delta fox 猫 a the Fox beta 😀 delta</span></td></tr></table><div><p>👨‍👩‍👧 the <br></p><ol><li>👨‍👩‍👧</li><li>the  gamma école “quoted”</li></ol><ul><li>&amp; x&gt;y</li></ul></div><table><tbody><tr><td> <br> </td><td>&amp; 1 &lt; 2 a  beta école gamma &eacute;cole a</td></tr></tbody></table></li></ul><p>&eacute;cole <img src=\"i2.png\" alt=\"\"> </p></div>",
+      "addedText": "delta 猫 😀 fox Fox delta delta delta fox 猫 a the Fox beta 😀 delta",
+      "removedText": "école &eacute;cole",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 28",
+    "old": "<p><!-- note --> &#x1F600; 猫 beta Fox &#233; 猫</p><table><tr><td><!-- note --> 👨‍👩‍👧  fox</td></tr><tr><td>\"quoted\"\nbeta\n猫\n😀</td><td><br /> “quoted” \"quoted\" &lt; fox <br /></td></tr></table>",
+    "new": "<table><tr><td><!-- note --> 👨‍👩‍👧  fox</td></tr><tr><td>\"quoted\"\nbeta\n猫\n😀</td><td><br /> “quoted” \"quoted\" &lt; fox <br /></td></tr></table>",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-removed\" data-change-index=\"0\"> &#x1F600; 猫 beta Fox &#233; 猫</span></p><table><tr><td> 👨‍👩‍👧  fox</td></tr><tr><td>\"quoted\"\nbeta\n猫\n😀</td><td><br /> “quoted” \"quoted\" &lt; fox <br /></td></tr></table></div>",
+      "addedText": "",
+      "removedText": "😀 猫 beta Fox é 猫",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 29",
+    "old": "<ul><li><!-- note --> <!-- note --></li></ul>",
+    "new": "<p>&#233; 1 < 2 gamma</p><ul><li><!-- note --> <!-- note --></li></ul>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-added\" data-change-index=\"0\">&#233; 1 &lt; 2 gamma</span></p><ul><li> </li></ul></div>",
+      "addedText": "é 1 < 2 gamma",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 30",
+    "old": "<p><img src=\"i1.png\"></p><p><!-- <b>x</b> --> \"quoted\" 😀 café “quoted” école <br /></p><p class=\"b\"><!-- <b>x</b> --> the\n&#233;\nx&gt;y</p>",
+    "new": "<p>café Fox <img src=\"i1.png\"></p><p><!-- <b>x</b> --> \"quoted\" 😀 café “quoted” école <br /></p><p class=\"b\"><!-- <b>x</b> --> the\n&#233;\nx&gt;y</p><blockquote><script>if (a < b) { s = \"</div>\"; }</script><p class=\"a\">“quoted” alpha</p><ul><li>Fox  &nbsp;  😀 <img src=\"i2.png\" alt=\"\"> <!-- note --></li><li>fox &#233; &lt; &#233; 👨‍👩‍👧 &eacute;cole</li><li><!-- note --></li></ul></blockquote>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-added\" data-change-index=\"0\">café Fox </span><img src=\"i1.png\"></p><p> \"quoted\" 😀 café “quoted” école <br /></p><p class=\"b\"> the\n&#233;\nx&gt;y</p><blockquote><script>if (a < b) { s = \"</div>\"; }</script><p class=\"a\"><span class=\"diff-added\" data-change-index=\"1\">“quoted” alpha</span></p><ul><li><span class=\"diff-added\" data-change-index=\"2\">Fox  &nbsp;  😀 <img src=\"i2.png\" alt=\"\"> </span></li><li><span class=\"diff-added\" data-change-index=\"3\">fox &#233; &lt; &#233; 👨‍👩‍👧 &eacute;cole</span></li><li></li></ul></blockquote></div>",
+      "addedText": "café Fox “quoted” alphaFox 😀 fox é < é 👨‍👩‍👧 &eacute;cole",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 31",
+    "old": "<p>beta\n&#233;</p><p>\"quoted\"  beta  \"quoted\" 猫  👨‍👩‍👧 “quoted”  x&gt;y  alpha  delta  the</p><table><tr><td>👨‍👩‍👧 猫 Fox &amp; &amp; &nbsp;</td><td>“quoted”\n😀\n&lt;\n&amp;\ndelta 😀  fox  😀  &nbsp;  猫</td></tr></table>",
+    "new": "<p>beta\n&#233;</p><p>\"quoted\"  beta  \"quoted\" 猫  👨‍👩‍👧 “quoted”  x&gt;y  alpha  delta  the</p><table><tr><td>👨‍👩‍👧 猫 Fox &amp; &amp; &nbsp;</td><td>“quoted”\n😀\n&lt;\n&amp;\ndelta 😀  fox  😀  &nbsp;  猫</td></tr></table><p><b title=\"a>b\">&#233; école &eacute;cole</b> <!-- note --> école école 1 < 2</p>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>beta\n&#233;</p><p>\"quoted\"  beta  \"quoted\" 猫  👨‍👩‍👧 “quoted”  x&gt;y  alpha  delta  the</p><table><tr><td>👨‍👩‍👧 猫 Fox &amp; &amp; &nbsp;</td><td>“quoted”\n😀\n&lt;\n&amp;\ndelta 😀  fox  😀  &nbsp;  猫</td></tr></table><p><b title=\"a>b\"><span class=\"diff-added\" data-change-index=\"0\">&#233; école &eacute;cole</span></b><span class=\"diff-added\" data-change-index=\"1\">  école école 1 &lt; 2</span></p></div>",
+      "addedText": "é école &eacute;cole école école 1 < 2",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 32",
+    "old": "<p>alpha\n&lt;\ncafé <!-- note --> <img src=\"i2.png\" alt=\"\"></p><script>if (a < b) { s = \"</div>\"; }</script>",
+    "new": "<style>p > b { color: red }</style><p>alpha\n&lt;\ncafé <!-- note --> <img src=\"i2.png\" alt=\"\"></p><script>if (a < b) { s = \"</div>\"; }</script>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><style>p > b { color: red }</style><p>alpha\n&lt;\ncafé  <img src=\"i2.png\" alt=\"\"></p><script>if (a < b) { s = \"</div>\"; }</script></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 33",
+    "old": "<p>fox\n1 < 2\n😀\n&#x1F600;\nFox</p><table><tbody><tr><td>beta \"quoted\" &lt;</td><td>&nbsp; “quoted” 猫 \"quoted\" &lt; 1 < 2 gamma &nbsp; a</td></tr><tr><td>猫 x&gt;y 猫 &amp; fox</td><td><strong>😀  café  猫 &#x1F600;\nbeta\n&lt;\n\"quoted\"\n&#x1F600;</strong> <a href=\"#\">“quoted”\ncafé\n&amp;\n&#x1F600;\n👨‍👩‍👧</a></td></tr></tbody></table>",
+    "new": "<p>fox\n1 < 2\n😀\n&#x1F600;\nFox</p><table><tbody><tr><td>beta \"quoted\" &lt;</td><td>&nbsp; “quoted” 猫 \"quoted\" &lt; 1 < 2 gamma &nbsp; a</td></tr><tr><td>猫 x&gt;y 猫 &amp; fox</td><td><strong>😀  café  猫 &#x1F600;\nbeta\n&lt;\n\"quoted\"\n&#x1F600;</strong> <a href=\"/new\">“quoted”\ncafé\n&amp;\n&#x1F600;\n👨‍👩‍👧</a></td></tr></tbody></table>",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p>fox\n1 &lt; 2\n😀\n&#x1F600;\nFox</p><table><tbody><tr><td>beta \"quoted\" &lt;</td><td>&nbsp; “quoted” 猫 \"quoted\" &lt; 1 &lt; 2 gamma &nbsp; a</td></tr><tr><td>猫 x&gt;y 猫 &amp; fox</td><td>😀  café  猫 &#x1F600;\nbeta\n&lt;\n\"quoted\"\n&#x1F600; <a href=\"/new\">“quoted”\ncafé\n&amp;\n&#x1F600;\n👨‍👩‍👧</a></td></tr></tbody></table></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 34",
+    "old": "<p class=\"a\">café\nthe\nFox</p><table><tbody><tr><td>&nbsp;\na\nthe\na\ngamma</td></tr></tbody></table>",
+    "new": "<ol><li>&#233; delta &#x1F600; the 猫</li><li><em>alpha\n&#x1F600;\n&#x1F600;\n👨‍👩‍👧</em> gamma 猫 <br /></li><li>a alpha</li></ol><p class=\"a\">café\nthe\nFox</p><table><tbody><tr><td>&nbsp;\na\nthe\na\ngamma</td></tr></tbody></table><blockquote><p>café  😀  beta 1 < 2\nécole\n\"quoted\"\ncafé\n&nbsp; 👨‍👩‍👧 a “quoted” fox  a  &eacute;cole  &amp;  gamma</p><ul><li><br /></li><li>猫 café &lt; \"quoted\" the</li><li><em>&amp; Fox 😀\n&eacute;cole</em> école  &amp;  &#233;  猫</li></ul></blockquote>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><ol><li><span class=\"diff-added\" data-change-index=\"0\">&#233; delta &#x1F600; the 猫</span></li><li><span class=\"diff-added\" data-change-index=\"1\">alpha\n&#x1F600;\n&#x1F600;\n👨‍👩‍👧 gamma 猫 </span><br /></li><li><span class=\"diff-added\" data-change-index=\"2\">a alpha</span></li></ol><p class=\"a\">café\nthe\nFox</p><table><tbody><tr><td>&nbsp;\na\nthe\na\ngamma</td></tr></tbody></table><blockquote><p><span class=\"diff-added\" data-change-index=\"3\">café  😀  beta 1 &lt; 2\nécole\n\"quoted\"\ncafé\n&nbsp; 👨‍👩‍👧 a “quoted” fox  a  &eacute;cole  &amp;  gamma</span></p><ul><li><br /></li><li><span class=\"diff-added\" data-change-index=\"4\">猫 café &lt; \"quoted\" the</span></li><li><span class=\"diff-added\" data-change-index=\"5\">&amp; Fox 😀\n&eacute;cole école  &amp;  &#233;  猫</span></li></ul></blockquote></div>",
+      "addedText": "é delta 😀 the 猫alpha 😀 😀 👨‍👩‍👧 gamma 猫 a alphacafé 😀 beta 1 < 2 école \"quoted\" café 👨‍👩‍👧 a “quoted” fox a &eacute;cole & gamma猫 café < \"quoted\" the& Fox 😀 &eacute;cole école & é 猫",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 35",
+    "old": "<SCRIPT>x = \"<p>\";</SCRIPT>",
+    "new": "<SCRIPT>x = \"<p>\";</SCRIPT><div><p class=\"b\">école 😀 1 < 2 <!-- <b>x</b> --></p><ol><li>&lt; café delta</li><li>&lt;</li><li><a href=\"#\"><br /> <img src=\"i1.png\"> delta  alpha</a> &#x1F600; the\nx&gt;y\nalpha\ncafé\nalpha</li></ol></div>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><SCRIPT>x = \"<p>\";</SCRIPT><div><p class=\"b\"><span class=\"diff-added\" data-change-index=\"0\">école 😀 1 &lt; 2 </span></p><ol><li><span class=\"diff-added\" data-change-index=\"1\">&lt; café delta</span></li><li><span class=\"diff-added\" data-change-index=\"2\">&lt;</span></li><li><a href=\"#\"><br /><span class=\"diff-added\" data-change-index=\"3\"> <img src=\"i1.png\"> delta  alpha</span></a><span class=\"diff-added\" data-change-index=\"4\"> &#x1F600; the\nx&gt;y\nalpha\ncafé\nalpha</span></li></ol></div></div>",
+      "addedText": "école 😀 1 < 2 < café delta< delta alpha 😀 the x>y alpha café alpha",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 36",
+    "old": "<p>1 < 2 &#x1F600; café the école</p><ol><li><p>delta Fox gamma a 猫</p><ul><li><p>猫</p></li><li><table><tbody><tr><td>1 < 2\n\"quoted\"\nFox\n1 < 2\n&amp;</td><td>fox 猫 café 1 < 2</td></tr><tr><td>猫 <a href=\"#\">&#233; café 1 < 2 &amp; x&gt;y</a></td><td>“quoted” &eacute;cole &nbsp; &nbsp; 猫 delta x&gt;y a &#x1F600;</td></tr></tbody></table><h2>“quoted”\nfox\n&eacute;cole\n&lt;</h2><p>&amp; 😀 &lt; café café &amp; delta</p></li></ul><ol><li>delta\n\"quoted\"</li><li><p>alpha &nbsp; beta &lt; <!-- note --> &#x1F600;\n1 < 2\nx&gt;y\nfox</p><div><em>beta\ndelta\n&nbsp;</em> 1 < 2  gamma  a <img src=\"i1.png\"></div><ul><li><strong>Fox &eacute;cole</strong> “quoted”</li></ul></li><li><ol><li>a\n&#233;\n1 < 2\n猫\n&#233; Fox  &#x1F600;  x&gt;y  fox  \"quoted\" fox &eacute;cole</li></ol><ol><li><!-- note --></li><li>&#x1F600; “quoted” &nbsp; &#x1F600; a</li></ol></li></ol></li><li><div><p>&lt; 😀 猫 fox café école 1 < 2 😀</p><p>👨‍👩‍👧 école beta &nbsp; &amp;\n&#x1F600;\nécole\nbeta\n&eacute;cole <em>&#x1F600;\nécole <img src=\"i1.png\"> \"quoted\" 😀 delta Fox x&gt;y</em></p><p class=\"a\"><b title=\"a>b\">alpha &eacute;cole beta alpha Fox alpha</b> <img src=\"i1.png\"> <!-- <b>x</b> --></p></div></li><li><p>&eacute;cole  👨‍👩‍👧  école  \"quoted\"</p></li></ol><table><tr><td>&lt; “quoted” 猫 a delta &eacute;cole beta <!-- note --></td></tr></table>",
+    "new": "<blockquote><div><br> &#x1F600;  &amp;  école  delta  😀</div><p class=\"b\">👨‍👩‍👧 beta the gamma école Fox Fox x&gt;y delta <!-- note --></p></blockquote><p>1 < 2 &#x1F600; café the école</p><ol><li><p>delta Fox gamma a 猫</p><ul><li><p>猫</p></li><li><table><tbody><tr><td>1 < 2\n\"quoted\"\nFox\n1 < 2\n&amp;</td><td>fox 猫 café 1 < 2</td></tr><tr><td>猫 <a href=\"#\">&#233; café 1 < 2 &amp; x&gt;y</a></td><td>“quoted” &eacute;cole &nbsp; &nbsp; 猫 delta x&gt;y a &#x1F600;</td></tr></tbody></table><h2>“quoted”\nfox\n&eacute;cole\n&lt;</h2><p>&amp; 😀 &lt; café café &amp; delta</p></li></ul><ol><li>delta\n\"quoted\"</li><li><p>alpha &nbsp; beta &lt; <!-- note --> &#x1F600;\n1 < 2\nx&gt;y\nfox</p><div><em>beta\ndelta\n&nbsp;</em> 1 < 2  gamma  a <img src=\"i1.png\"></div><ul><li><strong>Fox &eacute;cole</strong> “quoted”</li></ul></li><li><ol><li>a\n&#233;\n1 < 2\n猫\n&#233; Fox  &#x1F600;  x&gt;y  fox  \"quoted\" fox &eacute;cole</li></ol><ol><li><!-- note --></li><li>&#x1F600; “quoted” &nbsp; &#x1F600; a</li></ol></li></ol></li><li><div><p>&lt; 😀 猫 fox café école 1 < 2 😀</p><p>👨‍👩‍👧 école beta &nbsp; &amp;\n&#x1F600;\nécole\nbeta\n&eacute;cole <em>&#x1F600;\nécole <img src=\"i1.png\"> \"quoted\" 😀 delta Fox x&gt;y</em></p><p class=\"a\"><b title=\"a>b\">alpha &eacute;cole beta alpha Fox alpha</b> <img src=\"i1.png\"> <!-- <b>x</b> --></p></div></li><li><p>&eacute;cole  👨‍👩‍👧  école  \"quoted\"</p></li></ol><table><tr><td>&lt; “quoted” 猫 a delta &eacute;cole beta <!-- note --></td></tr></table><p>Fox &eacute;cole &lt;</p>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><blockquote><div><br><span class=\"diff-added\" data-change-index=\"0\"> &#x1F600;  &amp;  école  delta  😀</span></div><p class=\"b\"><span class=\"diff-added\" data-change-index=\"1\">👨‍👩‍👧 beta the gamma école Fox Fox x&gt;y delta </span></p></blockquote><p>1 &lt; 2 &#x1F600; café the école</p><ol><li><p>delta Fox gamma a 猫</p><ul><li><p>猫</p></li><li><table><tbody><tr><td>1 &lt; 2\n\"quoted\"\nFox\n1 &lt; 2\n&amp;</td><td>fox 猫 café 1 &lt; 2</td></tr><tr><td>猫 <a href=\"#\">&#233; café 1 &lt; 2 &amp; x&gt;y</a></td><td>“quoted” &eacute;cole &nbsp; &nbsp; 猫 delta x&gt;y a &#x1F600;</td></tr></tbody></table><h2>“quoted”\nfox\n&eacute;cole\n&lt;</h2><p>&amp; 😀 &lt; café café &amp; delta</p></li></ul><ol><li>delta\n\"quoted\"</li><li><p>alpha &nbsp; beta &lt;  &#x1F600;\n1 &lt; 2\nx&gt;y\nfox</p><div><em>beta\ndelta\n&nbsp;</em> 1 &lt; 2  gamma  a <img src=\"i1.png\"></div><ul><li><strong>Fox &eacute;cole</strong> “quoted”</li></ul></li><li><ol><li>a\n&#233;\n1 &lt; 2\n猫\n&#233; Fox  &#x1F600;  x&gt;y  fox  \"quoted\" fox &eacute;cole</li></ol><ol><li></li><li>&#x1F600; “quoted” &nbsp; &#x1F600; a</li></ol></li></ol></li><li><div><p>&lt; 😀 猫 fox café école 1 &lt; 2 😀</p><p>👨‍👩‍👧 école beta &nbsp; &amp;\n&#x1F600;\nécole\nbeta\n&eacute;cole <em>&#x1F600;\nécole <img src=\"i1.png\"> \"quoted\" 😀 delta Fox x&gt;y</em></p><p class=\"a\"><b title=\"a>b\">alpha &eacute;cole beta alpha Fox alpha</b> <img src=\"i1.png\"> </p></div></li><li><p>&eacute;cole  👨‍👩‍👧  école  \"quoted\"</p></li></ol><table><tr><td>&lt; “quoted” 猫 a delta &eacute;cole beta </td></tr></table><p><span class=\"diff-added\" data-change-index=\"2\">Fox &eacute;cole &lt;</span></p></div>",
+      "addedText": "😀 & école delta 😀👨‍👩‍👧 beta the gamma école Fox Fox x>y delta Fox &eacute;cole <",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 37",
+    "old": "<p class=\"b\">&#x1F600;</p><blockquote><p class=\"b\">a 1 < 2 café gamma &eacute;cole café  Fox &#x1F600; &amp; &amp;</p><ul><li><img src=\"i1.png\"></li><li>a</li><li><p><!-- note --></p><p>école  Fox  &eacute;cole  &#x1F600; <!-- note --></p></li></ul></blockquote>",
+    "new": "<p class=\"b\">&#x1F600;</p><blockquote><p class=\"b\">a 1 < 2 café gamma &eacute;cole café  Fox &#x1F600; &amp; &amp;</p><ul><li>&eacute;cole\nécole\ngamma\nfox\nFox <!-- note --> &#233;</li><li>a</li><li><p><!-- note --></p><p>école  Fox  &eacute;cole  &#x1F600; <!-- note --></p></li></ul></blockquote>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p class=\"b\">&#x1F600;</p><blockquote><p class=\"b\">a 1 &lt; 2 café gamma &eacute;cole café  Fox &#x1F600; &amp; &amp;</p><ul><li><span class=\"diff-removed\" data-change-index=\"0\"><img src=\"i1.png\"></span><span class=\"diff-added\" data-change-index=\"1\">&eacute;cole\nécole\ngamma\nfox\nFox  &#233;</span></li><li>a</li><li><p></p><p>école  Fox  &eacute;cole  &#x1F600; </p></li></ul></blockquote></div>",
+      "addedText": "&eacute;cole école gamma fox Fox é",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 38",
+    "old": "<p class=\"b\"><!-- note --> <img src=\"i1.png\"/> <!-- <b>x</b> --></p><ol><li>“quoted” &eacute;cole fox x&gt;y école école</li><li>1 < 2 &#x1F600; &#233; café alpha  beta  x&gt;y <img src=\"i1.png\"></li><li>café\n\"quoted\" 猫 Fox &nbsp; 猫 fox</li></ol><ol><li><style>p > b { color: red }</style><ul><li><h2><!-- <b>x</b> --> beta  &#x1F600;  😀 <!-- <b>x</b> --></h2></li><li>&lt;</li><li><SCRIPT>x = \"<p>\";</SCRIPT></li></ul><ol><li><ol><li><img src=\"i1.png\"/></li><li><br> x&gt;y\n&lt;\nx&gt;y\n猫 <img src=\"i1.png\"/></li></ol><style>p > b { color: red }</style></li><li><strong>&lt;\n&nbsp;\n\"quoted\"\n\"quoted\"\nécole</strong></li><li>&lt; &amp;\nFox\ncafé &eacute;cole  &amp;  café</li></ol></li><li><p>gamma 👨‍👩‍👧 👨‍👩‍👧 <br /></p><p>gamma\n&#233; gamma Fox 😀 école a</p><ul><li><div><b title=\"a>b\">Fox \"quoted\" \"quoted\" &lt; beta &eacute;cole “quoted” alpha  the  “quoted”  école  delta</b> fox 猫</div><h2><em>Fox  Fox  &lt; 👨‍👩‍👧 fox the delta  Fox  &amp;</em> 👨‍👩‍👧 alpha</h2></li><li><br></li><li><h2>&#233; &nbsp;</h2></li></ul></li></ol>",
+    "new": "<p class=\"b\"><!-- note --> <img src=\"i1.png\"/> <!-- <b>x</b> --></p><ol><li>“quoted” &eacute;cole fox x&gt;y école école</li><li>1 < 2 &#x1F600; &#233; café café  beta  x&gt;y <img src=\"i1.png\"></li><li>café\n\"quoted\" 猫 Fox &nbsp; 猫 fox</li></ol><ol><li><style>p > b { color: red }</style><ul><li><h2><!-- <b>x</b> --> beta  &#x1F600;  😀 <!-- <b>x</b> --></h2></li><li>&lt;</li><li><SCRIPT>x = \"<p>\";</SCRIPT></li></ul><ol><li><ol><li><img src=\"i1.png\"/></li><li><br> x&gt;y\n&lt;\nx&gt;y\n猫 <img src=\"i1.png\"/></li></ol><style>p > b { color: red }</style></li><li><strong>&lt;\n&nbsp;\n\"quoted\"\n\"quoted\"\nécole</strong></li><li>&lt; &amp;\nFox\ncafé &eacute;cole  &amp;  café</li></ol></li><li><p>gamma 👨‍👩‍👧 👨‍👩‍👧 <br /></p><p>gamma\n&#233; gamma Fox 😀 école a</p><ul><li><div><b title=\"a>b\">Fox \"quoted\" \"quoted\" &lt; beta &eacute;cole “quoted” alpha  the  “quoted”  école  delta</b> fox 猫</div><h2><em>Fox  Fox  &lt; 👨‍👩‍👧 fox the delta  Fox  &amp;</em> 👨‍👩‍👧 alpha</h2></li><li><br></li><li><h2>&#233; &nbsp;</h2></li></ul></li></ol>",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p class=\"b\"> <img src=\"i1.png\"/> </p><ol><li>“quoted” &eacute;cole fox x&gt;y école école</li><li>1 &lt; 2 &#x1F600; &#233; café <span class=\"diff-removed\" data-change-index=\"0\">alpha</span><span class=\"diff-added\" data-change-index=\"1\">café</span>  beta  x&gt;y <img src=\"i1.png\"></li><li>café\n\"quoted\" 猫 Fox &nbsp; 猫 fox</li></ol><ol><li><style>p > b { color: red }</style><ul><li><h2> beta  &#x1F600;  😀 </h2></li><li>&lt;</li><li><SCRIPT>x = \"<p>\";</SCRIPT></li></ul><ol><li><ol><li><img src=\"i1.png\"/></li><li><br> x&gt;y\n&lt;\nx&gt;y\n猫 <img src=\"i1.png\"/></li></ol><style>p > b { color: red }</style></li><li>&lt;\n&nbsp;\n\"quoted\"\n\"quoted\"\nécole</li><li>&lt; &amp;\nFox\ncafé &eacute;cole  &amp;  café</li></ol></li><li><p>gamma 👨‍👩‍👧 👨‍👩‍👧 <br /></p><p>gamma\n&#233; gamma Fox 😀 école a</p><ul><li><div>Fox \"quoted\" \"quoted\" &lt; beta &eacute;cole “quoted” alpha  the  “quoted”  école  delta fox 猫</div><h2>Fox  Fox  &lt; 👨‍👩‍👧 fox the delta  Fox  &amp; 👨‍👩‍👧 alpha</h2></li><li><br></li><li><h2>&#233; &nbsp;</h2></li></ul></li></ol></div>",
+      "addedText": "café",
+      "removedText": "alpha",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 39",
+    "old": "<p>alpha\nfox\n&#233;\ncafé</p>",
+    "new": "<style>p > b { color: red }</style><p>1 < 2 x&gt;y 1 < 2 alpha\nfox\n&#233;\ncafé</p><div><p class=\"a\">école  café  &#x1F600;  x&gt;y  delta école école 猫 fox</p><ol><li>delta &#x1F600;  école  fox &#x1F600; &lt; “quoted” &nbsp;</li></ol></div>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><style>p > b { color: red }</style><p><span class=\"diff-added\" data-change-index=\"0\">1 &lt; 2 x&gt;y 1 &lt; 2 </span>alpha\nfox\n&#233;\ncafé</p><div><p class=\"a\"><span class=\"diff-added\" data-change-index=\"1\">école  café  &#x1F600;  x&gt;y  delta école école 猫 fox</span></p><ol><li><span class=\"diff-added\" data-change-index=\"2\">delta &#x1F600;  école  fox &#x1F600; &lt; “quoted” &nbsp;</span></li></ol></div></div>",
+      "addedText": "1 < 2 x>y 1 < 2 école café 😀 x>y delta école école 猫 foxdelta 😀 école fox 😀 < “quoted”",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 40",
+    "old": "<p class=\"b\">delta gamma 👨‍👩‍👧 beta <br></p><ol><li>1 < 2  “quoted”  x&gt;y  &eacute;cole <img src=\"i2.png\" alt=\"\"></li><li><blockquote><p>&#233; &#233; fox &#x1F600;</p><p><br /> <img src=\"i1.png\"></p><h2><code>gamma</code> <span class=\"k\">café “quoted” &eacute;cole 1 < 2 &#233; &lt;\n&#x1F600;\nfox\nalpha\na</span></h2></blockquote><SCRIPT>x = \"<p>\";</SCRIPT><blockquote><table><tbody><tr><td><b title=\"a>b\">猫  &lt; &eacute;cole\na\ndelta\n&eacute;cole gamma\n\"quoted\"\na\n&#x1F600;\n猫</b></td></tr></tbody></table><table><tbody><tr><td><img src=\"i2.png\" alt=\"\"></td><td><b title=\"a>b\">the &#x1F600; “quoted” beta &eacute;cole \"quoted\" “quoted” &amp; beta &nbsp; Fox</b> café the 1 < 2 fox</td></tr></tbody></table></blockquote></li><li><!-- <b>x</b> --></li></ol>",
+    "new": "<p class=\"b\">delta gamma 👨‍👩‍👧 beta <br></p><ol><li>1 < 2  “quoted”  x&gt;y  &eacute;cole <img src=\"i2.png\" alt=\"\"></li><li><blockquote><p>&#233; &#233; fox &#x1F600;</p><p><br /> <img src=\"i1.png\"></p><h2><code>gamma</code> <span class=\"k\">café “quoted” &eacute;cole 1 < 2 &#233; &lt;\n&#x1F600;\nfox\nalpha\na</span></h2></blockquote><SCRIPT>x = \"<p>\";</SCRIPT><blockquote><table><tbody><tr><td><b title=\"a>b\">猫  &lt; &eacute;cole\na\ndelta\n&eacute;cole gamma\n\"quoted\"\na\n&#x1F600;\n猫</b></td></tr></tbody></table><table><tbody><tr><td><img src=\"i2.png\" alt=\"\"></td><td><b title=\"a>b\">the &#x1F600; “quoted” beta &eacute;cole \"quoted\" “quoted” &amp; beta &nbsp; Fox</b> café the 1 < 2 fox</td></tr></tbody></table></blockquote></li><li><!-- <b>x</b> --></li></ol>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p class=\"b\">delta gamma 👨‍👩‍👧 beta <br></p><ol><li>1 &lt; 2  “quoted”  x&gt;y  &eacute;cole <img src=\"i2.png\" alt=\"\"></li><li><blockquote><p>&#233; &#233; fox &#x1F600;</p><p><br /> <img src=\"i1.png\"></p><h2><code>gamma</code> <span class=\"k\">café “quoted” &eacute;cole 1 &lt; 2 &#233; &lt;\n&#x1F600;\nfox\nalpha\na</span></h2></blockquote><SCRIPT>x = \"<p>\";</SCRIPT><blockquote><table><tbody><tr><td>猫  &lt; &eacute;cole\na\ndelta\n&eacute;cole gamma\n\"quoted\"\na\n&#x1F600;\n猫</td></tr></tbody></table><table><tbody><tr><td><img src=\"i2.png\" alt=\"\"></td><td>the &#x1F600; “quoted” beta &eacute;cole \"quoted\" “quoted” &amp; beta &nbsp; Fox café the 1 &lt; 2 fox</td></tr></tbody></table></blockquote></li><li></li></ol></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 41",
+    "old": "<style>p > b { color: red }</style><SCRIPT>x = \"<p>\";</SCRIPT><blockquote><blockquote><p><!-- <b>x</b> --></p></blockquote><blockquote><table><tbody><tr><td><!-- <b>x</b> --></td><td>école</td></tr><tr><td><br> école  café  the the the \"quoted\"</td></tr></tbody></table></blockquote><p><a href=\"/x\">&lt;</a></p></blockquote>",
+    "new": "<style>p > b { color: red }</style><SCRIPT>x = \"<p>👨‍👩‍👧 gamma \";</SCRIPT><blockquote><blockquote><p><!-- <b>x</b> --></p></blockquote><blockquote><table><tbody><tr><td><!-- <b>x</b> --></td><td>école</td></tr><tr><td><br> école  café  the the the \"quoted\"</td></tr></tbody></table></blockquote><p><a href=\"/x\">&lt;</a></p></blockquote>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><style>p > b { color: red }</style><SCRIPT>x = \"<p>👨‍👩‍👧 gamma \";</SCRIPT><blockquote><blockquote><p></p></blockquote><blockquote><table><tbody><tr><td></td><td>école</td></tr><tr><td><br> école  café  the the the \"quoted\"</td></tr></tbody></table></blockquote><p><a href=\"/x\">&lt;</a></p></blockquote></div>",
+      "addedText": "",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 42",
+    "old": "<blockquote><p class=\"b\">&eacute;cole a 猫 café Fox</p><SCRIPT>x = \"<p>\";</SCRIPT><p class=\"a\"><strong>the</strong> delta Fox &eacute;cole alpha beta &lt;</p></blockquote><table><tbody><tr><td>école  the  fox  fox  beta</td></tr><tr><td>&#233; gamma <!-- note --></td><td>\"quoted\" <!-- <b>x</b> --></td></tr></tbody></table>",
+    "new": "<div><div><!-- note --> &#x1F600; 猫 &nbsp; &lt; <strong>gamma &eacute;cole 😀 gamma &#x1F600;</strong></div><p>“quoted”</p></div><blockquote><p class=\"b\">&eacute;cole a 猫 café Fox</p><SCRIPT>x = \"<p>\";</SCRIPT><p class=\"b\"><strong>&lt;</strong> delta Fox &eacute;cole alpha beta &lt;</p></blockquote><table><tbody><tr><td>école  the  fox  fox  beta</td></tr><tr><td>&#233; gamma <!-- note --></td><td>\"quoted\" <!-- <b>x</b> --></td></tr></tbody></table>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><div><div><span class=\"diff-added\" data-change-index=\"0\"> &#x1F600; 猫 &nbsp; &lt; gamma &eacute;cole 😀 gamma &#x1F600;</span></div><p><span class=\"diff-added\" data-change-index=\"1\">“quoted”</span></p></div><blockquote><p class=\"b\">&eacute;cole a 猫 café Fox</p><SCRIPT>x = \"<p>\";</SCRIPT><p class=\"b\"><span class=\"diff-removed\" data-change-index=\"2\">the</span><span class=\"diff-added\" data-change-index=\"3\">&lt;</span> delta Fox &eacute;cole alpha beta &lt;</p></blockquote><table><tbody><tr><td>école  the  fox  fox  beta</td></tr><tr><td>&#233; gamma </td><td>\"quoted\" </td></tr></tbody></table></div>",
+      "addedText": "😀 猫 < gamma &eacute;cole 😀 gamma 😀“quoted”<",
+      "removedText": "the",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 43",
+    "old": "<table><tr><td>beta</td></tr><tr><td>beta  &eacute;cole  fox  &amp;  “quoted”</td></tr></table><table><tbody><tr><td>😀\n“quoted”\nx&gt;y <!-- <b>x</b> --></td><td><em>café 😀 &#x1F600; &lt; \"quoted\" beta\nFox\nécole\ncafé <img src=\"i2.png\" alt=\"\"></em></td></tr></tbody></table><p>&nbsp; beta</p>",
+    "new": "<ol><li><!-- <b>x</b> --> &#x1F600; &#233; fox &amp; Fox <span class=\"k\">delta  delta  1 < 2  delta Fox école\n👨‍👩‍👧</span></li></ol><table><tr><td>beta</td></tr><tr><td>beta  &eacute;cole  fox  &amp;  “quoted”</td></tr></table><table><tbody><tr><td>😀\n“quoted”\nx&gt;y <!-- <b>x</b> --></td><td><em>café 😀 &#x1F600; &lt; \"quoted\" beta\nFox\nécole\ncafé <img src=\"i2.png\" alt=\"\"></em></td></tr></tbody></table><p>&nbsp; beta</p>",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><ol><li><span class=\"diff-added\" data-change-index=\"0\"> &#x1F600; &#233; fox &amp; Fox </span><span class=\"k\"><span class=\"diff-added\" data-change-index=\"1\">delta  delta  1 &lt; 2  delta Fox école\n👨‍👩‍👧</span></span></li></ol><table><tr><td>beta</td></tr><tr><td>beta  &eacute;cole  fox  &amp;  “quoted”</td></tr></table><table><tbody><tr><td>😀\n“quoted”\nx&gt;y </td><td>café 😀 &#x1F600; &lt; \"quoted\" beta\nFox\nécole\ncafé <img src=\"i2.png\" alt=\"\"></td></tr></tbody></table><p>&nbsp; beta</p></div>",
+      "addedText": "😀 é fox & Fox delta delta 1 < 2 delta Fox école 👨‍👩‍👧",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 44",
+    "old": "<ul><li>&amp; 1 < 2 café <b title=\"a>b\">&nbsp; école Fox &#233; &nbsp; &#x1F600; &eacute;cole 1 < 2 fox</b></li></ul><div><ol><li>x&gt;y &#233;  école  &eacute;cole  café  &eacute;cole</li><li>beta 👨‍👩‍👧 <br></li><li><a href=\"/x\">👨‍👩‍👧 x&gt;y 猫 delta 猫 x&gt;y <br></a></li></ol><script>if (a < b) { s = \"</div>\"; }</script></div><ul><li><p><img src=\"i2.png\" alt=\"\"> <!-- note --> alpha  “quoted”  😀  &lt;  beta</p></li><li><p class=\"a\"><!-- note --> <span class=\"k\">👨‍👩‍👧  fox  &amp;  “quoted”  x&gt;y 😀 😀 😀</span></p><p class=\"b\">&nbsp; beta café</p></li><li>😀  &lt;  beta école\n\"quoted\"\nécole 👨‍👩‍👧  café  \"quoted\"  the</li></ul>",
+    "new": "<ul><li>fox x&gt;y the &#233; fox &amp; 1 < 2 café <b title=\"a>b\">&nbsp; école Fox &#233; &nbsp; &#x1F600; &eacute;cole 1 < 2 fox</b></li></ul><div><ol><li>x&gt;y &#233;  école  &eacute;cole  café  &eacute;cole</li><li>beta 👨‍👩‍👧 <br></li><li><a href=\"/x\">👨‍👩‍👧 x&gt;y 猫 delta 猫 x&gt;y <br></a></li></ol><script>if (a < b) { s = \"</div>\"; }</script></div><ul><li><p><img src=\"i2.png\" alt=\"\"> <!-- note --> alpha  “quoted”  😀  &lt;  beta</p></li><li><p class=\"a\"><!-- note --> <span class=\"k\">👨‍👩‍👧  fox  &amp;  “quoted”  x&gt;y 😀 😀 😀</span></p><p class=\"b\">&nbsp; beta café</p></li><li>😀  &lt;  beta école\n\"quoted\"\nécole 👨‍👩‍👧  café  \"quoted\"  the</li></ul>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><ul><li><span class=\"diff-added\" data-change-index=\"0\">fox x&gt;y the &#233; fox </span>&amp; 1 &lt; 2 café &nbsp; école Fox &#233; &nbsp; &#x1F600; &eacute;cole 1 &lt; 2 fox</li></ul><div><ol><li>x&gt;y &#233;  école  &eacute;cole  café  &eacute;cole</li><li>beta 👨‍👩‍👧 <br></li><li><a href=\"/x\">👨‍👩‍👧 x&gt;y 猫 delta 猫 x&gt;y <br></a></li></ol><script>if (a < b) { s = \"</div>\"; }</script></div><ul><li><p><img src=\"i2.png\" alt=\"\">  alpha  “quoted”  😀  &lt;  beta</p></li><li><p class=\"a\"> <span class=\"k\">👨‍👩‍👧  fox  &amp;  “quoted”  x&gt;y 😀 😀 😀</span></p><p class=\"b\">&nbsp; beta café</p></li><li>😀  &lt;  beta école\n\"quoted\"\nécole 👨‍👩‍👧  café  \"quoted\"  the</li></ul></div>",
+      "addedText": "fox x>y the é fox",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 45",
+    "old": "<p>alpha  \"quoted\"  1 < 2 Fox\ngamma\n&lt;\n&#x1F600;\nx&gt;y</p>",
+    "new": "",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-removed\" data-change-index=\"0\">alpha  \"quoted\"  1 &lt; 2 Fox\ngamma\n&lt;\n&#x1F600;\nx&gt;y</span></p></div>",
+      "addedText": "",
+      "removedText": "alpha \"quoted\" 1 < 2 Fox gamma < 😀 x>y",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 46",
+    "old": "<p><br /> café “quoted”</p>",
+    "new": "<p>1 < 2 <br /> café “quoted”</p><ol><li>&amp; “quoted” <img src=\"i1.png\"> the x&gt;y 猫 école</li></ol>",
+    "options": {
+      "ignoreFormattingTags": false
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-added\" data-change-index=\"0\">1 &lt; 2 </span><br /> café “quoted”</p><ol><li><span class=\"diff-added\" data-change-index=\"1\">&amp; “quoted” <img src=\"i1.png\"> the x&gt;y 猫 école</span></li></ol></div>",
+      "addedText": "1 < 2 & “quoted” the x>y 猫 école",
+      "removedText": "",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 47",
+    "old": "<ol><li>1 < 2 alpha &lt; gamma <!-- note --></li><li>\"quoted\"  x&gt;y <code>“quoted” alpha 😀 &#x1F600; delta alpha Fox  1 < 2</code></li></ol><ul><li><!-- <b>x</b> --> <!-- note --> x&gt;y</li></ul>",
+    "new": "<script>if (a < b) { s = \"</div>\"; }</script><ol><li>alpha the \"quoted\"  x&gt;y <code>“quoted” alpha 😀 &#x1F600; delta alpha Fox  1 < 2</code></li></ol><ul><li><!-- <b>x</b> --> <!-- note --> x&gt;y</li></ul>",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><script>if (a < b) { s = \"</div>\"; }</script><ol><li><span class=\"diff-removed\" data-change-index=\"0\">1 &lt; 2 </span>alpha <span class=\"diff-removed\" data-change-index=\"1\">&lt; gamma </span><span class=\"diff-added\" data-change-index=\"2\">the </span>\"quoted\"  x&gt;y <code>“quoted” alpha 😀 &#x1F600; delta alpha Fox  1 &lt; 2</code></li></ol><ul><li>  x&gt;y</li></ul></div>",
+      "addedText": "the",
+      "removedText": "1 < 2 < gamma",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 48",
+    "old": "<script>if (a < b) { s = \"</div>\"; }</script><ol><li>café fox beta 1 < 2</li><li>a  the  1 < 2  a  beta</li></ol><ol><li><table><tbody><tr><td>x&gt;y &nbsp; école alpha x&gt;y</td><td>1 < 2 &amp; a 猫 1 < 2 <img src=\"i2.png\" alt=\"\"></td></tr><tr><td><!-- note --></td><td>delta</td></tr></tbody></table></li><li><p><!-- <b>x</b> --> <!-- note --></p></li><li><!-- note --></li></ol>",
+    "new": "<p>&#233;</p><script>if (a < b) { s = \"</div>\"; }</script><ol><li>café fox beta 1 < 2</li><li>a  the  1 < 2  a  beta</li></ol><ol><li><table><tbody><tr><td>x&gt;y &nbsp; école delta x&gt;y</td><td>1 < 2 &amp; a 猫 1 < 2 <img src=\"i2.png\" alt=\"\"></td></tr><tr><td><!-- note --></td><td>delta</td></tr></tbody></table></li><li><p><!-- <b>x</b> --> <!-- note --></p></li><li><!-- note --></li></ol><p>école &amp; &nbsp; gamma \"quoted\" &#233; “quoted”</p>",
+    "options": {
+      "orphanMatchThreshold": 0
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p><span class=\"diff-added\" data-change-index=\"0\">&#233;</span></p><script>if (a < b) { s = \"</div>\"; }</script><ol><li>café fox beta 1 &lt; 2</li><li>a  the  1 &lt; 2  a  beta</li></ol><ol><li><table><tbody><tr><td>x&gt;y &nbsp; école <span class=\"diff-removed\" data-change-index=\"1\">alpha</span><span class=\"diff-added\" data-change-index=\"2\">delta</span> x&gt;y</td><td>1 &lt; 2 &amp; a 猫 1 &lt; 2 <img src=\"i2.png\" alt=\"\"></td></tr><tr><td></td><td>delta</td></tr></tbody></table></li><li><p> </p></li><li></li></ol><p><span class=\"diff-added\" data-change-index=\"3\">école &amp; &nbsp; gamma \"quoted\" &#233; “quoted”</span></p></div>",
+      "addedText": "édeltaécole & gamma \"quoted\" é “quoted”",
+      "removedText": "alpha",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 49",
+    "old": "<p>&nbsp; 👨‍👩‍👧</p><ul><li><!-- note --> &nbsp;\nFox</li><li>&lt; 猫 &lt; <!-- <b>x</b> --> 👨‍👩‍👧  the</li><li>café gamma  猫</li></ul>",
+    "new": "<p class=\"a\">&amp; café alpha &nbsp; fox “quoted”\n&eacute;cole</p><p>&#233; &nbsp; &nbsp; 👨‍👩‍👧</p><ul><li>&lt; 猫 &lt; <!-- <b>x</b> --> 👨‍👩‍👧  the</li><li>café gamma  猫</li></ul>",
+    "options": {
+      "orphanMatchThreshold": 0.9
+    },
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><p class=\"a\"><span class=\"diff-removed\" data-change-index=\"0\">&nbsp; </span><span class=\"diff-added\" data-change-index=\"1\">&amp; café alpha &nbsp; fox “quoted”\n&eacute;cole</span></p><p><span class=\"diff-added\" data-change-index=\"2\">&#233; &nbsp; &nbsp; </span>👨‍👩‍👧</p><ul><li><span class=\"diff-removed\" data-change-index=\"3\"> &nbsp;\nFox</span></li><li>&lt; 猫 &lt;  👨‍👩‍👧  the</li><li>café gamma  猫</li></ul></div>",
+      "addedText": "& café alpha fox “quoted” &eacute;coleé",
+      "removedText": "Fox",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  },
+  {
+    "name": "random document 50",
+    "old": "<ul><li><p class=\"a\"><br /> <br> 😀</p></li><li><div><h2>&eacute;cole x&gt;y the &nbsp; <!-- <b>x</b> --> fox</h2><script>if (a < b) { s = \"</div>\"; }</script></div><div><p><strong><img src=\"i1.png\"> “quoted” x&gt;y</strong> <br> a</p><table><tbody><tr><td>&#x1F600;  beta  1 < 2  Fox  “quoted” &lt;</td><td><br /> delta the 👨‍👩‍👧 x&gt;y 😀</td></tr><tr><td><img src=\"i2.png\" alt=\"\"> <!-- note --></td><td>a &lt;</td></tr></tbody></table><p>école 猫 猫 &nbsp; école</p></div></li></ul><p>猫 &nbsp; 👨‍👩‍👧 gamma 👨‍👩‍👧 😀</p>",
+    "new": "<ul><li><p class=\"a\"><br /> <br> 😀</p></li><li><div><h2>&eacute;cole x&gt;y the &nbsp; <!-- <b>x</b> --> 猫</h2><script>if (a < b) { s = \"</div>\"; }</script></div><div><p><strong><img src=\"i1.png\"> “quoted” x&gt;y</strong> <br> a</p><table><tbody><tr><td>&#x1F600;  beta  1 < 2  Fox  “quoted” &lt;</td><td><br /> delta the 👨‍👩‍👧 x&gt;y 😀</td></tr><tr><td><img src=\"i2.png\" alt=\"\"> <!-- note --></td><td>a &lt;</td></tr></tbody></table><p>école 猫 猫 &nbsp; école</p></div></li></ul><p>猫 &nbsp; 👨‍👩‍👧 gamma 👨‍👩‍👧 😀</p><p>\"quoted\" &amp;</p>",
+    "options": {},
+    "expected": {
+      "html": "<div class=\"text-diff text-diff-html\"><ul><li><p class=\"a\"><br /> <br> 😀</p></li><li><div><h2>&eacute;cole x&gt;y the &nbsp;  <span class=\"diff-removed\" data-change-index=\"0\">fox</span><span class=\"diff-added\" data-change-index=\"1\">猫</span></h2><script>if (a < b) { s = \"</div>\"; }</script></div><div><p><img src=\"i1.png\"> “quoted” x&gt;y <br> a</p><table><tbody><tr><td>&#x1F600;  beta  1 &lt; 2  Fox  “quoted” &lt;</td><td><br /> delta the 👨‍👩‍👧 x&gt;y 😀</td></tr><tr><td><img src=\"i2.png\" alt=\"\"> </td><td>a &lt;</td></tr></tbody></table><p>école 猫 猫 &nbsp; école</p></div></li></ul><p>猫 &nbsp; 👨‍👩‍👧 gamma 👨‍👩‍👧 😀</p><p><span class=\"diff-added\" data-change-index=\"2\">\"quoted\" &amp;</span></p></div>",
+      "addedText": "猫\"quoted\" &",
+      "removedText": "fox",
+      "fullReplacement": false
+    },
+    "mustBeValidHtml": true
+  }
+]

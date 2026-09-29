@@ -244,4 +244,23 @@ final class NormalizeHtmlTest extends TestCase
     {
         $this->assertSame('Hello<br/>World', NormalizeHtml::stripFormattingTags('Hello<br/>World'));
     }
+
+    /** SPEC §12.1: the tag grammar is the HTML lexer's (same rows as core's normalize.test.ts). */
+    public static function lexerAwareStripCases(): iterable
+    {
+        yield '> in a double-quoted attribute' => ['<b title="a>b">x</b>', 'x'];
+        yield 'class attribute' => ['<strong class="x">y</strong>', 'y'];
+        yield '> in a single-quoted attribute' => ["<em data-x='1>0'>z</em>", 'z'];
+        yield 'self-closing' => ['a<b/>b', 'ab'];
+        yield 'raw text elements untouched' => ['<script>s = "<b>";</script><style>b{}</style>', '<script>s = "<b>";</script><style>b{}</style>'];
+        yield 'comments untouched' => ['a<!-- <i>x</i> -->b', 'a<!-- <i>x</i> -->b'];
+        yield 'unbalanced quote is not a tag' => ['<b title="x>y', '<b title="x>y'];
+        yield 'similar names kept' => ['<br><bdi>x</bdi><small>y</small><summary>z</summary>', '<br><bdi>x</bdi><small>y</small><summary>z</summary>'];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('lexerAwareStripCases')]
+    public function testStripFormattingTagsFollowsTheLexer(string $input, string $expected): void
+    {
+        $this->assertSame($expected, NormalizeHtml::stripFormattingTags($input));
+    }
 }

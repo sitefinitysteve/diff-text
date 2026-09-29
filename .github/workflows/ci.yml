@@ -1,0 +1,39 @@
+name: CI
+on:
+  push:
+    branches: [main, monorepo]
+  pull_request:
+
+jobs:
+  js:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['20', '22']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install
+      - run: npm run fixtures:check
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+
+  php:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.1', '8.2', '8.3', '8.4']
+    defaults:
+      run:
+        working-directory: packages/php
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, dom
+      - run: composer install --no-interaction
+      - run: composer test

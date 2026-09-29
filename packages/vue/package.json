@@ -1,12 +1,13 @@
 {
   "name": "vue-diff-text",
   "private": false,
-  "version": "1.5.4",
+  "version": "1.6.0",
   "description": "Vue 3 components to display text and HTML differences with multiple diff strategies.",
   "main": "./dist/vue-diff-text.umd.js",
   "module": "./dist/vue-diff-text.mjs",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/vue-diff-text.mjs",
       "require": "./dist/vue-diff-text.umd.js"
     },
@@ -16,29 +17,30 @@
   "files": [
     "dist"
   ],
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix"
-  },
-  "dependencies": {
-    "diff": "^5.2.0",
-    "diffblazer": "^1.0.1"
+    "lint:fix": "eslint src/ --fix",
+    "sync-style": "node -e \"require('fs').copyFileSync('../core/src/style.css','src/style.css')\""
   },
   "peerDependencies": {
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@types/diff": "^5.2.1",
+    "@diff-text/core": "*",
     "@types/node": "^20.19.6",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.6",
+    "diff": "^8.0.2",
     "eslint": "^9.39.4",
     "eslint-plugin-vue": "^10.8.0",
     "jsdom": "^28.1.0",
@@ -61,10 +63,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sitefinitysteve/vue-diff-text.git"
+    "url": "git+https://github.com/sitefinitysteve/diff-text.git",
+    "directory": "packages/vue"
   },
   "bugs": {
-    "url": "https://github.com/sitefinitysteve/vue-diff-text/issues"
+    "url": "https://github.com/sitefinitysteve/diff-text/issues"
   },
-  "homepage": "https://github.com/sitefinitysteve/vue-diff-text#readme"
+  "homepage": "https://github.com/sitefinitysteve/diff-text/tree/main/packages/vue#readme"
 }

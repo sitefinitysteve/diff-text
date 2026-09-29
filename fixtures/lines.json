@@ -1,0 +1,1028 @@
+[
+  {
+    "name": "both empty",
+    "old": "",
+    "new": "",
+    "options": {},
+    "expected": {
+      "changes": [],
+      "html": "<div class=\"text-diff text-diff-lines\"></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "old empty",
+    "old": "",
+    "new": "Hello world",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "Hello world",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-added\" data-change-index=\"0\">Hello world</span></div>",
+      "stats": {
+        "added": 11,
+        "removed": 0,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "new empty",
+    "old": "Hello world",
+    "new": "",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "Hello world",
+          "added": false,
+          "removed": true,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">Hello world</span></div>",
+      "stats": {
+        "added": 0,
+        "removed": 11,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "identical",
+    "old": "The same text. Twice!\nLine two.",
+    "new": "The same text. Twice!\nLine two.",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "The same text. Twice!\nLine two.",
+          "added": false,
+          "removed": false,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>The same text. Twice!\nLine two.</span></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 31,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "single word replaced",
+    "old": "The quick brown fox",
+    "new": "The quick red fox",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "The quick brown fox",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "The quick red fox",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">The quick brown fox</span><span class=\"diff-added\" data-change-index=\"1\">The quick red fox</span></div>",
+      "stats": {
+        "added": 17,
+        "removed": 19,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "punctuation",
+    "old": "Hello, world!",
+    "new": "Hello world.",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "Hello, world!",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "Hello world.",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">Hello, world!</span><span class=\"diff-added\" data-change-index=\"1\">Hello world.</span></div>",
+      "stats": {
+        "added": 12,
+        "removed": 13,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "emoji",
+    "old": "I ❤️ cats 😺",
+    "new": "I ❤️ dogs 🐶",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "I ❤️ cats 😺",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "I ❤️ dogs 🐶",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">I ❤️ cats 😺</span><span class=\"diff-added\" data-change-index=\"1\">I ❤️ dogs 🐶</span></div>",
+      "stats": {
+        "added": 11,
+        "removed": 11,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "CJK",
+    "old": "我喜欢猫。",
+    "new": "我喜欢狗。",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "我喜欢猫。",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "我喜欢狗。",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">我喜欢猫。</span><span class=\"diff-added\" data-change-index=\"1\">我喜欢狗。</span></div>",
+      "stats": {
+        "added": 5,
+        "removed": 5,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "mixed CJK and Latin",
+    "old": "東京 is big",
+    "new": "京都 is big",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "東京 is big",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "京都 is big",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">東京 is big</span><span class=\"diff-added\" data-change-index=\"1\">京都 is big</span></div>",
+      "stats": {
+        "added": 9,
+        "removed": 9,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "accents",
+    "old": "café naïve résumé",
+    "new": "cafe naive résumé",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "café naïve résumé",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "cafe naive résumé",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">café naïve résumé</span><span class=\"diff-added\" data-change-index=\"1\">cafe naive résumé</span></div>",
+      "stats": {
+        "added": 17,
+        "removed": 17,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "combining mark vs precomposed",
+    "old": "café",
+    "new": "café",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "café",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "café",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">café</span><span class=\"diff-added\" data-change-index=\"1\">café</span></div>",
+      "stats": {
+        "added": 4,
+        "removed": 5,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "CRLF vs LF",
+    "old": "one\r\ntwo\r\n",
+    "new": "one\ntwo\nthree\n",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "one\r\ntwo\r\n",
+          "added": false,
+          "removed": true,
+          "count": 2
+        },
+        {
+          "value": "one\ntwo\nthree\n",
+          "added": true,
+          "removed": false,
+          "count": 3
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">one\ntwo\n</span><span class=\"diff-added\" data-change-index=\"1\">one\ntwo\nthree\n</span></div>",
+      "stats": {
+        "added": 14,
+        "removed": 10,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "whitespace-only change",
+    "old": "a b  c",
+    "new": "a  b c",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "a b  c",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "a  b c",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">a b  c</span><span class=\"diff-added\" data-change-index=\"1\">a  b c</span></div>",
+      "stats": {
+        "added": 6,
+        "removed": 6,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "tabs and newlines",
+    "old": " foo\tbar\n",
+    "new": "foo bar\n\n",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": " foo\tbar\n",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "foo bar\n\n",
+          "added": true,
+          "removed": false,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\"> foo\tbar\n</span><span class=\"diff-added\" data-change-index=\"1\">foo bar\n\n</span></div>",
+      "stats": {
+        "added": 9,
+        "removed": 9,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "ignoreCase off",
+    "old": "Hello World",
+    "new": "hello world",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "Hello World",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "hello world",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">Hello World</span><span class=\"diff-added\" data-change-index=\"1\">hello world</span></div>",
+      "stats": {
+        "added": 11,
+        "removed": 11,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "ignoreCase on",
+    "old": "Hello World",
+    "new": "hello world",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "hello world",
+          "added": false,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>hello world</span></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 11,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "multi-line prose",
+    "old": "First sentence. Second one!\nThird?",
+    "new": "First sentence. Second two!\nThird? Fourth.",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "First sentence. Second one!\nThird?",
+          "added": false,
+          "removed": true,
+          "count": 2
+        },
+        {
+          "value": "First sentence. Second two!\nThird? Fourth.",
+          "added": true,
+          "removed": false,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">First sentence. Second one!\nThird?</span><span class=\"diff-added\" data-change-index=\"1\">First sentence. Second two!\nThird? Fourth.</span></div>",
+      "stats": {
+        "added": 42,
+        "removed": 34,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "insert at both ends",
+    "old": "world",
+    "new": "hello world again",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "world",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "hello world again",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">world</span><span class=\"diff-added\" data-change-index=\"1\">hello world again</span></div>",
+      "stats": {
+        "added": 17,
+        "removed": 5,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "HTML-special characters are escaped",
+    "old": "<b>\"x\" & 'y'</b>",
+    "new": "<b>\"x\" & 'z'</b>",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "<b>\"x\" & 'y'</b>",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "<b>\"x\" & 'z'</b>",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">&lt;b&gt;&quot;x&quot; &amp; &#39;y&#39;&lt;/b&gt;</span><span class=\"diff-added\" data-change-index=\"1\">&lt;b&gt;&quot;x&quot; &amp; &#39;z&#39;&lt;/b&gt;</span></div>",
+      "stats": {
+        "added": 16,
+        "removed": 16,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "repeated tokens",
+    "old": "a a a b",
+    "new": "a b a a",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "a a a b",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "a b a a",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">a a a b</span><span class=\"diff-added\" data-change-index=\"1\">a b a a</span></div>",
+      "stats": {
+        "added": 7,
+        "removed": 7,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "maxEditLength fallback",
+    "old": "one two three",
+    "new": "uno dos tres",
+    "options": {
+      "maxEditLength": 1
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "one two three",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "uno dos tres",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">one two three</span><span class=\"diff-added\" data-change-index=\"1\">uno dos tres</span></div>",
+      "stats": {
+        "added": 12,
+        "removed": 13,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "unusual whitespace",
+    "old": "a﻿b c d e",
+    "new": "a b c d  e",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "a﻿b c d e",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "a b c d  e",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">a﻿b c d e</span><span class=\"diff-added\" data-change-index=\"1\">a b c d  e</span></div>",
+      "stats": {
+        "added": 10,
+        "removed": 9,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "ignoreCase final sigma",
+    "old": "ΣΟΦΟΣ ΟΔΟΣ.",
+    "new": "σοφος οδος.",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "σοφος οδος.",
+          "added": false,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>σοφος οδος.</span></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 11,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "ignoreCase dotted I and Kelvin sign",
+    "old": "İstanbul 5K",
+    "new": "i̇stanbul 5k",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "i̇stanbul 5k",
+          "added": false,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>i̇stanbul 5k</span></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 12,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "ignoreCase sharp s and titlecase digraph",
+    "old": "STRASSE ǅ",
+    "new": "straße ǆ",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "STRASSE ǅ",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "straße ǆ",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">STRASSE ǅ</span><span class=\"diff-added\" data-change-index=\"1\">straße ǆ</span></div>",
+      "stats": {
+        "added": 8,
+        "removed": 9,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "no final newline",
+    "old": "a\nb",
+    "new": "a\nb\n",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "a\n",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "b",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "b\n",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>a\n</span><span class=\"diff-removed\" data-change-index=\"0\">b</span><span class=\"diff-added\" data-change-index=\"1\">b\n</span></div>",
+      "stats": {
+        "added": 2,
+        "removed": 1,
+        "unchanged": 2,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "blank lines",
+    "old": "a\n\nb\n",
+    "new": "a\nb\n\n",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "a\n",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "\n",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "b\n",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "\n",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>a\n</span><span class=\"diff-removed\" data-change-index=\"0\">\n</span><span>b\n</span><span class=\"diff-added\" data-change-index=\"1\">\n</span></div>",
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 4,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "ignoreWhitespace",
+    "old": "a\n  b  \nc\n",
+    "new": "a\nb\nc \n",
+    "options": {
+      "ignoreWhitespace": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "a\nb\nc \n",
+          "added": false,
+          "removed": false,
+          "count": 3
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>a\nb\nc \n</span></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 7,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "ignoreWhitespace off",
+    "old": "a\n  b  \nc\n",
+    "new": "a\nb\nc \n",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "a\n",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "  b  \nc\n",
+          "added": false,
+          "removed": true,
+          "count": 2
+        },
+        {
+          "value": "b\nc \n",
+          "added": true,
+          "removed": false,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>a\n</span><span class=\"diff-removed\" data-change-index=\"0\">  b  \nc\n</span><span class=\"diff-added\" data-change-index=\"1\">b\nc \n</span></div>",
+      "stats": {
+        "added": 5,
+        "removed": 8,
+        "unchanged": 2,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "newlineIsToken",
+    "old": "a\nb\nc",
+    "new": "a\nb c\n",
+    "options": {
+      "newlineIsToken": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "a\n",
+          "added": false,
+          "removed": false,
+          "count": 2
+        },
+        {
+          "value": "b",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "b c",
+          "added": true,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "\n",
+          "added": false,
+          "removed": false,
+          "count": 1
+        },
+        {
+          "value": "c",
+          "added": false,
+          "removed": true,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>a\n</span><span class=\"diff-removed\" data-change-index=\"0\">b</span><span class=\"diff-added\" data-change-index=\"1\">b c</span><span>\n</span><span class=\"diff-removed\" data-change-index=\"2\">c</span></div>",
+      "stats": {
+        "added": 3,
+        "removed": 2,
+        "unchanged": 3,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "stripTrailingCr",
+    "old": "one\r\ntwo\r\n",
+    "new": "one\ntwo\nthree\n",
+    "options": {
+      "stripTrailingCr": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "one\ntwo\n",
+          "added": false,
+          "removed": false,
+          "count": 2
+        },
+        {
+          "value": "three\n",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>one\ntwo\n</span><span class=\"diff-added\" data-change-index=\"0\">three\n</span></div>",
+      "stats": {
+        "added": 6,
+        "removed": 0,
+        "unchanged": 8,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "ignoreCase lines",
+    "old": "Alpha\nBeta\n",
+    "new": "alpha\nBETA\ngamma\n",
+    "options": {
+      "ignoreCase": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "alpha\nBETA\n",
+          "added": false,
+          "removed": false,
+          "count": 2
+        },
+        {
+          "value": "gamma\n",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>alpha\nBETA\n</span><span class=\"diff-added\" data-change-index=\"0\">gamma\n</span></div>",
+      "stats": {
+        "added": 6,
+        "removed": 0,
+        "unchanged": 11,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "ignoreWhitespace and ignoreCase",
+    "old": "  Alpha\nBeta\n",
+    "new": "alpha  \nbeta\n",
+    "options": {
+      "ignoreWhitespace": true,
+      "ignoreCase": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "alpha  \nbeta\n",
+          "added": false,
+          "removed": false,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>alpha  \nbeta\n</span></div>",
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 13,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "lone CR is not a line break",
+    "old": "a\rb\n",
+    "new": "a\rc\n",
+    "options": {},
+    "expected": {
+      "changes": [
+        {
+          "value": "a\rb\n",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "a\rc\n",
+          "added": true,
+          "removed": false,
+          "count": 1
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">a\nb\n</span><span class=\"diff-added\" data-change-index=\"1\">a\nc\n</span></div>",
+      "stats": {
+        "added": 4,
+        "removed": 4,
+        "unchanged": 0,
+        "unit": "codepoints"
+      }
+    }
+  },
+  {
+    "name": "ignoreWhitespace with newlineIsToken",
+    "old": "a\n \nb",
+    "new": "a\n\nb",
+    "options": {
+      "ignoreWhitespace": true,
+      "newlineIsToken": true
+    },
+    "expected": {
+      "changes": [
+        {
+          "value": "a\n",
+          "added": false,
+          "removed": false,
+          "count": 2
+        },
+        {
+          "value": " ",
+          "added": false,
+          "removed": true,
+          "count": 1
+        },
+        {
+          "value": "\nb",
+          "added": false,
+          "removed": false,
+          "count": 2
+        }
+      ],
+      "html": "<div class=\"text-diff text-diff-lines\"><span>a\n</span><span class=\"diff-removed\" data-change-index=\"0\"> </span><span>\nb</span></div>",
+      "stats": {
+        "added": 0,
+        "removed": 1,
+        "unchanged": 4,
+        "unit": "codepoints"
+      }
+    }
+  }
+]

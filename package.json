@@ -12,9 +12,12 @@
     "test": "npm test --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "test:php": "cd packages/php && composer test",
-    "prepare": "husky"
+    "prepare": "husky",
+    "fixtures": "tsx scripts/generate-fixtures.ts",
+    "fixtures:check": "tsx scripts/check-fixtures.ts"
   },
   "devDependencies": {
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "tsx": "^4.23.15"
   }
 }

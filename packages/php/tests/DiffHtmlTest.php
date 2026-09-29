@@ -79,8 +79,10 @@ final class DiffHtmlTest extends TestCase
         );
         $this->assertSame(1, substr_count($html, 'diff-removed'));
         $this->assertSame(1, substr_count($html, 'diff-added'));
-        $this->assertStringContainsString('Hello world</span>', $html);
-        $this->assertStringContainsString('Hello worlds</span>', $html);
+        // CHANGED (1.6.0): full replacement now wraps each side in a <div> instead of a
+        // <span>, so block-level HTML inside stays valid. Previously asserted '...</span>'.
+        $this->assertStringContainsString('<div class="diff-removed" data-change-index="0">Hello world</div>', $html);
+        $this->assertStringContainsString('<div class="diff-added" data-change-index="1">Hello worlds</div>', $html);
     }
 
     public function testThresholdOneDoesNotTriggerForIdenticalText(): void

@@ -1,0 +1,287 @@
+[
+  {
+    "name": "chars",
+    "old": "kitten",
+    "new": "sitting",
+    "options": {
+      "mode": "chars"
+    },
+    "expected": {
+      "stats": {
+        "added": 3,
+        "removed": 2,
+        "unchanged": 4,
+        "unit": "codepoints"
+      },
+      "similarity": 0,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+3</span><span class=\"diff-sr\">3 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−2</span><span class=\"diff-sr\">2 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=4</span><span class=\"diff-sr\">4 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">0% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+3</span><span class=\"diff-sr\">3 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−2</span><span class=\"diff-sr\">2 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=4</span><span class=\"diff-sr\">4 characters unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "chars emoji",
+    "old": "😀😀",
+    "new": "😀",
+    "options": {
+      "mode": "chars"
+    },
+    "expected": {
+      "stats": {
+        "added": 0,
+        "removed": 1,
+        "unchanged": 1,
+        "unit": "codepoints"
+      },
+      "similarity": 0.6666666666666666,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 character unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">67% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 character unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "words",
+    "old": "The quick brown fox",
+    "new": "The slow brown fox",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "stats": {
+        "added": 4,
+        "removed": 5,
+        "unchanged": 14,
+        "unit": "codepoints"
+      },
+      "similarity": 0.7096774193548387,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+4</span><span class=\"diff-sr\">4 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−5</span><span class=\"diff-sr\">5 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=14</span><span class=\"diff-sr\">14 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">71% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+4</span><span class=\"diff-sr\">4 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−5</span><span class=\"diff-sr\">5 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=14</span><span class=\"diff-sr\">14 characters unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "words both empty",
+    "old": "",
+    "new": "",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 0,
+        "unit": "codepoints"
+      },
+      "similarity": 1,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=0</span><span class=\"diff-sr\">0 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">100% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=0</span><span class=\"diff-sr\">0 characters unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "words old empty",
+    "old": "",
+    "new": "one two",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "stats": {
+        "added": 7,
+        "removed": 0,
+        "unchanged": 0,
+        "unit": "codepoints"
+      },
+      "similarity": 0,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+7</span><span class=\"diff-sr\">7 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=0</span><span class=\"diff-sr\">0 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">0% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+7</span><span class=\"diff-sr\">7 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=0</span><span class=\"diff-sr\">0 characters unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "wordsWithSpace",
+    "old": "a b",
+    "new": "a  b",
+    "options": {
+      "mode": "wordsWithSpace"
+    },
+    "expected": {
+      "stats": {
+        "added": 2,
+        "removed": 1,
+        "unchanged": 2,
+        "unit": "codepoints"
+      },
+      "similarity": 1,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+2</span><span class=\"diff-sr\">2 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">100% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+2</span><span class=\"diff-sr\">2 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 characters unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "sentences",
+    "old": "One. Two.",
+    "new": "One. Three.",
+    "options": {
+      "mode": "sentences"
+    },
+    "expected": {
+      "stats": {
+        "added": 6,
+        "removed": 4,
+        "unchanged": 5,
+        "unit": "codepoints"
+      },
+      "similarity": 0.5555555555555556,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−4</span><span class=\"diff-sr\">4 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=5</span><span class=\"diff-sr\">5 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">56% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−4</span><span class=\"diff-sr\">4 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=5</span><span class=\"diff-sr\">5 characters unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "lines text mode",
+    "old": "a\nb\n",
+    "new": "a\nc\n",
+    "options": {
+      "mode": "lines"
+    },
+    "expected": {
+      "stats": {
+        "added": 2,
+        "removed": 2,
+        "unchanged": 2,
+        "unit": "codepoints"
+      },
+      "similarity": 0.5,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+2</span><span class=\"diff-sr\">2 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−2</span><span class=\"diff-sr\">2 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">50% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+2</span><span class=\"diff-sr\">2 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−2</span><span class=\"diff-sr\">2 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 characters unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "unified lines",
+    "old": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\n",
+    "new": "line 1\nline 2\nthree\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nextra\n",
+    "options": {
+      "mode": "unified"
+    },
+    "expected": {
+      "stats": {
+        "added": 2,
+        "removed": 1,
+        "unchanged": 9,
+        "unit": "lines"
+      },
+      "similarity": 0.8598130841121495,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+2</span><span class=\"diff-sr\">2 lines added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 line removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=9</span><span class=\"diff-sr\">9 lines unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">86% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+2</span><span class=\"diff-sr\">2 lines added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 line removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=9</span><span class=\"diff-sr\">9 lines unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "unified identical",
+    "old": "a\nb\n",
+    "new": "a\nb\n",
+    "options": {
+      "mode": "unified"
+    },
+    "expected": {
+      "stats": {
+        "added": 0,
+        "removed": 0,
+        "unchanged": 2,
+        "unit": "lines"
+      },
+      "similarity": 1,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 lines added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 lines removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 lines unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">100% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 lines added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 lines removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 lines unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "split lines",
+    "old": "a\nb\nc\n",
+    "new": "a\nB\n",
+    "options": {
+      "mode": "split"
+    },
+    "expected": {
+      "stats": {
+        "added": 1,
+        "removed": 2,
+        "unchanged": 1,
+        "unit": "lines"
+      },
+      "similarity": 0.4,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 line added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−2</span><span class=\"diff-sr\">2 lines removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 line unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">40% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 line added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−2</span><span class=\"diff-sr\">2 lines removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 line unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "CJK chars",
+    "old": "我喜欢猫",
+    "new": "我喜欢狗",
+    "options": {
+      "mode": "chars"
+    },
+    "expected": {
+      "stats": {
+        "added": 1,
+        "removed": 1,
+        "unchanged": 3,
+        "unit": "codepoints"
+      },
+      "similarity": 0.75,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 character added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=3</span><span class=\"diff-sr\">3 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">75% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 character added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=3</span><span class=\"diff-sr\">3 characters unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "singular units",
+    "old": "a",
+    "new": "ab",
+    "options": {
+      "mode": "chars"
+    },
+    "expected": {
+      "stats": {
+        "added": 1,
+        "removed": 0,
+        "unchanged": 1,
+        "unit": "codepoints"
+      },
+      "similarity": 0,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 character added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 character unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">0% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 character added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 character unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "singular lines",
+    "old": "a\n",
+    "new": "a\nb\n",
+    "options": {
+      "mode": "unified"
+    },
+    "expected": {
+      "stats": {
+        "added": 1,
+        "removed": 0,
+        "unchanged": 1,
+        "unit": "lines"
+      },
+      "similarity": 0.6666666666666666,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 line added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 lines removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 line unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">67% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 line added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 lines removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 line unchanged</span></span></div>"
+    }
+  },
+  {
+    "name": "similarity rounding",
+    "old": "Hello, world!",
+    "new": "Hello world!",
+    "options": {
+      "mode": "words"
+    },
+    "expected": {
+      "stats": {
+        "added": 0,
+        "removed": 1,
+        "unchanged": 12,
+        "unit": "codepoints"
+      },
+      "similarity": 0.9565217391304348,
+      "html": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=12</span><span class=\"diff-sr\">12 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">96% similar</span></div>",
+      "htmlWithoutSimilarity": "<div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=12</span><span class=\"diff-sr\">12 characters unchanged</span></span></div>"
+    }
+  }
+]

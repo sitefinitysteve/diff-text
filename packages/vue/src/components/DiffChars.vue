@@ -1,38 +1,35 @@
 <template>
-  <div class="text-diff text-diff-chars">
-    <span
-      v-for="(part, index) in diff"
-      :key="index"
-      :class="{
-        'diff-added': part.added,
-        'diff-removed': part.removed,
-      }"
-      v-text="part.value"
-    />
-  </div>
+  <MinimapFrame
+    :enabled="minimap"
+    :links="links"
+  >
+    <div
+      ref="root"
+      class="text-diff text-diff-chars"
+    >
+      <template
+        v-for="(part, index) in model.parts"
+        :key="index"
+      >
+        <span v-if="part.changeIndex === null">{{ part.value }}</span>
+        <span
+          v-else
+          :id="idOf(part.changeIndex)"
+          :class="`diff-${part.kind}`"
+          :data-change-index="part.changeIndex"
+        >{{ part.value }}</span>
+      </template>
+    </div>
+  </MinimapFrame>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { diffChars } from 'diff';
-import type { Change } from 'diff';
+// `chars` diff. Options: ignoreCase, maxEditLength.
+import MinimapFrame from './MinimapFrame';
+import { textDiffProps, useTextDiff } from './textDiff';
 
-const props = defineProps({
-  oldText: {
-    type: String,
-    required: true,
-  },
-  newText: {
-    type: String,
-    required: true,
-  },
-  options: {
-    type: Object,
-    default: () => ({}),
-  },
-});
+const props = defineProps(textDiffProps);
+const { root, model, links, idOf, exposed } = useTextDiff('chars', props);
 
-const diff = computed<Change[]>(() => {
-  return diffChars(props.oldText, props.newText, props.options);
-});
-</script> 
+defineExpose(exposed);
+</script>

@@ -37,6 +37,9 @@ export default [
     rules: {
       'vue/multi-word-component-names': 'off',
       'vue/no-v-html': 'off',
+      // Diff markup is whitespace-sensitive: text must sit directly inside its element.
+      'vue/singleline-html-element-content-newline': 'off',
+      'vue/multiline-html-element-content-newline': 'off',
     },
   },
 ]

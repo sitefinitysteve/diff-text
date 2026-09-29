@@ -1,0 +1,849 @@
+[
+  {
+    "name": "no versions",
+    "versions": [],
+    "options": {
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [],
+      "steps": [],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><div class=\"diff-empty\">Nothing to compare</div></div>"
+    }
+  },
+  {
+    "name": "1 version",
+    "versions": [
+      "Only one draft."
+    ],
+    "options": {
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "v1"
+      ],
+      "steps": [],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><div class=\"diff-empty\">Nothing to compare</div></div>"
+    }
+  },
+  {
+    "name": "2 versions",
+    "versions": [
+      "The plan is simple. We ship on Friday.",
+      "The plan is simple. We ship on Monday."
+    ],
+    "options": {
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "v1",
+        "v2"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 6,
+            "removed": 6,
+            "unchanged": 32,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8064516129032258
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\" checked><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−6</span><span class=\"diff-sr\">6 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=32</span><span class=\"diff-sr\">32 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">81% similar</span></div><div class=\"text-diff text-diff-words\"><span>The plan is simple. We ship on </span><span class=\"diff-removed\" data-change-index=\"0\">Friday</span><span class=\"diff-added\" data-change-index=\"1\">Monday</span><span>.</span></div></div></div>"
+    }
+  },
+  {
+    "name": "2 identical versions",
+    "versions": [
+      "Same.",
+      "Same."
+    ],
+    "options": {
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "v1",
+        "v2"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 0,
+            "removed": 0,
+            "unchanged": 5,
+            "unit": "codepoints"
+          },
+          "similarity": 1
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\" checked><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=5</span><span class=\"diff-sr\">5 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">100% similar</span></div><div class=\"text-diff text-diff-words\"><span>Same.</span></div></div></div>"
+    }
+  },
+  {
+    "name": "3 versions",
+    "versions": [
+      "The plan is simple. We ship on Friday.",
+      "The plan is simple. We ship on Monday.",
+      "The plan is simple and clear. We ship on Monday."
+    ],
+    "options": {
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 6,
+            "removed": 6,
+            "unchanged": 32,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8064516129032258
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 9,
+            "removed": 0,
+            "unchanged": 39,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8857142857142857
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−6</span><span class=\"diff-sr\">6 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=32</span><span class=\"diff-sr\">32 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">81% similar</span></div><div class=\"text-diff text-diff-words\"><span>The plan is simple. We ship on </span><span class=\"diff-removed\" data-change-index=\"0\">Friday</span><span class=\"diff-added\" data-change-index=\"1\">Monday</span><span>.</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\" checked><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+9</span><span class=\"diff-sr\">9 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=39</span><span class=\"diff-sr\">39 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">89% similar</span></div><div class=\"text-diff text-diff-words\"><span>The plan is simple </span><span class=\"diff-added\" data-change-index=\"0\">and clear</span><span>. We ship on Monday.</span></div></div></div>"
+    }
+  },
+  {
+    "name": "5 versions",
+    "versions": [
+      "The plan is simple. We ship on Friday.",
+      "The plan is simple. We ship on Monday.",
+      "The plan is simple and clear. We ship on Monday.",
+      "Our plan is simple and clear. We ship on Monday! Tell the team.",
+      "Our plan is clear. We ship Monday. Tell the whole team."
+    ],
+    "options": {
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 6,
+            "removed": 6,
+            "unchanged": 32,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8064516129032258
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 9,
+            "removed": 0,
+            "unchanged": 39,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8857142857142857
+        },
+        {
+          "step": 3,
+          "fromLabel": "v3",
+          "toLabel": "v4",
+          "stats": {
+            "added": 18,
+            "removed": 3,
+            "unchanged": 45,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8
+        },
+        {
+          "step": 4,
+          "fromLabel": "v4",
+          "toLabel": "v5",
+          "stats": {
+            "added": 7,
+            "removed": 15,
+            "unchanged": 48,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8125
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−6</span><span class=\"diff-sr\">6 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=32</span><span class=\"diff-sr\">32 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">81% similar</span></div><div class=\"text-diff text-diff-words\"><span>The plan is simple. We ship on </span><span class=\"diff-removed\" data-change-index=\"0\">Friday</span><span class=\"diff-added\" data-change-index=\"1\">Monday</span><span>.</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\"><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+9</span><span class=\"diff-sr\">9 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=39</span><span class=\"diff-sr\">39 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">89% similar</span></div><div class=\"text-diff text-diff-words\"><span>The plan is simple </span><span class=\"diff-added\" data-change-index=\"0\">and clear</span><span>. We ship on Monday.</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-3\"><label class=\"diff-rev-label\" for=\"tl-rev-3\">v3 → v4</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v3 → v4\"><div class=\"diff-rev-caption\">v3 → v4</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+18</span><span class=\"diff-sr\">18 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−3</span><span class=\"diff-sr\">3 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=45</span><span class=\"diff-sr\">45 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">80% similar</span></div><div class=\"text-diff text-diff-words\"><span class=\"diff-removed\" data-change-index=\"0\">The</span><span class=\"diff-added\" data-change-index=\"1\">Our</span><span> plan is simple and clear. We ship on Monday</span><span class=\"diff-added\" data-change-index=\"2\">! Tell the team</span><span>.</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-4\" checked><label class=\"diff-rev-label\" for=\"tl-rev-4\">v4 → v5</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v4 → v5\"><div class=\"diff-rev-caption\">v4 → v5</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+7</span><span class=\"diff-sr\">7 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−15</span><span class=\"diff-sr\">15 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=48</span><span class=\"diff-sr\">48 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">81% similar</span></div><div class=\"text-diff text-diff-words\"><span>Our plan is </span><span class=\"diff-removed\" data-change-index=\"0\">simple and </span><span>clear. We ship </span><span class=\"diff-removed\" data-change-index=\"1\">on </span><span>Monday</span><span class=\"diff-removed\" data-change-index=\"2\">!</span><span class=\"diff-added\" data-change-index=\"3\">.</span><span> Tell the </span><span class=\"diff-added\" data-change-index=\"4\">whole </span><span>team.</span></div></div></div>"
+    }
+  },
+  {
+    "name": "5 versions unified",
+    "versions": [
+      "a\n",
+      "a\nb\n",
+      "a\nB\n",
+      "a\nB\nc\n",
+      "B\nc\n"
+    ],
+    "options": {
+      "mode": "unified",
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "unified",
+      "labels": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 1,
+            "removed": 0,
+            "unchanged": 1,
+            "unit": "lines"
+          },
+          "similarity": 0.6666666666666666
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 1,
+            "removed": 1,
+            "unchanged": 1,
+            "unit": "lines"
+          },
+          "similarity": 0.5
+        },
+        {
+          "step": 3,
+          "fromLabel": "v3",
+          "toLabel": "v4",
+          "stats": {
+            "added": 1,
+            "removed": 0,
+            "unchanged": 2,
+            "unit": "lines"
+          },
+          "similarity": 0.8
+        },
+        {
+          "step": 4,
+          "fromLabel": "v4",
+          "toLabel": "v5",
+          "stats": {
+            "added": 0,
+            "removed": 1,
+            "unchanged": 2,
+            "unit": "lines"
+          },
+          "similarity": 0.8
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 line added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 lines removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 line unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">67% similar</span></div><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">b</span></div></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\"><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 line added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 line removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 line unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">50% similar</span></div><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 2\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">b</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">B</span></div></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-3\"><label class=\"diff-rev-label\" for=\"tl-rev-3\">v3 → v4</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v3 → v4\"><div class=\"diff-rev-caption\">v3 → v4</div><div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 line added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 lines removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 lines unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">80% similar</span></div><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">B</span></div><div class=\"diff-row diff-row-added\" role=\"group\" aria-label=\"added line 3\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">c</span></div></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-4\" checked><label class=\"diff-rev-label\" for=\"tl-rev-4\">v4 → v5</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v4 → v5\"><div class=\"diff-rev-caption\">v4 → v5</div><div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 lines added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 line removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 lines unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">80% similar</span></div><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-removed\" role=\"group\" aria-label=\"removed line 1\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">a</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">B</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">c</span></div></div></div></div>"
+    }
+  },
+  {
+    "name": "3 versions split",
+    "versions": [
+      "x\ny\n",
+      "x\nY\n",
+      "X\nY\nz\n"
+    ],
+    "options": {
+      "mode": "split",
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "split",
+      "labels": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 1,
+            "removed": 1,
+            "unchanged": 1,
+            "unit": "lines"
+          },
+          "similarity": 0.5
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 2,
+            "removed": 1,
+            "unchanged": 1,
+            "unit": "lines"
+          },
+          "similarity": 0.4
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 line added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 line removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 line unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">50% similar</span></div><div class=\"text-diff text-diff-split\"><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">x</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">x</span></div></div><div class=\"diff-row diff-row-modified\" data-change-index=\"0\"><div class=\"diff-cell diff-cell-old diff-cell-removed\" role=\"group\" aria-label=\"removed line 2\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">y</span></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 2\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">Y</span></div></div></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\" checked><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+2</span><span class=\"diff-sr\">2 lines added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 line removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=1</span><span class=\"diff-sr\">1 line unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">40% similar</span></div><div class=\"text-diff text-diff-split\"><div class=\"diff-row diff-row-modified\" data-change-index=\"0\"><div class=\"diff-cell diff-cell-old diff-cell-removed\" role=\"group\" aria-label=\"removed line 1\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">x</span></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 1\"><span class=\"diff-gutter\">1</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">X</span></div></div><div class=\"diff-row diff-row-equal\"><div class=\"diff-cell diff-cell-old\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">Y</span></div><div class=\"diff-cell diff-cell-new\"><span class=\"diff-gutter\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">Y</span></div></div><div class=\"diff-row diff-row-added\" data-change-index=\"1\"><div class=\"diff-cell diff-cell-old diff-cell-empty\"></div><div class=\"diff-cell diff-cell-new diff-cell-added\" role=\"group\" aria-label=\"added line 3\"><span class=\"diff-gutter\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">z</span></div></div></div></div></div>"
+    }
+  },
+  {
+    "name": "unified with moves",
+    "versions": [
+      "m\nk1\nk2\n",
+      "k1\nk2\nm\n",
+      "k1\nm\nk2\n"
+    ],
+    "options": {
+      "mode": "unified",
+      "detectMoves": true,
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "unified",
+      "labels": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 1,
+            "removed": 1,
+            "unchanged": 2,
+            "unit": "lines"
+          },
+          "similarity": 0.8
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 1,
+            "removed": 1,
+            "unchanged": 2,
+            "unit": "lines"
+          },
+          "similarity": 0.6
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 line added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 line removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 lines unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">80% similar</span></div><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-moved-from diff-move-0\" role=\"group\" aria-label=\"line 1 moved to line 3\" data-move=\"0\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">m</span><a class=\"diff-move-link\" id=\"tl-rev-1-move-0-from\" href=\"#tl-rev-1-move-0-to\">moved to line 3</a></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k1</span></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k2</span></div><div class=\"diff-row diff-row-moved-to diff-move-0\" role=\"group\" aria-label=\"line 3 moved from line 1\" data-move=\"0\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">m</span><a class=\"diff-move-link\" id=\"tl-rev-1-move-0-to\" href=\"#tl-rev-1-move-0-from\">moved from line 1</a></div></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\" checked><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"lines\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 line added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 line removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 lines unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">60% similar</span></div><div class=\"text-diff text-diff-unified\"><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">1</span><span class=\"diff-gutter diff-gutter-new\">1</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">k1</span></div><div class=\"diff-row diff-row-moved-from diff-move-0\" role=\"group\" aria-label=\"line 2 moved to line 3\" data-move=\"0\" data-change-index=\"0\"><span class=\"diff-gutter diff-gutter-old\">2</span><span class=\"diff-gutter diff-gutter-new\"></span><span class=\"diff-sign\" aria-hidden=\"true\">−</span><span class=\"diff-line\">k2</span><a class=\"diff-move-link\" id=\"tl-rev-2-move-0-from\" href=\"#tl-rev-2-move-0-to\">moved to line 3</a></div><div class=\"diff-row diff-row-equal\"><span class=\"diff-gutter diff-gutter-old\">3</span><span class=\"diff-gutter diff-gutter-new\">2</span><span class=\"diff-sign\" aria-hidden=\"true\"> </span><span class=\"diff-line\">m</span></div><div class=\"diff-row diff-row-moved-to diff-move-0\" role=\"group\" aria-label=\"line 3 moved from line 2\" data-move=\"0\" data-change-index=\"1\"><span class=\"diff-gutter diff-gutter-old\"></span><span class=\"diff-gutter diff-gutter-new\">3</span><span class=\"diff-sign\" aria-hidden=\"true\">+</span><span class=\"diff-line\">k2</span><a class=\"diff-move-link\" id=\"tl-rev-2-move-0-to\" href=\"#tl-rev-2-move-0-from\">moved from line 2</a></div></div></div></div>"
+    }
+  },
+  {
+    "name": "custom labels",
+    "versions": [
+      "The plan is simple. We ship on Friday.",
+      "The plan is simple. We ship on Monday.",
+      "The plan is simple and clear. We ship on Monday."
+    ],
+    "options": {
+      "labels": [
+        "Draft",
+        "Review",
+        "Final"
+      ],
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "Draft",
+        "Review",
+        "Final"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "Draft",
+          "toLabel": "Review",
+          "stats": {
+            "added": 6,
+            "removed": 6,
+            "unchanged": 32,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8064516129032258
+        },
+        {
+          "step": 2,
+          "fromLabel": "Review",
+          "toLabel": "Final",
+          "stats": {
+            "added": 9,
+            "removed": 0,
+            "unchanged": 39,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8857142857142857
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">Draft → Review</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"Draft → Review\"><div class=\"diff-rev-caption\">Draft → Review</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−6</span><span class=\"diff-sr\">6 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=32</span><span class=\"diff-sr\">32 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">81% similar</span></div><div class=\"text-diff text-diff-words\"><span>The plan is simple. We ship on </span><span class=\"diff-removed\" data-change-index=\"0\">Friday</span><span class=\"diff-added\" data-change-index=\"1\">Monday</span><span>.</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\" checked><label class=\"diff-rev-label\" for=\"tl-rev-2\">Review → Final</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"Review → Final\"><div class=\"diff-rev-caption\">Review → Final</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+9</span><span class=\"diff-sr\">9 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=39</span><span class=\"diff-sr\">39 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">89% similar</span></div><div class=\"text-diff text-diff-words\"><span>The plan is simple </span><span class=\"diff-added\" data-change-index=\"0\">and clear</span><span>. We ship on Monday.</span></div></div></div>"
+    }
+  },
+  {
+    "name": "partial labels",
+    "versions": [
+      "The plan is simple. We ship on Friday.",
+      "The plan is simple. We ship on Monday.",
+      "The plan is simple and clear. We ship on Monday."
+    ],
+    "options": {
+      "labels": [
+        "Start"
+      ],
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "Start",
+        "v2",
+        "v3"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "Start",
+          "toLabel": "v2",
+          "stats": {
+            "added": 6,
+            "removed": 6,
+            "unchanged": 32,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8064516129032258
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 9,
+            "removed": 0,
+            "unchanged": 39,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8857142857142857
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">Start → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"Start → v2\"><div class=\"diff-rev-caption\">Start → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−6</span><span class=\"diff-sr\">6 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=32</span><span class=\"diff-sr\">32 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">81% similar</span></div><div class=\"text-diff text-diff-words\"><span>The plan is simple. We ship on </span><span class=\"diff-removed\" data-change-index=\"0\">Friday</span><span class=\"diff-added\" data-change-index=\"1\">Monday</span><span>.</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\" checked><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+9</span><span class=\"diff-sr\">9 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=39</span><span class=\"diff-sr\">39 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">89% similar</span></div><div class=\"text-diff text-diff-words\"><span>The plan is simple </span><span class=\"diff-added\" data-change-index=\"0\">and clear</span><span>. We ship on Monday.</span></div></div></div>"
+    }
+  },
+  {
+    "name": "labels are escaped",
+    "versions": [
+      "a",
+      "b"
+    ],
+    "options": {
+      "labels": [
+        "<old> & \"x\"",
+        "it's new"
+      ],
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "<old> & \"x\"",
+        "it's new"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "<old> & \"x\"",
+          "toLabel": "it's new",
+          "stats": {
+            "added": 1,
+            "removed": 1,
+            "unchanged": 0,
+            "unit": "codepoints"
+          },
+          "similarity": 0
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\" checked><label class=\"diff-rev-label\" for=\"tl-rev-1\">&lt;old&gt; &amp; &quot;x&quot; → it&#39;s new</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"&lt;old&gt; &amp; &quot;x&quot; → it&#39;s new\"><div class=\"diff-rev-caption\">&lt;old&gt; &amp; &quot;x&quot; → it&#39;s new</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 character added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=0</span><span class=\"diff-sr\">0 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">0% similar</span></div><div class=\"text-diff text-diff-words\"><span class=\"diff-removed\" data-change-index=\"0\">a</span><span class=\"diff-added\" data-change-index=\"1\">b</span></div></div></div>"
+    }
+  },
+  {
+    "name": "empty versions",
+    "versions": [
+      "",
+      "text",
+      ""
+    ],
+    "options": {
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 4,
+            "removed": 0,
+            "unchanged": 0,
+            "unit": "codepoints"
+          },
+          "similarity": 0
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 0,
+            "removed": 4,
+            "unchanged": 0,
+            "unit": "codepoints"
+          },
+          "similarity": 0
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+4</span><span class=\"diff-sr\">4 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=0</span><span class=\"diff-sr\">0 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">0% similar</span></div><div class=\"text-diff text-diff-words\"><span class=\"diff-added\" data-change-index=\"0\">text</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\" checked><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−4</span><span class=\"diff-sr\">4 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=0</span><span class=\"diff-sr\">0 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">0% similar</span></div><div class=\"text-diff text-diff-words\"><span class=\"diff-removed\" data-change-index=\"0\">text</span></div></div></div>"
+    }
+  },
+  {
+    "name": "unicode",
+    "versions": [
+      "東京 is big",
+      "京都 is big",
+      "京都 is huge 😀"
+    ],
+    "options": {
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 2,
+            "removed": 1,
+            "unchanged": 7,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8571428571428571
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 6,
+            "removed": 3,
+            "unchanged": 6,
+            "unit": "codepoints"
+          },
+          "similarity": 0.5
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+2</span><span class=\"diff-sr\">2 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=7</span><span class=\"diff-sr\">7 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">86% similar</span></div><div class=\"text-diff text-diff-words\"><span class=\"diff-removed\" data-change-index=\"0\">東</span><span>京</span><span class=\"diff-added\" data-change-index=\"1\">都 </span><span>is big</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\" checked><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−3</span><span class=\"diff-sr\">3 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=6</span><span class=\"diff-sr\">6 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">50% similar</span></div><div class=\"text-diff text-diff-words\"><span>京都 is </span><span class=\"diff-removed\" data-change-index=\"0\">big</span><span class=\"diff-added\" data-change-index=\"1\">huge 😀</span></div></div></div>"
+    }
+  },
+  {
+    "name": "CRLF lines mode",
+    "versions": [
+      "one\r\ntwo\r\n",
+      "one\ntwo\n",
+      "one\ntwo\nthree\n"
+    ],
+    "options": {
+      "mode": "lines",
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "lines",
+      "labels": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 8,
+            "removed": 10,
+            "unchanged": 0,
+            "unit": "codepoints"
+          },
+          "similarity": 1
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 6,
+            "removed": 0,
+            "unchanged": 8,
+            "unit": "codepoints"
+          },
+          "similarity": 0.7058823529411765
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+8</span><span class=\"diff-sr\">8 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−10</span><span class=\"diff-sr\">10 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=0</span><span class=\"diff-sr\">0 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">100% similar</span></div><div class=\"text-diff text-diff-lines\"><span class=\"diff-removed\" data-change-index=\"0\">one\ntwo\n</span><span class=\"diff-added\" data-change-index=\"1\">one\ntwo\n</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\" checked><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=8</span><span class=\"diff-sr\">8 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">71% similar</span></div><div class=\"text-diff text-diff-lines\"><span>one\ntwo\n</span><span class=\"diff-added\" data-change-index=\"0\">three\n</span></div></div></div>"
+    }
+  },
+  {
+    "name": "chars mode",
+    "versions": [
+      "kitten",
+      "sitten",
+      "sittin",
+      "sitting"
+    ],
+    "options": {
+      "mode": "chars",
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "chars",
+      "labels": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 1,
+            "removed": 1,
+            "unchanged": 5,
+            "unit": "codepoints"
+          },
+          "similarity": 0
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 1,
+            "removed": 1,
+            "unchanged": 5,
+            "unit": "codepoints"
+          },
+          "similarity": 0
+        },
+        {
+          "step": 3,
+          "fromLabel": "v3",
+          "toLabel": "v4",
+          "stats": {
+            "added": 1,
+            "removed": 0,
+            "unchanged": 6,
+            "unit": "codepoints"
+          },
+          "similarity": 0
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 character added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=5</span><span class=\"diff-sr\">5 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">0% similar</span></div><div class=\"text-diff text-diff-chars\"><span class=\"diff-removed\" data-change-index=\"0\">k</span><span class=\"diff-added\" data-change-index=\"1\">s</span><span>itten</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\"><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 character added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=5</span><span class=\"diff-sr\">5 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">0% similar</span></div><div class=\"text-diff text-diff-chars\"><span>sitt</span><span class=\"diff-removed\" data-change-index=\"0\">e</span><span class=\"diff-added\" data-change-index=\"1\">i</span><span>n</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-3\" checked><label class=\"diff-rev-label\" for=\"tl-rev-3\">v3 → v4</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v3 → v4\"><div class=\"diff-rev-caption\">v3 → v4</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 character added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=6</span><span class=\"diff-sr\">6 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">0% similar</span></div><div class=\"text-diff text-diff-chars\"><span>sittin</span><span class=\"diff-added\" data-change-index=\"0\">g</span></div></div></div>"
+    }
+  },
+  {
+    "name": "sentences mode",
+    "versions": [
+      "One. Two.",
+      "One. Three.",
+      "Zero. One. Three."
+    ],
+    "options": {
+      "mode": "sentences",
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "sentences",
+      "labels": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 6,
+            "removed": 4,
+            "unchanged": 5,
+            "unit": "codepoints"
+          },
+          "similarity": 0.5555555555555556
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 6,
+            "removed": 0,
+            "unchanged": 11,
+            "unit": "codepoints"
+          },
+          "similarity": 0.8
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−4</span><span class=\"diff-sr\">4 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=5</span><span class=\"diff-sr\">5 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">56% similar</span></div><div class=\"text-diff text-diff-sentences\"><span>One. </span><span class=\"diff-removed\" data-change-index=\"0\">Two.</span><span class=\"diff-added\" data-change-index=\"1\">Three.</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\" checked><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+6</span><span class=\"diff-sr\">6 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=11</span><span class=\"diff-sr\">11 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">80% similar</span></div><div class=\"text-diff text-diff-sentences\"><span class=\"diff-added\" data-change-index=\"0\">Zero. </span><span>One. Three.</span></div></div></div>"
+    }
+  },
+  {
+    "name": "ignoreCase",
+    "versions": [
+      "Hello World",
+      "hello world",
+      "hello there"
+    ],
+    "options": {
+      "ignoreCase": true,
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 0,
+            "removed": 0,
+            "unchanged": 11,
+            "unit": "codepoints"
+          },
+          "similarity": 0
+        },
+        {
+          "step": 2,
+          "fromLabel": "v2",
+          "toLabel": "v3",
+          "stats": {
+            "added": 5,
+            "removed": 5,
+            "unchanged": 6,
+            "unit": "codepoints"
+          },
+          "similarity": 0.5
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\"><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+0</span><span class=\"diff-sr\">0 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−0</span><span class=\"diff-sr\">0 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=11</span><span class=\"diff-sr\">11 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">0% similar</span></div><div class=\"text-diff text-diff-words\"><span>hello world</span></div></div><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-2\" checked><label class=\"diff-rev-label\" for=\"tl-rev-2\">v2 → v3</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v2 → v3\"><div class=\"diff-rev-caption\">v2 → v3</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+5</span><span class=\"diff-sr\">5 characters added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−5</span><span class=\"diff-sr\">5 characters removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=6</span><span class=\"diff-sr\">6 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">50% similar</span></div><div class=\"text-diff text-diff-words\"><span>hello </span><span class=\"diff-removed\" data-change-index=\"0\">world</span><span class=\"diff-added\" data-change-index=\"1\">there</span></div></div></div>"
+    }
+  },
+  {
+    "name": "unknown mode falls back to words",
+    "versions": [
+      "a b",
+      "a c"
+    ],
+    "options": {
+      "mode": "nope",
+      "idPrefix": "tl"
+    },
+    "expected": {
+      "mode": "words",
+      "labels": [
+        "v1",
+        "v2"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "fromLabel": "v1",
+          "toLabel": "v2",
+          "stats": {
+            "added": 1,
+            "removed": 1,
+            "unchanged": 2,
+            "unit": "codepoints"
+          },
+          "similarity": 0.5
+        }
+      ],
+      "html": "<div class=\"text-diff-timeline\" role=\"group\" aria-label=\"Revision timeline\"><input class=\"diff-rev-input\" type=\"radio\" name=\"tl-rev\" id=\"tl-rev-1\" checked><label class=\"diff-rev-label\" for=\"tl-rev-1\">v1 → v2</label><div class=\"diff-rev-panel\" role=\"group\" aria-label=\"v1 → v2\"><div class=\"diff-rev-caption\">v1 → v2</div><div class=\"text-diff-stats\" data-unit=\"codepoints\"><span class=\"diff-stat diff-stat-added\"><span aria-hidden=\"true\">+1</span><span class=\"diff-sr\">1 character added</span></span><span class=\"diff-stat diff-stat-removed\"><span aria-hidden=\"true\">−1</span><span class=\"diff-sr\">1 character removed</span></span><span class=\"diff-stat diff-stat-unchanged\"><span aria-hidden=\"true\">=2</span><span class=\"diff-sr\">2 characters unchanged</span></span><span class=\"diff-stat diff-stat-similarity\">50% similar</span></div><div class=\"text-diff text-diff-words\"><span>a </span><span class=\"diff-removed\" data-change-index=\"0\">b</span><span class=\"diff-added\" data-change-index=\"1\">c</span></div></div></div>"
+    }
+  }
+]

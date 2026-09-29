@@ -25,13 +25,22 @@ final class NormalizeHtml
     }
 
     /**
-     * Strip inline formatting tags while preserving block-level and other HTML.
+     * Strip inline formatting tags while preserving everything else byte for byte (SPEC §12.1).
      *
-     * Removes: <strong>, <em>, <b>, <i>, <u>, <s>, <mark>, <sub>, <sup>
-     * (opening, closing, and with attributes)
+     * Removes opening, closing and self-closing <strong>, <em>, <b>, <i>, <u>, <s>, <mark>,
+     * <sub>, <sup> tags (any attributes, any case) as recognised by {@see HtmlLexer}: a `>`
+     * inside a quoted attribute value does not end the tag, and comments, CDATA and raw text
+     * elements (script, style, ...) are left untouched.
      */
     public static function stripFormattingTags(string $text): string
     {
-        return preg_replace('/<\/?(strong|em|b|i|u|s|mark|sub|sup)(\s[^>]*)?>/i', '', $text) ?? $text;
+        $out = '';
+        foreach (HtmlLexer::lex($text) as $seg) {
+            if (in_array($seg['kind'], ['open', 'close', 'void'], true) && isset(HtmlLexer::FORMATTING_ELEMENTS[$seg['name']])) {
+                continue;
+            }
+            $out .= $seg['raw'];
+        }
+        return $out;
     }
 }

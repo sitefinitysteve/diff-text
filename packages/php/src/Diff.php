@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace PhpDiffText;
 
 /**
- * Core diff engine using the Myers diff algorithm.
- * Produces Change[] arrays from two token sequences.
+ * Token-level diff entry point.
+ *
+ * Tokens are interned to integer ids (the equality key, e.g. the lowercased
+ * token for ignoreCase, is computed once per token), diffed with
+ * {@see Myers}, and turned into change objects from token indices.
  */
 final class Diff
 {
@@ -15,148 +18,103 @@ final class Diff
      *
      * @param string[] $oldTokens
      * @param string[] $newTokens
+     * @param array{maxEditLength?: int|null} $options
      * @return Change[]
      */
-    public static function diffTokens(array $oldTokens, array $newTokens, bool $ignoreCase = false): array
+    public static function diffTokens(array $oldTokens, array $newTokens, bool $ignoreCase = false, array $options = []): array
     {
-        $compare = $ignoreCase
-            ? fn(string $a, string $b): bool => mb_strtolower($a) === mb_strtolower($b)
-            : fn(string $a, string $b): bool => $a === $b;
+        $key = $ignoreCase ? static fn(string $t): string => Str::lower($t) : null;
+        $components = self::components(array_values($oldTokens), array_values($newTokens), $key, null, $options);
 
-        $lcs = self::lcs($oldTokens, $newTokens, $compare);
-
-        $changes = [];
-        $oldIdx = 0;
-        $newIdx = 0;
-        $lcsIdx = 0;
-
-        while ($oldIdx < count($oldTokens) || $newIdx < count($newTokens)) {
-            if ($lcsIdx < count($lcs)) {
-                // Emit removed tokens before the next LCS match
-                $removedBuf = '';
-                while ($oldIdx < count($oldTokens) && !$compare($oldTokens[$oldIdx], $lcs[$lcsIdx])) {
-                    $removedBuf .= $oldTokens[$oldIdx];
-                    $oldIdx++;
-                }
-                if ($removedBuf !== '') {
-                    $changes[] = new Change($removedBuf, removed: true);
-                }
-
-                // Emit added tokens before the next LCS match
-                $addedBuf = '';
-                while ($newIdx < count($newTokens) && !$compare($newTokens[$newIdx], $lcs[$lcsIdx])) {
-                    $addedBuf .= $newTokens[$newIdx];
-                    $newIdx++;
-                }
-                if ($addedBuf !== '') {
-                    $changes[] = new Change($addedBuf, added: true);
-                }
-
-                // Emit the unchanged LCS token (use newTokens value to preserve original casing)
-                $changes[] = new Change($newTokens[$newIdx]);
-                $oldIdx++;
-                $newIdx++;
-                $lcsIdx++;
-            } else {
-                // After LCS is exhausted, remaining old tokens are removed
-                $removedBuf = '';
-                while ($oldIdx < count($oldTokens)) {
-                    $removedBuf .= $oldTokens[$oldIdx];
-                    $oldIdx++;
-                }
-                if ($removedBuf !== '') {
-                    $changes[] = new Change($removedBuf, removed: true);
-                }
-
-                // Remaining new tokens are added
-                $addedBuf = '';
-                while ($newIdx < count($newTokens)) {
-                    $addedBuf .= $newTokens[$newIdx];
-                    $newIdx++;
-                }
-                if ($addedBuf !== '') {
-                    $changes[] = new Change($addedBuf, added: true);
-                }
-            }
-        }
-
-        return self::mergeConsecutive($changes);
+        return array_map(static fn(Component $c): Change => $c->toChange(), $components);
     }
 
     /**
-     * Merge consecutive changes with the same status into single changes.
+     * Intern both token lists into integer ids.
      *
-     * @param Change[] $changes
-     * @return Change[]
+     * @param list<string> $oldTokens
+     * @param list<string> $newTokens
+     * @param (callable(string): string)|null $key
+     * @return array{0: list<int>, 1: list<int>}
      */
-    private static function mergeConsecutive(array $changes): array
+    public static function intern(array $oldTokens, array $newTokens, ?callable $key = null): array
     {
-        if (count($changes) === 0) {
-            return [];
-        }
-
-        $merged = [];
-        $current = $changes[0];
-
-        for ($i = 1, $len = count($changes); $i < $len; $i++) {
-            $next = $changes[$i];
-            if ($current->added === $next->added && $current->removed === $next->removed) {
-                $current = new Change(
-                    $current->value . $next->value,
-                    added: $current->added,
-                    removed: $current->removed,
-                );
-            } else {
-                $merged[] = $current;
-                $current = $next;
+        $ids = [];
+        $a = [];
+        $b = [];
+        if ($key === null) {
+            foreach ($oldTokens as $t) {
+                $a[] = $ids[$t] ??= count($ids);
+            }
+            foreach ($newTokens as $t) {
+                $b[] = $ids[$t] ??= count($ids);
+            }
+        } else {
+            foreach ($oldTokens as $t) {
+                $a[] = $ids[$key($t)] ??= count($ids);
+            }
+            foreach ($newTokens as $t) {
+                $b[] = $ids[$key($t)] ??= count($ids);
             }
         }
-        $merged[] = $current;
-
-        return $merged;
+        return [$a, $b];
     }
 
     /**
-     * Compute the Longest Common Subsequence of two token arrays.
+     * Run the diff and return raw [type, count] operations. When
+     * maxEditLength is exceeded, a whole replacement is returned (SPEC §7.1).
      *
-     * @param string[] $a
-     * @param string[] $b
-     * @param callable(string, string): bool $compare
-     * @return string[]
+     * @param list<int> $a
+     * @param list<int> $b
+     * @param array<string, mixed> $options
+     * @return list<array{0:int,1:int}>
      */
-    private static function lcs(array $a, array $b, callable $compare): array
+    public static function ops(array $a, array $b, array $options = []): array
     {
-        $m = count($a);
-        $n = count($b);
+        $ops = Myers::diff($a, $b, Options::maxEditLength($options));
+        if ($ops === null) {
+            $ops = [];
+            if ($a !== []) {
+                $ops[] = [Myers::DELETE, count($a)];
+            }
+            if ($b !== []) {
+                $ops[] = [Myers::INSERT, count($b)];
+            }
+        }
+        return $ops;
+    }
 
-        // Build DP table
-        $dp = array_fill(0, $m + 1, array_fill(0, $n + 1, 0));
-        for ($i = 1; $i <= $m; $i++) {
-            for ($j = 1; $j <= $n; $j++) {
-                if ($compare($a[$i - 1], $b[$j - 1])) {
-                    $dp[$i][$j] = $dp[$i - 1][$j - 1] + 1;
-                } else {
-                    $dp[$i][$j] = max($dp[$i - 1][$j], $dp[$i][$j - 1]);
+    /**
+     * @internal Build jsdiff-style components: unchanged values come from the new tokens.
+     *
+     * @param list<string> $oldTokens
+     * @param list<string> $newTokens
+     * @param (callable(string): string)|null $key
+     * @param (callable(list<string>): string)|null $join
+     * @param array<string, mixed> $options
+     * @return list<Component>
+     */
+    public static function components(array $oldTokens, array $newTokens, ?callable $key, ?callable $join, array $options = []): array
+    {
+        [$a, $b] = self::intern($oldTokens, $newTokens, $key);
+        $join ??= static fn(array $tokens): string => implode('', $tokens);
+
+        $components = [];
+        $oldPos = 0;
+        $newPos = 0;
+        foreach (self::ops($a, $b, $options) as [$type, $count]) {
+            if ($type === Myers::DELETE) {
+                $components[] = new Component($join(array_slice($oldTokens, $oldPos, $count)), false, true, $count);
+                $oldPos += $count;
+            } else {
+                $value = $join(array_slice($newTokens, $newPos, $count));
+                $components[] = new Component($value, $type === Myers::INSERT, false, $count);
+                $newPos += $count;
+                if ($type === Myers::EQUAL) {
+                    $oldPos += $count;
                 }
             }
         }
-
-        // Backtrack to find LCS
-        $result = [];
-        $i = $m;
-        $j = $n;
-        while ($i > 0 && $j > 0) {
-            if ($compare($a[$i - 1], $b[$j - 1])) {
-                $result[] = $a[$i - 1];
-                $i--;
-                $j--;
-            } elseif ($dp[$i - 1][$j] >= $dp[$i][$j - 1]) {
-                $i--;
-            } else {
-                $j--;
-            }
-        }
-
-        return array_reverse($result);
+        return $components;
     }
 }
