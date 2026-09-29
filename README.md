@@ -10,7 +10,9 @@ percentage.
 
 It is built for prose and paragraphs (policies, articles, CMS content), not for code review.
 
-![The diff-text demo page: hero and the six diff modes](https://raw.githubusercontent.com/sitefinitysteve/diff-text/main/packages/vue/DemoPreview-hero.png)
+**Live demo:** [Vue](https://sitefinitysteve.github.io/diff-text/vue/) · [React](https://sitefinitysteve.github.io/diff-text/react/) · [PHP](https://sitefinitysteve.github.io/diff-text/php/)
+
+![The diff-text demo page: hero and the six diff modes](packages/vue/DemoPreview-hero.png)
 
 *The shared demo page, rendered here by the Vue package. The React and PHP demos render the same page.*
 
