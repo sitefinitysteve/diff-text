@@ -36,4 +36,14 @@ describe('timeline', () => {
     expect(renderTimeline(buildTimeline([]))).toBe(empty);
     expect(renderTimeline(buildTimeline(['only']))).toBe(empty);
   });
+
+  it('compares versions as plain text and keeps anchors per panel', () => {
+    // Plain text: "1 < 2 and 3 > 2" -> "1 2" keeps "1" and "2" of 9 + 2 non-ws code points = 4/11
+    // (as HTML it would be 1, see SPEC 8).
+    const t = buildTimeline(['1 < 2 and 3 > 2', '1 2']);
+    expect(t.steps[0]!.similarity).toBe(4 / 11);
+    const html = renderTimeline(t, { anchors: true });
+    expect(html).toContain('id="td-rev-1-change-0"');
+    expect(renderTimeline(t)).not.toContain('-change-0"');
+  });
 });

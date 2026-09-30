@@ -1,9 +1,14 @@
-# Push vue-vX.Y.Z or react-vX.Y.Z to publish that package to npm.
+# Manual backup for scripts/release.sh (the normal, local release path).
+# Actions → Release npm package → Run workflow, then pick the package.
 # Requires secret NPM_TOKEN (automation token).
 name: Release npm package
 on:
-  push:
-    tags: ['vue-v*', 'react-v*']
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Package to publish
+        type: choice
+        options: [vue, react]
 
 jobs:
   publish:
@@ -18,17 +23,10 @@ jobs:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
       - id: pkg
-        run: |
-          case "$GITHUB_REF_NAME" in
-            vue-v*) echo "ws=vue-diff-text" >> "$GITHUB_OUTPUT" ;;
-            react-v*) echo "ws=react-diff-text" >> "$GITHUB_OUTPUT" ;;
-          esac
-      - run: npm install
+        run: echo "ws=${{ inputs.package }}-diff-text" >> "$GITHUB_OUTPUT"
+      - run: npm ci
       - run: npm test -w ${{ steps.pkg.outputs.ws }}
       - run: npm run build -w ${{ steps.pkg.outputs.ws }}
       - run: npm publish -w ${{ steps.pkg.outputs.ws }} --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: gh release create "$GITHUB_REF_NAME" --generate-notes --title "$GITHUB_REF_NAME"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

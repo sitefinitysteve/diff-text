@@ -1298,14 +1298,14 @@ Notes for ports:
 - Matched pairs (step 2b) always have `s >= 0.5`; positional pairs in step 3 after 2b always have
   `s < 0.5` (otherwise the alignment was not optimal), so "edited" ⇔ heat 1–2 and "rewritten" ⇔
   heat 3–4, except after the exact fallback where a positional pair may land in any bucket.
-- Unchanged but not identical sentences exist: whitespace, quote style or tag-only changes give
-  similarity 1 (section 8) and heat 0.
+- Unchanged but not identical sentences exist: whitespace or quote style changes give
+  similarity 1 (section 8) and heat 0. (Sentences are plain text, so `<b>` counts as characters.)
 - The DP adds doubles in exactly the order written, compares with strict `>`, and the backtrack
   compares with `==` against the very same expression, so both languages reproduce it exactly.
   Do not round, do not use an epsilon, do not reorder the additions.
 - **Result-neutral shortcut (optional):** before computing `sim` for a pair, skip it (NONE) when
   `4 * min(a, b) < a + b` or `4 * I < a + b`, where `a`, `b` are the non-WS code-point counts of
-  the prepared keys (section 8 `prepare`) and `I` is the multiset intersection, weighted by
+  the prepared keys (section 8 `prepare`, `html: false`) and `I` is the multiset intersection, weighted by
   non-WS length, of their `words` tokens after trim. Both are upper bounds on the unchanged count,
   so such pairs are below 0.5 anyway. Core uses it; the fixtures do not depend on it.
 - The concatenation of all non-removed segment texts is exactly the new text.

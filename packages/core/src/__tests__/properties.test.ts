@@ -368,11 +368,11 @@ describe('visualization properties', () => {
 
   it('minimap: one mark per data-change-index in the rendered view, inside 0..100%', () => {
     fc.assert(
-      fc.property(text, text, mode, lineText, lineText, (a, b, m, la, lb) => {
+      fc.property(text, text, mode, lineText, lineText, fc.constantFrom(0, 1, 3), (a, b, m, la, lb, contextLines) => {
         const indexes = (html: string) => [...html.matchAll(/data-change-index="(\d+)"/g)].map((x) => Number(x[1]));
         const cs = computeDiff(m, a, b);
-        const unified = buildHunks(la, lb);
-        const split = buildSplitRows(la, lb);
+        const unified = buildHunks(la, lb, { contextLines });
+        const split = buildSplitRows(la, lb, { contextLines });
         const cases = [
           { marks: minimapMarksText(cs), html: renderText(m, cs) },
           { marks: minimapMarksLines(unified), html: renderUnified(unified) },

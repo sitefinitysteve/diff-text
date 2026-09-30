@@ -1,12 +1,14 @@
-# Mirrors packages/php into sitefinitysteve/php-diff-text, which Packagist reads.
-# Pushing a tag php-vX.Y.Z publishes vX.Y.Z on the mirror.
+# Manual backup for scripts/release.sh, which normally does the split locally.
+# Mirrors packages/php into sitefinitysteve/php-diff-text (which Packagist reads);
+# give a tag (vX.Y.Z) to also tag the mirror.
 # Requires secret SPLIT_TOKEN: a fine-grained PAT with contents:write on php-diff-text.
 name: Split PHP package
 on:
-  push:
-    branches: [main]
-    paths: ['packages/php/**']
-    tags: ['php-v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to create on the mirror (e.g. v1.6.0); leave empty for no tag
+        required: false
 
 jobs:
   split:
@@ -16,10 +18,7 @@ jobs:
         with:
           fetch-depth: 0
       - id: tag
-        run: |
-          if [[ "$GITHUB_REF" == refs/tags/php-v* ]]; then
-            echo "tag=${GITHUB_REF#refs/tags/php-}" >> "$GITHUB_OUTPUT"
-          fi
+        run: echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
       - uses: danharrin/monorepo-split-github-action@v2.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.SPLIT_TOKEN }}

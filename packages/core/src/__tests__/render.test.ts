@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { computeDiff } from '../computeDiff';
 import { diffHtml } from '../html';
 import { buildHunks, buildSplitRows } from '../lines';
-import { collapsedLabel, escapeHtml, renderHtmlDiff, renderSplit, renderStats, renderText, renderUnified } from '../render';
+import { collapsedLabel, escapeHtml, idPrefixOf, renderHtmlDiff, renderSplit, renderStats, renderText, renderUnified } from '../render';
 import { computeStats } from '../stats';
 
 describe('render', () => {
@@ -47,7 +47,35 @@ describe('render', () => {
         '<span class="diff-stat diff-stat-similarity">67% similar</span></div>',
     );
   });
+  it('uses the default id prefix unless a non-empty string is given', () => {
+    expect(idPrefixOf()).toBe('td');
+    expect(idPrefixOf({})).toBe('td');
+    expect(idPrefixOf({ idPrefix: '' })).toBe('td');
+    expect(idPrefixOf({ idPrefix: 5 } as never)).toBe('td');
+    expect(idPrefixOf({ idPrefix: 'a"b' })).toBe('a"b'); // not escaped here; renderers escape it
+  });
+
+  it('never renders a span for an empty part in split cells', () => {
+    const html = renderSplit([
+      {
+        type: 'hunk',
+        oldStart: 1,
+        oldLines: 1,
+        newStart: 1,
+        newLines: 1,
+        rows: [
+          {
+            type: 'modified',
+            left: { type: 'removed', lineNo: 1, text: 'a', parts: [{ value: '', added: false, removed: true, count: 1 }, { value: 'a', added: false, removed: false, count: 1 }] },
+            right: { type: 'added', lineNo: 1, text: 'a', parts: [{ value: 'a', added: false, removed: false, count: 1 }] },
+          },
+        ],
+      },
+    ]);
+    expect(html).not.toContain('<span class="diff-removed"></span>');
+  });
 });
+
 
 describe('diffHtml', () => {
   it('shows attribute-only changes as the new tag without highlight', () => {

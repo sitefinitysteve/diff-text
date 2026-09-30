@@ -1,9 +1,7 @@
-# Publishes the live demos to https://sitefinitysteve.github.io/diff-text/
-# One-time setup: repo Settings → Pages → Source: "GitHub Actions".
+# Manual alternative to scripts/release.sh, which normally pushes the demo site to the
+# gh-pages branch. Only use this if Settings → Pages → Source is "GitHub Actions".
 name: Demo site
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -23,12 +21,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
           extensions: mbstring
-      - run: npm install
-      - run: (cd packages/vue/demo && npm install) && (cd packages/react/demo && npm install)
+      - run: npm ci
+      - run: (cd packages/vue/demo && npm ci) && (cd packages/react/demo && npm ci)
       - run: scripts/build-pages.sh
       - uses: actions/upload-pages-artifact@v3
         with:

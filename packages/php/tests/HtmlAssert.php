@@ -137,7 +137,12 @@ final class HtmlAssert
         $test->assertNull($r['error'], "Invalid HTML ({$r['error']}): {$html}");
         $test->assertFalse($r['nested'], "An element is nested inside a diff marker: {$html}");
 
-        // libxml's HTML parser must not report structural errors either.
+        // libxml's HTML parser must not report structural errors either. Only libxml 2.14+
+        // tokenizes HTML5 (older versions end <script> at the first "</" and reject a bare
+        // "& "), so on older builds the SPEC §12.4 walk above is the validity check.
+        if (LIBXML_VERSION < 21400) {
+            return;
+        }
         $doc = new \DOMDocument();
         $prev = libxml_use_internal_errors(true);
         libxml_clear_errors();
