@@ -30,7 +30,6 @@ dist-ssr
 .DS_Store
 dist
 **/dist
-package-lock.json
 .vscode
 
 # Generated TypeScript files

@@ -107,20 +107,26 @@ SPEC.md          the behavior contract
 
 ## Releases
 
-Releases are driven by tags (see `.github/workflows`):
+All three packages are released together from your machine with one version and one tag
+(`vX.Y.Z`). No CI is involved:
 
-- `vue-vX.Y.Z` publishes `vue-diff-text` to npm; `react-vX.Y.Z` publishes `react-diff-text`
-  (`release-npm.yml`). The workflow runs that package's tests, builds it, publishes with
-  provenance, and creates a GitHub release. It needs the `NPM_TOKEN` secret.
-- `php-vX.Y.Z` tags the mirror repository
-  [sitefinitysteve/php-diff-text](https://github.com/sitefinitysteve/php-diff-text) as `vX.Y.Z`,
-  which Packagist reads (`split-php.yml`). Every push to `main` that touches `packages/php` also
-  updates the mirror's `main` branch. It needs the `SPLIT_TOKEN` secret.
+```bash
+scripts/release.sh set-version 1.6.1   # bump vue, react and php together
+# add CHANGELOG entries and .github/release-notes/v1.6.1.md, commit, push to main
+scripts/release.sh                     # dry run: checks, tests, builds, npm publish --dry-run
+scripts/release.sh --go                # publish
+```
 
-Bump the version in the package's `package.json` or `composer.json` (and the npm packages' CHANGELOG)
-before tagging.
-CI (`ci.yml`) runs fixtures:check, lint, tests and builds on Node 20 and 22, and the PHP suite on
-PHP 8.1 to 8.4.
+`--go` publishes `vue-diff-text` and `react-diff-text` to npm, pushes `packages/php` to the
+[php-diff-text](https://github.com/sitefinitysteve/php-diff-text) mirror and tags it (Packagist
+reads the mirror), tags the monorepo, creates the GitHub releases on both repositories, and pushes
+the demo site to the `gh-pages` branch. Each step is skipped if it already happened, so an
+interrupted release can be re-run. You need `npm login` and `gh auth login`.
+
+One-time setup: Settings → Pages → Deploy from a branch → `gh-pages` / root.
+
+The workflows in `.github/workflows` are optional. `ci.yml` runs the checks on pushes and pull
+requests; `release-npm.yml`, `split-php.yml` and `pages.yml` are manual backups for the script.
 
 ## License
 

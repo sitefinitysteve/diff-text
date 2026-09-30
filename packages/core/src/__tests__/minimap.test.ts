@@ -71,4 +71,55 @@ describe('minimap', () => {
       }
     }
   });
+
+  it('prints two decimals, padding only single-digit fractions', () => {
+    // 1210 hundredths = 12.10%: the fraction 10 has two digits and needs no padding.
+    expect(formatPercent(1210)).toBe('12.10%');
+    expect(formatPercent(1209)).toBe('12.09%');
+    expect(formatPercent(0)).toBe('0.00%');
+    expect(formatPercent(10000)).toBe('100.00%');
+  });
+
+  it('skips empty-valued changes like the text renderer does, so indexes line up', () => {
+    const changes = [
+      { value: 'a', added: false, removed: false, count: 1 },
+      { value: '', added: true, removed: false, count: 1 },
+      { value: 'b', added: true, removed: false, count: 1 },
+    ];
+    // Total new-side length 2; the added "b" covers offset 1..2 -> 50%..100%.
+    expect(minimapMarksText(changes)).toStrictEqual([{ index: 0, kind: 'added', top: 5000, height: 5000 }]);
+    expect(renderText('chars', changes)).toBe(
+      '<div class="text-diff text-diff-chars"><span>a</span><span class="diff-added" data-change-index="0">b</span></div>',
+    );
+  });
+
+  it('a run that mixes moved and plain changed rows is "modified"', () => {
+    const hunks = [
+      {
+        type: 'hunk' as const,
+        oldStart: 1,
+        oldLines: 2,
+        newStart: 1,
+        newLines: 1,
+        rows: [
+          { type: 'removed' as const, oldNo: 1, text: 'x' },
+          { type: 'moved-from' as const, oldNo: 2, text: 'm', move: 0, counterpart: 1 },
+          { type: 'equal' as const, oldNo: 3, newNo: 1, text: 'k' },
+          { type: 'moved-from' as const, oldNo: 4, text: 'n', move: 1, counterpart: 1 },
+          { type: 'moved-to' as const, newNo: 2, text: 'z', move: 2, counterpart: 9 },
+        ],
+      },
+    ];
+    expect(minimapMarksLines(hunks).map((m) => m.kind)).toStrictEqual(['modified', 'moved']);
+  });
+
+  it('a collapsed block ends the current run even at context 0', () => {
+    // Rows: X/x changed, then 2 hidden equal rows, then Y/y changed: two runs, two marks.
+    const hunks = buildHunks('X\na\nb\nY\n', 'x\na\nb\ny\n', { contextLines: 0 });
+    expect(hunks.map((h) => h.type)).toStrictEqual(['hunk', 'collapsed', 'hunk']);
+    expect(minimapMarksLines(hunks).map((m) => [m.index, m.top, m.height])).toStrictEqual([
+      [0, 0, 2500],
+      [1, 7500, 2500],
+    ]);
+  });
 });

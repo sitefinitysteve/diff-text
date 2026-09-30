@@ -447,14 +447,10 @@ composer bench   # engine benchmark, new vs 1.5.x
 
 ### Releasing a new version
 
-The package is developed in the diff-text monorepo and mirrored to `sitefinitysteve/php-diff-text`
-(which Packagist reads) by the `split-php.yml` workflow. To release, tag the monorepo with a
-`php-` prefix and push the tag; the mirror gets the plain version tag:
-
-```bash
-git tag php-v1.6.0
-git push origin php-v1.6.0     # publishes v1.6.0 on the mirror
-```
+The package is developed in the [diff-text](https://github.com/sitefinitysteve/diff-text) monorepo
+and released together with the Vue and React packages. `scripts/release.sh --go` in the monorepo
+pushes `packages/php` to `sitefinitysteve/php-diff-text` (which Packagist reads) and tags it
+`vX.Y.Z`. Please open issues and pull requests on the monorepo.
 
 Packagist picks up the new tag automatically via the webhook. See [CHANGELOG.md](CHANGELOG.md).
 

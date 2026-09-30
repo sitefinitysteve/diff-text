@@ -22,4 +22,9 @@ describe('playback', () => {
     expect(playbackStep('300')).toBeNull();
     expect(playbackStep(Infinity)).toBeNull();
   });
+
+  it('accepts exactly 1 ms', () => {
+    expect(playbackStep(1)).toBe(1);
+    expect(playbackStep(1.99)).toBe(1);
+  });
 });

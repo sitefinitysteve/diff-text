@@ -45,6 +45,14 @@ describe('computeDiff', () => {
   it('stripTrailingCr makes CRLF and LF lines equal', () => {
     expect(computeDiff('lines', 'a\r\nb\r\n', 'a\nb\n', { stripTrailingCr: true })).toStrictEqual([keep('a\nb\n', 2)]);
   });
+
+  it('ignores a maxEditLength that is not a non-negative number', () => {
+    // A numeric string or null must not turn into a limit (null >= 0 and "3" >= 0 are true in JS).
+    for (const bad of ['3', null, true, undefined]) {
+      expect(pickOptions('words', { maxEditLength: bad } as never)).toStrictEqual({});
+    }
+    expect(pickOptions('words', { maxEditLength: 2.9 })).toStrictEqual({ maxEditLength: 2 });
+  });
 });
 
 describe('cleanChanges (SPEC 7.2)', () => {
