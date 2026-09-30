@@ -419,45 +419,12 @@ composer test    # unit tests, jsdiff parity cases, and the shared fixtures (ins
 composer bench   # engine benchmark, new vs 1.5.x
 ```
 
-## Publishing to Packagist
+## Releasing
 
-### First-time setup
-
-1. Create a GitHub repository:
-   ```bash
-   cd php-diff-text
-   git init
-   git add .
-   git commit -m "Initial release"
-   gh repo create sitefinitysteve/php-diff-text --public --source=. --push
-   ```
-
-2. Register on [Packagist](https://packagist.org):
-   - Log in with your GitHub account
-   - Click "Submit" and enter the GitHub repo URL
-   - Packagist will auto-detect the `composer.json`
-
-3. Set up auto-updating (recommended):
-   - On Packagist, go to your package settings and grab the API token
-   - On GitHub, go to repo Settings > Webhooks > Add webhook
-   - Payload URL: `https://packagist.org/api/github?username=sitefinitysteve`
-   - Content type: `application/json`
-   - Secret: your Packagist API token
-   - Events: "Just the push event"
-
-### Releasing a new version
-
-The package is developed in the [diff-text](https://github.com/sitefinitysteve/diff-text) monorepo
-and released together with the Vue and React packages. `scripts/release.sh --go` in the monorepo
-pushes `packages/php` to `sitefinitysteve/php-diff-text` (which Packagist reads) and tags it
-`vX.Y.Z`. Please open issues and pull requests on the monorepo.
-
-Packagist picks up the new tag automatically via the webhook. See [CHANGELOG.md](CHANGELOG.md).
-
-### CI
-
-This package lives in the `packages/php` directory of the diff-text monorepo; its tests run from the
-monorepo's root GitHub Actions workflow.
+php-diff-text is released together with vue-diff-text and react-diff-text from the
+[diff-text monorepo](https://github.com/sitefinitysteve/diff-text): the release script pushes
+`packages/php` to this mirror and tags it, and Packagist picks up the tag. See
+[RELEASING.md](https://github.com/sitefinitysteve/diff-text/blob/main/RELEASING.md).
 
 ## License
 

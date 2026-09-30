@@ -125,6 +125,9 @@ describe('maxEditLength edges (SPEC 3 and 7, T8)', () => {
     // Negative and NaN are ignored: the normal diff (4 changes, see above).
     expect(computeDiff('words', 'a b c', 'a x c', { maxEditLength: -1 })).toHaveLength(4);
     expect(computeDiff('words', 'a b c', 'a x c', { maxEditLength: NaN })).toHaveLength(4);
+    // Huge and infinite limits mean no limit.
+    expect(computeDiff('words', 'a b c', 'a x c', { maxEditLength: 1e20 })).toHaveLength(4);
+    expect(computeDiff('words', 'a b c', 'a x c', { maxEditLength: Infinity })).toHaveLength(4);
   });
 
   it('at 0 anything but identical input falls back', () => {
@@ -157,6 +160,7 @@ describe('contextLines normalization (SPEC 9.2, T9)', () => {
     expect(shape(1.7)).toStrictEqual(['C9', 'H4', 'C8']);
     // Infinity: every row is within context.
     expect(shape(Infinity)).toStrictEqual(['H21']);
+    expect(shape(1e20)).toStrictEqual(['H21']);
   });
 
   it('identical single-line input is one collapsed block of 1 (T10)', () => {

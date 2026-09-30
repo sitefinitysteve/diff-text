@@ -6,6 +6,7 @@ namespace PhpDiffText\Tests;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use PhpDiffText\LineModel;
 use PhpDiffText\Similarity;
 
 /**
@@ -33,5 +34,18 @@ final class SimilarityTest extends TestCase
     public function testValue(string $old, string $new, bool $html, float $expected): void
     {
         $this->assertSame($expected, Similarity::compute($old, $new, $html));
+    }
+
+    public function testPrepareCollapsesWhitespaceAndStripsTagsOnlyForHtml(): void
+    {
+        $this->assertSame('Hello world', Similarity::prepare('<p>Hello</p><p>world</p>'));
+        $this->assertSame('<p>Hello</p> <p>world</p>', Similarity::prepare(" <p>Hello</p>\n\t<p>world</p> ", false));
+    }
+
+    public function testWhitespaceOnlyTextsAreFullySimilar(): void
+    {
+        // No non-whitespace code point on either side: 1 by definition, so the pair keeps its parts.
+        $this->assertSame(1.0, Similarity::fromChanges([], ' ', "\t"));
+        $this->assertNotNull(LineModel::intraLineDiff(' ', '  '));
     }
 }

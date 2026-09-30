@@ -109,11 +109,6 @@ final class Str
         return preg_match('/[' . self::WS . ']/u', $s) === 1;
     }
 
-    public static function isWsOnly(string $s): bool
-    {
-        return $s !== '' && preg_match('/^[' . self::WS . ']+$/uD', $s) === 1;
-    }
-
     public static function leadingWs(string $s): string
     {
         return preg_match('/^[' . self::WS . ']+/u', $s, $m) === 1 ? $m[0] : '';
@@ -122,10 +117,9 @@ final class Str
     public static function trailingWs(string $s): string
     {
         // The lookbehind anchors the match at the start of the final whitespace
-        // run, keeping this linear (see jsdiff's note on quadratic regexes).
-        return preg_match('/(?<![' . self::WS . '])[' . self::WS . ']+$/uD', $s, $m) === 1
-            ? $m[0]
-            : (self::isWsOnly($s) ? $s : '');
+        // run, keeping this linear (see jsdiff's note on quadratic regexes). It also
+        // matches at offset 0, so a whitespace-only string is returned whole.
+        return preg_match('/(?<![' . self::WS . '])[' . self::WS . ']+$/uD', $s, $m) === 1 ? $m[0] : '';
     }
 
     public static function longestCommonPrefix(string $a, string $b): string

@@ -108,7 +108,8 @@ final class LineModel
     {
         $n = $options['contextLines'] ?? null;
         if ((is_int($n) || is_float($n)) && !is_nan((float) $n) && $n >= 0) {
-            return is_infinite((float) $n) ? PHP_INT_MAX : (int) floor($n);
+            // Saturating (also for INF): a plain (int) cast of a huge float warns and wraps.
+            return Options::floorInt($n);
         }
         return self::DEFAULT_CONTEXT_LINES;
     }
@@ -132,7 +133,8 @@ final class LineModel
                 continue;
             }
             $lo = max(0, $i - $context);
-            $hi = min($n - 1, $context > $n ? $n - 1 : $i + $context);
+            // With contextLines = PHP_INT_MAX the sum overflows to a float; min() still returns $n - 1.
+            $hi = min($n - 1, $i + $context);
             for ($j = $lo; $j <= $hi; $j++) {
                 $visible[$j] = true;
             }

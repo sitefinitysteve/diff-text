@@ -1,5 +1,6 @@
-# Manual alternative to scripts/release.sh, which normally pushes the demo site to the
-# gh-pages branch. Only use this if Settings → Pages → Source is "GitHub Actions".
+# Deploys the live demos to https://sitefinitysteve.github.io/diff-text/.
+# Run by scripts/release.sh --go, or by hand: gh workflow run pages.yml --ref main
+# One-time setup: Settings → Pages → Source: "GitHub Actions".
 name: Demo site
 on:
   workflow_dispatch:
@@ -15,10 +16,10 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: '22'
           cache: npm
@@ -29,13 +30,13 @@ jobs:
       - run: npm ci
       - run: (cd packages/vue/demo && npm ci) && (cd packages/react/demo && npm ci)
       - run: scripts/build-pages.sh
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

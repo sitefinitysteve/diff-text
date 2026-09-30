@@ -12,6 +12,7 @@ use PhpDiffText\DiffLines;
 use PhpDiffText\DiffSentences;
 use PhpDiffText\DiffWords;
 use PhpDiffText\DiffWordsWithSpace;
+use PhpDiffText\Myers;
 use PhpDiffText\Str;
 use PhpDiffText\Tokenizer;
 
@@ -111,6 +112,23 @@ final class JsdiffParityTest extends TestCase
         // jsdiff drops empty tokens (removeEmpty) before diffing; so do we.
         $tokens = array_values(array_filter($tokens, static fn(string $t): bool => $t !== ''));
         $this->assertSame($expected, $tokens);
+    }
+
+    /**
+     * The engine alone against jsdiff's diffChars: every binary pair up to length 6 plus 3000
+     * random pairs (one test, not a data provider, to keep the run fast).
+     */
+    public function testMyersMatchesJsdiffOnStressPairs(): void
+    {
+        $ids = static fn(string $s): array => $s === '' ? [] : array_map(ord(...), str_split($s));
+        $mismatches = [];
+        foreach (self::data()['myers'] as [$old, $new, $expected]) {
+            if (Myers::diff($ids($old), $ids($new)) !== $expected) {
+                $mismatches[] = "$old → $new";
+            }
+        }
+        $this->assertSame([], array_slice($mismatches, 0, 5));
+        $this->assertGreaterThan(16000, count(self::data()['myers']));
     }
 
     public function testWordsRenderingKeepsSpaces(): void

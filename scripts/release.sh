@@ -16,8 +16,8 @@
 #   3. tag the monorepo vX.Y.Z and push it
 #   4. GitHub releases: vX.Y.Z on diff-text (notes: .github/release-notes/vX.Y.Z.md)
 #      and on php-diff-text (notes: .github/release-notes/vX.Y.Z-php.md if present)
-#   5. build the demo site and push it to the gh-pages branch
-#      (Settings → Pages → Deploy from a branch → gh-pages / root)
+#   5. deploy the demo site by running the pages.yml workflow
+#      (Settings → Pages → Source: GitHub Actions)
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/.." && pwd)"
@@ -112,11 +112,11 @@ say "2. php-diff-text mirror"
 split_sha="$(git subtree split --prefix=packages/php HEAD 2>/dev/null | tail -1)"
 echo "    split commit $split_sha"
 if (( GO )); then
-  git push "$PHP_MIRROR_URL" "$split_sha:refs/heads/main"
+  git push "$PHP_MIRROR_URL" "${split_sha}:refs/heads/main"
   if git ls-remote --exit-code --tags "$PHP_MIRROR_URL" "refs/tags/$TAG" >/dev/null 2>&1; then
     skip "mirror already has tag $TAG"
   else
-    git push "$PHP_MIRROR_URL" "$split_sha:refs/tags/$TAG"
+    git push "$PHP_MIRROR_URL" "${split_sha}:refs/tags/$TAG"
   fi
 else
   echo "    would push $split_sha to $PHP_MIRROR main and tag $TAG"
@@ -156,23 +156,13 @@ else
 fi
 
 # ---------------------------------------------------------------- 5. demo site
-say "5. Demo site (gh-pages)"
-scripts/build-pages.sh
+say "5. Demo site"
 if (( GO )); then
-  tmp="$(mktemp -d)"
-  cp -R _site/. "$tmp/"
-  touch "$tmp/.nojekyll"
-  (
-    cd "$tmp"
-    git init -q -b gh-pages
-    git add -A
-    git commit -q -m "Demo site for $TAG"
-    git push -f "$(cd "$root" && git remote get-url origin)" gh-pages
-  )
-  rm -rf "$tmp"
-  echo "    https://sitefinitysteve.github.io/diff-text/"
+  gh workflow run pages.yml -R "$MONO_REPO" --ref main
+  echo "    deploying via GitHub Actions: https://sitefinitysteve.github.io/diff-text/"
 else
-  echo "    would push _site/ to the gh-pages branch"
+  scripts/build-pages.sh
+  echo "    built _site/ locally; --go deploys it with the pages.yml workflow"
 fi
 
 say "Done$( (( GO )) || echo ' (dry run: nothing was published)')"

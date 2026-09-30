@@ -107,26 +107,10 @@ SPEC.md          the behavior contract
 
 ## Releases
 
-All three packages are released together from your machine with one version and one tag
-(`vX.Y.Z`). No CI is involved:
-
-```bash
-scripts/release.sh set-version 1.6.1   # bump vue, react and php together
-# add CHANGELOG entries and .github/release-notes/v1.6.1.md, commit, push to main
-scripts/release.sh                     # dry run: checks, tests, builds, npm publish --dry-run
-scripts/release.sh --go                # publish
-```
-
-`--go` publishes `vue-diff-text` and `react-diff-text` to npm, pushes `packages/php` to the
-[php-diff-text](https://github.com/sitefinitysteve/php-diff-text) mirror and tags it (Packagist
-reads the mirror), tags the monorepo, creates the GitHub releases on both repositories, and pushes
-the demo site to the `gh-pages` branch. Each step is skipped if it already happened, so an
-interrupted release can be re-run. You need `npm login` and `gh auth login`.
-
-One-time setup: Settings → Pages → Deploy from a branch → `gh-pages` / root.
-
-The workflows in `.github/workflows` are optional. `ci.yml` runs the checks on pushes and pull
-requests; `release-npm.yml`, `split-php.yml` and `pages.yml` are manual backups for the script.
+All three packages are released together, from your machine, with one command:
+`scripts/release.sh --go` publishes to npm and Packagist, tags `vX.Y.Z`, creates the GitHub
+releases and deploys the demo site. See [RELEASING.md](RELEASING.md) for setup, the step-by-step
+process and manual fallbacks.
 
 ## License
 

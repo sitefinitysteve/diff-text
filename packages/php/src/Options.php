@@ -38,7 +38,8 @@ final class Options
         if ($v < 0) {
             return null;
         }
-        return (int) floor($v);
+        // Saturating: a float beyond the int range would warn and wrap on a plain (int) cast.
+        return self::floorInt($v);
     }
 
     /** Default prefix for every emitted id (SPEC §18). */

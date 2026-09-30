@@ -127,6 +127,8 @@ final class BoundariesTest extends TestCase
         $this->assertSame([self::del('a b c', 3), self::add('a x c', 3)], $diff('a b c', 'a x c', 1));
         $this->assertCount(2, $diff('a b c', 'a x c', 1.7)); // floored to 1
         $this->assertCount(4, $diff('a b c', 'a x c', -1)); // ignored
+        $this->assertCount(4, $diff('a b c', 'a x c', 1e20)); // saturates: no limit, no cast warning
+        $this->assertCount(4, $diff('a b c', 'a x c', INF)); // no limit
         $this->assertSame([self::del('a b', 2)], $diff('a b', '', 0));
         $chars = static fn(string $a, string $b): array => LineModel::changesToArrays(DiffChars::diff($a, $b, ['maxEditLength' => 0]));
         $this->assertSame([self::del('ab', 2), self::add('ac', 2)], $chars('ab', 'ac'));
@@ -149,6 +151,8 @@ final class BoundariesTest extends TestCase
         }
         $this->assertSame(['C9', 'H4', 'C8'], $shape(1.7));
         $this->assertSame(['H21'], $shape(INF));
+        // Beyond the int range: saturates (no float-to-int cast warning, no garbage value).
+        $this->assertSame(['H21'], $shape(1e20));
         $this->assertSame(
             [['type' => 'collapsed', 'count' => 1, 'oldStart' => 1, 'newStart' => 1, 'rows' => [['type' => 'equal', 'oldNo' => 1, 'newNo' => 1, 'text' => 'a']]]],
             LineModel::buildHunks("a\n", "a\n"),
